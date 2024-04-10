@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+p{
+  margin: 0;
+}
+
+.social-media-icons, .copyright {
+  position: relative;
+
+}
+.copyright {
+  padding-left: 10px;
+}
+.tarzanas-logo {
+  width: 100px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
