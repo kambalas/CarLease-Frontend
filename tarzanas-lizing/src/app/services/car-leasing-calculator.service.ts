@@ -12,4 +12,8 @@ export class MonthlyPaymentCalculatorService {
     this.client.get('backend url');
     return 5n.toString();
   }
+
+  postCarCalculatorData() {
+    //this.client.post('backend url');
+  }
 }
