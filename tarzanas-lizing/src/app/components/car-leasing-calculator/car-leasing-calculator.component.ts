@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MonthlyPaymentCalculatorService } from '../../services/car-leasing-calculator.service';
+import { CalculatorFormFields } from '../../types';
 
 @Component({
   selector: 'app-car-leasing-calculator',
@@ -11,6 +13,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 })
 export class CarLeasingCalculatorComponent {
   calculatorForm = this.makeForm();
+  monthlyPayment: String = "CUSTOM VALUE";
+  private service = inject(MonthlyPaymentCalculatorService);
 
   private makeForm() {
     return new FormGroup(
@@ -23,8 +27,19 @@ export class CarLeasingCalculatorComponent {
       });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     console.log(this.calculatorForm.value);
+
   }
 
+  calculateMonthlyPayment(): void {
+    if (this.calculatorForm.value.period !== "months" &&
+      this.calculatorForm.value.carValue !== '' &&
+      this.calculatorForm.value.downpayment != '') {
+      //this.monthlyPayment = this.service.getMonthlyPayment(this.calculatorForm.value as Partial<CalculatorFormFields>);
+      console.log('required fields are filled');
+    }
+
+    return;
+  }
 }

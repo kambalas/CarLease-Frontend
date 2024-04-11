@@ -1,5 +1,5 @@
 <h2>Car leasing calculator</h2>
-<form [formGroup]="calculatorForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="calculatorForm" (ngSubmit)="onSubmit()" (change)="calculateMonthlyPayment()">
     <div class="form-line">
         <label for="carValue">Car value</label>
         <input type="number" id="carValue" min="300" placeholder="EUR" formControlName="carValue">
@@ -38,11 +38,11 @@
     </div>
     <div class="form-line">
         <label>Environmentally friendly car</label>
-        <mat-slide-toggle formControlName="envFriendly"></mat-slide-toggle>
+        <mat-slide-toggle formControlName="envFriendly" (change)="calculateMonthlyPayment()"></mat-slide-toggle>
     </div>
     <div class="form-line">
         <label>Monthly payment from</label>
-        <div class="monthlyPayment">CUSTOM VALUE</div>
+        <div class="monthlyPayment">{{monthlyPayment}}</div>
     </div>
     <button type="submit">APPLY</button>
 </form>
