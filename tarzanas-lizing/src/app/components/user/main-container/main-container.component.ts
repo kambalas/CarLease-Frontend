@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HowItWorksComponent, CarLeasingCalculatorComponent } from '../how-it-works/how-it-works.component';
-import { CarLeasingCalculatorComponent } from "../components/car-leasing-calculator/car-leasing-calculator.component";
+import { CarLeasingCalculatorComponent } from '../car-leasing-calculator/car-leasing-calculator.component';
+import { HowItWorksComponent } from '../how-it-works/how-it-works.component';
 
 
 

@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MonthlyPaymentCalculatorService } from '../../services/car-leasing-calculator.service';
-import { CalculatorFormFields } from '../../types';
+import { MonthlyPaymentCalculatorService } from '../../../services/car-leasing-calculator.service';
+import { CalculatorFormFields } from '../../../types';
 
 @Component({
   selector: 'app-car-leasing-calculator',
