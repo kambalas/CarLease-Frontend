@@ -9,11 +9,13 @@ export class MonthlyPaymentCalculatorService {
   private client = inject(HttpClient);
 
   getMonthlyPayment(inputs: Partial<CalculatorFormFields>): string {
-    this.client.get('backend url');
+    //this.client.get('backend url');
+    console.log(inputs);
     return 5n.toString();
+    // observable turi grazint cia ir su async loadint virsuj
   }
 
-  postCarCalculatorData() {
-    //this.client.post('backend url');
+  postCarCalculatorData(formData: CalculatorFormFields) {
+    console.log(formData);
   }
 }

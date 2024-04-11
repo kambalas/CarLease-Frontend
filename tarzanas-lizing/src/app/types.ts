@@ -1,7 +1,8 @@
 export interface CalculatorFormFields {
     carValue: number;
     period: string;
-    downpayment: number;
-    residual: string;
-    envFriendly: boolean
+    downPayment: number;
+    residualValuePercentage: string;
+    isEcoFriendly: boolean,
+    monthlyPayment: string
 }
