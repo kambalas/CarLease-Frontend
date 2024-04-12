@@ -1,0 +1,144 @@
+<div class="container">
+  <div class="carLeasingForm">
+    <h2>Information about car</h2>
+    <form [formGroup]="carLeasingForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="make">*Make:</label>
+        <br>
+        <select id="make" formControlName="make">
+          @for (carMake of carMakes; track $index) {
+            <option>{{carMake}}</option>
+          }
+        </select>
+        <!-- <app-error-handler [control]="carLeasingForm.get('make')"/> -->
+      </div>
+
+      <div>
+        <label for="model">*Model:</label>
+        <br>
+        <select id="model" formControlName="model">
+          @for (carModel of carModels$ | async; track $index) {
+            <option>{{carModel}}</option>
+          }
+        </select>
+        <!-- <app-error-handler [control]="carLeasingForm.get('model')"/> -->
+      </div>
+
+      <div>
+        <label for="modelVariant">Model variant:</label>
+        <br>
+        <select id="modelVariant" formControlName="modelVariant">
+          @for (carModelVariant of carModelVariants$ | async; track $index) {
+            <option>{{carModelVariant}}</option>
+          }
+        </select>
+        <!-- <app-error-handler [control]="carLeasingForm.get('modelVariant')"/> -->
+      </div>
+
+      <div>
+        <label for="year">*Year:</label>
+        <br>
+        <select id="year" formControlName="year">
+          @if (variantDetails$) {
+            @for (year of (variantDetails$ | async)?.years; track $index) {
+              <option>{{year}}</option>
+            }
+          }
+          @else if (modelDetails$) {
+            @for (year of (modelDetails$ | async)?.years; track $index) {
+              <option>{{year}}</option>
+            }
+          }
+        </select>
+        <!-- <app-error-handler [control]="carLeasingForm.get('year')"/> -->
+      </div>
+
+      <div>
+        <label for="fuelType">*Fuel type:</label>
+        <br>
+        <select id="fuelType" formControlName="fuelType">
+          @if (variantDetails$) {
+            @for (fuelType of (variantDetails$ | async)?.fuelTypes; track $index) {
+              <option>{{fuelType}}</option>
+            }
+          }
+          @else if (modelDetails$) {
+            @for (fuelType of (modelDetails$ | async)?.fuelTypes; track $index) {
+              <option>{{fuelType}}</option>
+            }
+          }
+        </select>
+        <!-- <app-error-handler [control]="carLeasingForm.get('fuelType')"/> -->
+      </div>
+
+      <div>
+        <label for="enginePower">*Engine power:</label>
+        <br>
+        <select id="enginePower" formControlName="enginePower">
+          @if (variantDetails$) {
+            @for (enginePower of (variantDetails$ | async)?.enginePowers; track $index) {
+              <option>{{enginePower}}</option>
+            }
+          }
+          @else if (modelDetails$) {
+            @for (enginePower of (modelDetails$ | async)?.enginePowers; track $index) {
+              <option>{{enginePower}}</option>
+            }
+          }
+        </select>
+        <!-- <app-error-handler [control]="carLeasingForm.get('enginePower')"/> -->
+      </div>
+
+      <div>
+        <label for="engineSize">*Engine size:</label>
+        <br>
+        <select id="engineSize" formControlName="engineSize">
+          @if (variantDetails$) {
+            @for (engineSize of (variantDetails$ | async)?.engineSizes; track $index) {
+              <option>{{engineSize}}</option>
+            }
+          }
+          @else if (modelDetails$) {
+            @for (engineSize of (modelDetails$ | async)?.engineSizes; track $index) {
+              <option>{{engineSize}}</option>
+            }
+          }
+        </select>
+        <!-- <app-error-handler [control]="carLeasingForm.get('engineSize')"/> -->
+      </div>
+
+      <div>
+        <label for="url">URL</label>
+        <br>
+        <input type="url" id="url" formControlName="url">
+        <!-- <app-error-handler [control]="carLeasingForm.get('url')"/> -->
+      </div>
+
+      <div>
+        <label for="offer">Attach car offer:</label>
+        <br>
+        <input type="file" id="offer" formControlName="offer">
+        <!-- <app-error-handler [control]="carLeasingForm.get('offer')"/> -->
+      </div>
+
+      <br>
+
+      <div>
+        <label for="terms">I confirm that the above information is accurate:</label>
+        <input type="checkbox" id="confirmation" formControlName="confirmation">
+        <!-- <app-error-handler [control]="carLeasingForm.get('terms')"/> -->
+      </div>
+
+      <div>
+        <label for="terms">I have read and agree with the Terms and Conditions:</label>
+        <input type="checkbox" id="terms" formControlName="terms">
+        <!-- <app-error-handler [control]="carLeasingForm.get('terms')"/> -->
+      </div>
+
+
+      <!-- <app-error-handler [control]="carLeasingForm"/> -->
+
+      <button type="submit" [disabled]="!carLeasingForm.valid">APPLY FOR LOAN</button>
+    </form>
+  </div>
+</div>
