@@ -1,4 +1,8 @@
 :host {
+  width: 100%;
+}
+
+.footer {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,12 +10,6 @@
 
 p {
   margin: 0;
-}
-
-.social-media-icons,
-.copyright {
-  position: relative;
-
 }
 
 .copyright {
