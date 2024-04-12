@@ -5,31 +5,31 @@
       <mat-form-field
         >
         <mat-label>First name</mat-label>
-        <input matInput type="text" placeholder="First name"
+        <input required matInput type="text" placeholder="First name"
       /></mat-form-field>
       <mat-form-field>
         <mat-label>Last name</mat-label>
-        <input matInput type="text" placeholder="Last name" />
+        <input required matInput type="text" placeholder="Last name" />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Email address</mat-label>
-        <input matInput type="email" placeholder="Email address"
+        <input required matInput type="email" placeholder="Email address"
       /></mat-form-field>
       <mat-form-field
         ><mat-label>Phone number</mat-label>
-        <input matInput type="tel" placeholder="Phone no"
+        <input required matInput type="tel" placeholder="Phone no"
       /></mat-form-field>
     </div>
     <div class="rightRow">
       <mat-form-field
         >
         <mat-label>Personal ID number</mat-label>
-        <input matInput type="text" placeholder="Personal ID number"
+        <input required matInput type="text" placeholder="Personal ID number"
       /></mat-form-field>
 
       <mat-form-field class="example-full-width">
         <mat-label class="mat-form-field-label">Choose a date</mat-label>
-        <input matInput [matDatepicker]="picker">
+        <input required matInput [matDatepicker]="picker">
         <mat-datepicker-toggle matIconSuffix [for]="picker">
           <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
         </mat-datepicker-toggle>
@@ -39,7 +39,7 @@
 
       <mat-form-field>
         <mat-label>Marital status</mat-label>
-        <select matNativeControl>
+        <select required matNativeControl>
           <option>----------</option>
           <option value="Single">Single</option>
           <option value="Married">Married</option>
@@ -49,11 +49,11 @@
 
       <mat-form-field>
         <mat-label>Number of children</mat-label>
-        <input matInput type="number" placeholder="Number of children" />
+        <input required matInput type="number" placeholder="Number of children" />
       </mat-form-field>
     </div>
     </div>
-    <mat-form-field class="bottom">
+    <mat-form-field required class="bottom">
       <mat-label>Citizenship</mat-label>
       <select matNativeControl required>
         <option value="Austria">Austria</option>
@@ -89,7 +89,7 @@
     </mat-form-field>
     <mat-form-field class="bottom"
     ><mat-label>Monthly income after taxes and commitments</mat-label>
-    <input
+    <input required
     matInput
       type="text"
       placeholder="Monthly income after taxes and commitments"
