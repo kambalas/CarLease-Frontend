@@ -2,8 +2,13 @@
   .carLeasingForm {
     form {
       select {
+        color: #999;
+
+        option {
+          color: black; // This will make the selected option black
+        }
+      }
         width: 47%;
       }
-    }
   }
 }
