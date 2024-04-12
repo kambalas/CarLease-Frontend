@@ -3,6 +3,7 @@ import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angula
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MonthlyPaymentCalculatorService } from '../../../services/car-leasing-calculator.service';
 import { CalculatorFormFields } from '../../../types';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-car-leasing-calculator',
@@ -12,9 +13,11 @@ import { CalculatorFormFields } from '../../../types';
   styleUrl: './car-leasing-calculator.component.scss'
 })
 export class CarLeasingCalculatorComponent implements OnInit {
+  private service = inject(MonthlyPaymentCalculatorService);
+  private router = inject(Router);
+
   calculatorForm = this.makeForm();
   monthlyPayment: string = "CUSTOM VALUE";
-  private service = inject(MonthlyPaymentCalculatorService);
   noteActive: boolean = true;
 
   ngOnInit(): void {
@@ -58,6 +61,7 @@ export class CarLeasingCalculatorComponent implements OnInit {
       monthlyPayment: this.monthlyPayment
     });
 
+    this.router.navigate(['registration']);
   }
 
   calculateMonthlyPayment(): void {
