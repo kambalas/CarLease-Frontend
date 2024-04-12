@@ -1,6 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 import { MonthlyPaymentCalculatorService } from '../../../services/car-leasing-calculator.service';
 import { CalculatorFormFields } from '../../../types';
 import { Router } from '@angular/router';
@@ -8,7 +12,13 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-car-leasing-calculator',
   standalone: true,
-  imports: [MatSlideToggleModule, ReactiveFormsModule],
+  imports: [
+    MatSlideToggleModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule],
   templateUrl: './car-leasing-calculator.component.html',
   styleUrl: './car-leasing-calculator.component.scss'
 })
@@ -73,7 +83,7 @@ export class CarLeasingCalculatorComponent implements OnInit {
   }
 
   checkDownPayment() {
-    if (parseInt(this.calculatorForm.value.residual!) >= 10) {
+    if (this.calculatorForm.value.downPayment! >= 10) {
       this.noteActive = false;
       return;
     }

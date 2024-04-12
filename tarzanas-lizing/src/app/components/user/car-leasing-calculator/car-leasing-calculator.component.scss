@@ -1,6 +1,10 @@
-form {
+:host {
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+form {
     width: 300px;
 }
 
@@ -9,21 +13,13 @@ form button {
     margin: 0 auto;
 }
 
-.monthlyPayment {
-    display: inline;
-    margin-left: 10px;
-}
-
-.form-line,
-.mat-mdc-form-field-infix {
+.form-row {
+    margin-bottom: 25px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
-form input {
-    width: 110px;
-}
-
-form select {
-    width: 118px;
+form .error,
+form .note {
+    margin-bottom: 25px;
 }
