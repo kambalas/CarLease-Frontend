@@ -8,6 +8,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MonthlyPaymentCalculatorService } from '../../../services/car-leasing-calculator.service';
 import { CalculatorFormFields } from '../../../types';
 import { Router } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-car-leasing-calculator',
@@ -18,7 +19,8 @@ import { Router } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatOptionModule],
+    MatOptionModule,
+    MatButtonModule],
   templateUrl: './car-leasing-calculator.component.html',
   styleUrl: './car-leasing-calculator.component.scss'
 })
