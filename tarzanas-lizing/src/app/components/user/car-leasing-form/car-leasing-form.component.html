@@ -5,7 +5,10 @@
       <div>
         <label for="make">*Make:</label>
         <br>
-        <select id="make" formControlName="make">
+        <select id="make" formControlName="make" (change)="changeColor($event)">
+          <option value="" disabled [hidden]="carLeasingForm.get('make')?.value">
+            select make
+          </option>
           @for (carMake of carMakes; track $index) {
             <option>{{carMake}}</option>
           }
@@ -16,7 +19,10 @@
       <div>
         <label for="model">*Model:</label>
         <br>
-        <select id="model" formControlName="model">
+        <select id="model" formControlName="model" (change)="changeColor($event)" >
+          <option value="" disabled [hidden]="carLeasingForm.get('model')?.value">
+            select model
+          </option>
           @for (carModel of carModels$ | async; track $index) {
             <option>{{carModel}}</option>
           }
@@ -27,7 +33,10 @@
       <div>
         <label for="modelVariant">Model variant:</label>
         <br>
-        <select id="modelVariant" formControlName="modelVariant">
+        <select id="modelVariant" formControlName="modelVariant" (change)="changeColor($event)">
+          <option value="" disabled [hidden]="carLeasingForm.get('modelVariant')?.value">
+            select model variant
+          </option>
           @for (carModelVariant of carModelVariants$ | async; track $index) {
             <option>{{carModelVariant}}</option>
           }
@@ -38,7 +47,10 @@
       <div>
         <label for="year">*Year:</label>
         <br>
-        <select id="year" formControlName="year">
+        <select id="year" formControlName="year" (change)="changeColor($event)">
+          <option value="" disabled [hidden]="carLeasingForm.get('year')?.value">
+            select year of manufacture
+          </option>
           @if (variantDetails$) {
             @for (year of (variantDetails$ | async)?.years; track $index) {
               <option>{{year}}</option>
@@ -56,7 +68,10 @@
       <div>
         <label for="fuelType">*Fuel type:</label>
         <br>
-        <select id="fuelType" formControlName="fuelType">
+        <select id="fuelType" formControlName="fuelType" (change)="changeColor($event)">
+          <option value="" disabled [hidden]="carLeasingForm.get('fuelType')?.value">
+            select fuel type
+          </option>
           @if (variantDetails$) {
             @for (fuelType of (variantDetails$ | async)?.fuelTypes; track $index) {
               <option>{{fuelType}}</option>
@@ -74,7 +89,10 @@
       <div>
         <label for="enginePower">*Engine power:</label>
         <br>
-        <select id="enginePower" formControlName="enginePower">
+        <select id="enginePower" formControlName="enginePower" (change)="changeColor($event)">
+          <option value="" disabled [hidden]="carLeasingForm.get('enginePower')?.value">
+            select engine power
+          </option>
           @if (variantDetails$) {
             @for (enginePower of (variantDetails$ | async)?.enginePowers; track $index) {
               <option>{{enginePower}}</option>
@@ -92,7 +110,10 @@
       <div>
         <label for="engineSize">*Engine size:</label>
         <br>
-        <select id="engineSize" formControlName="engineSize">
+        <select id="engineSize" formControlName="engineSize" (change)="changeColor($event)">
+          <option value="" disabled [hidden]="carLeasingForm.get('engineSize')?.value">
+            select engine size
+          </option>
           @if (variantDetails$) {
             @for (engineSize of (variantDetails$ | async)?.engineSizes; track $index) {
               <option>{{engineSize}}</option>
@@ -108,7 +129,7 @@
       </div>
 
       <div>
-        <label for="url">URL</label>
+        <label for="url">URL:</label>
         <br>
         <input type="url" id="url" formControlName="url">
         <!-- <app-error-handler [control]="carLeasingForm.get('url')"/> -->

@@ -106,4 +106,9 @@ export class CarLeasingFormComponent implements OnInit {
       console.log('Form Submitted!', this.carLeasingForm.value);
     }
   }
+
+  changeColor(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    selectElement.style.color = selectElement.value ? 'black' : '#999';
+  }
 }
