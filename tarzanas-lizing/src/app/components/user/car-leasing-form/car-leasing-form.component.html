@@ -7,7 +7,7 @@
         <br>
         <select id="make" formControlName="make" (change)="changeColor($event)">
           <option value="" disabled [hidden]="carLeasingForm.get('make')?.value">
-            Select make
+            select make
           </option>
           @for (carMake of carMakes; track $index) {
             <option>{{carMake}}</option>
@@ -21,7 +21,7 @@
         <br>
         <select id="model" formControlName="model" (change)="changeColor($event)" >
           <option value="" disabled [hidden]="carLeasingForm.get('model')?.value">
-            Select model
+            select model
           </option>
           @for (carModel of carModels$ | async; track $index) {
             <option>{{carModel}}</option>
@@ -35,7 +35,7 @@
         <br>
         <select id="modelVariant" formControlName="modelVariant" (change)="changeColor($event)">
           <option value="" disabled [hidden]="carLeasingForm.get('modelVariant')?.value">
-            Select model variant
+            select model variant
           </option>
           @for (carModelVariant of carModelVariants$ | async; track $index) {
             <option>{{carModelVariant}}</option>
@@ -49,7 +49,7 @@
         <br>
         <select id="year" formControlName="year" (change)="changeColor($event)">
           <option value="" disabled [hidden]="carLeasingForm.get('year')?.value">
-            Select year of manufacture
+            select year of manufacture
           </option>
           @if (variantDetails$) {
             @for (year of (variantDetails$ | async)?.years; track $index) {
@@ -70,7 +70,7 @@
         <br>
         <select id="fuelType" formControlName="fuelType" (change)="changeColor($event)">
           <option value="" disabled [hidden]="carLeasingForm.get('fuelType')?.value">
-            Select fuel type
+            select fuel type
           </option>
           @if (variantDetails$) {
             @for (fuelType of (variantDetails$ | async)?.fuelTypes; track $index) {
@@ -91,7 +91,7 @@
         <br>
         <select id="enginePower" formControlName="enginePower" (change)="changeColor($event)">
           <option value="" disabled [hidden]="carLeasingForm.get('enginePower')?.value">
-            Select engine power
+            select engine power
           </option>
           @if (variantDetails$) {
             @for (enginePower of (variantDetails$ | async)?.enginePowers; track $index) {
@@ -112,7 +112,7 @@
         <br>
         <select id="engineSize" formControlName="engineSize" (change)="changeColor($event)">
           <option value="" disabled [hidden]="carLeasingForm.get('engineSize')?.value">
-            Select engine size
+            select engine size
           </option>
           @if (variantDetails$) {
             @for (engineSize of (variantDetails$ | async)?.engineSizes; track $index) {
@@ -129,7 +129,7 @@
       </div>
 
       <div>
-        <label for="url">URL</label>
+        <label for="url">URL:</label>
         <br>
         <input type="url" id="url" formControlName="url">
         <!-- <app-error-handler [control]="carLeasingForm.get('url')"/> -->
