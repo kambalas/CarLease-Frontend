@@ -85,7 +85,7 @@ export class CarLeasingCalculatorComponent implements OnInit {
   }
 
   checkDownPayment() {
-    if (this.calculatorForm.value.downPayment! >= 10) {
+    if (this.downPayment?.value! / this.carValue?.value! * 100 >= 10) {
       this.noteActive = false;
       return;
     }
