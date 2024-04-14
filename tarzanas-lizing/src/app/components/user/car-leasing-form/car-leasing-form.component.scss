@@ -2,15 +2,17 @@
   .carLeasingForm {
     form {
       select {
+        width: 100%; // Adjust this as per your requirement
+        margin-bottom: 15px;
         color: #999;
 
         option {
           color: black; // This will make the selected option black
         }
-
-        width: 40%;
       }
-
+      ::placeholder {
+        font-size: 0.7em;
       }
+    }
   }
 }

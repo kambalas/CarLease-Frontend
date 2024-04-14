@@ -10,12 +10,23 @@ import { Observable, switchMap } from 'rxjs';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { ModelDetails, VariantDetails } from '../../../types';
 import { LeasingFormService } from '../../../services/leasing-form-service.service';
-
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-car-leasing-form',
   standalone: true,
-  imports: [ReactiveFormsModule, AsyncPipe, JsonPipe],
+  imports: [
+    ReactiveFormsModule,
+    AsyncPipe,
+    JsonPipe,
+    MatInputModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatOptionModule
+  ],
   templateUrl: './car-leasing-form.component.html',
   styleUrl: './car-leasing-form.component.scss',
 })
@@ -36,7 +47,7 @@ export class CarLeasingFormComponent implements OnInit {
     this.carMakes = this.leasingFormService.getCarMakes();
 
     this.carLeasingForm = this.formBuilder.group({
-      make: ['', Validators.required,],
+      make: ['', Validators.required],
       model: ['', Validators.required],
       modelVariant: [''],
       year: ['', Validators.required],
@@ -102,7 +113,6 @@ export class CarLeasingFormComponent implements OnInit {
 
   onSubmit(): void {
     if (this.carLeasingForm.valid) {
-      // TODO: Handle form submission
       console.log('Form Submitted!', this.carLeasingForm.value);
     }
   }

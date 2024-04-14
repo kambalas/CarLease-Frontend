@@ -2,10 +2,9 @@
   <div class="carLeasingForm">
     <h2>Information about car</h2>
     <form [formGroup]="carLeasingForm" (ngSubmit)="onSubmit()">
-      <div>
-        <label for="make">*Make:</label>
-        <br>
-        <select id="make" formControlName="make" (change)="changeColor($event)">
+      <mat-form-field>
+        <mat-label>Make</mat-label>
+        <select matNativeControl id="make" formControlName="make" (change)="changeColor($event)">
           <option value="" disabled [hidden]="carLeasingForm.get('make')?.value">
             select make
           </option>
@@ -13,8 +12,7 @@
             <option>{{carMake}}</option>
           }
         </select>
-        <!-- <app-error-handler [control]="carLeasingForm.get('make')"/> -->
-      </div>
+      </mat-form-field>
 
       <div>
         <label for="model">*Model:</label>
