@@ -2,164 +2,209 @@
   <div class="carLeasingForm">
     <h2>Information about car</h2>
     <form [formGroup]="carLeasingForm" (ngSubmit)="onSubmit()">
-      <div>
-        <label for="make">*Make:</label>
-        <br>
-        <select id="make" formControlName="make" (change)="changeColor($event)">
-          <option value="" disabled [hidden]="carLeasingForm.get('make')?.value">
-            select make
-          </option>
-          @for (carMake of carMakes; track $index) {
-            <option>{{carMake}}</option>
-          }
-        </select>
-        <!-- <app-error-handler [control]="carLeasingForm.get('make')"/> -->
+      <div class="mainContainer">
+        <div class="leftColumn">
+          <mat-form-field>
+            <mat-label>Make</mat-label>
+            <select
+              matNativeControl
+              id="make"
+              formControlName="make"
+              (change)="changeColor($event)"
+            >
+              <option
+                value=""
+                disabled
+                [hidden]="carLeasingForm.get('make')?.value"
+              >
+                select make
+              </option>
+              @for (carMake of carMakes; track $index) {
+              <option>{{ carMake }}</option>
+              }
+            </select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label for="model">Model:</mat-label>
+            <select
+              matNativeControl
+              id="model"
+              formControlName="model"
+              (change)="changeColor($event)"
+            >
+              <option
+                value=""
+                disabled
+                [hidden]="carLeasingForm.get('model')?.value"
+              >
+                select model
+              </option>
+              @for (carModel of carModels$ | async; track $index) {
+              <option>{{ carModel }}</option>
+              }
+            </select>
+            <!-- <app-error-handler [control]="carLeasingForm.get('model')"/> -->
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label for="modelVariant">Model variant:</mat-label>
+            <select
+              matNativeControl
+              id="modelVariant"
+              formControlName="modelVariant"
+              (change)="changeColor($event)"
+            >
+              <option
+                value=""
+                disabled
+                [hidden]="carLeasingForm.get('modelVariant')?.value"
+              >
+                select model variant
+              </option>
+              @for (carModelVariant of carModelVariants$ | async; track $index)
+              {
+              <option>{{ carModelVariant }}</option>
+              }
+            </select>
+            <!-- <app-error-handler [control]="carLeasingForm.get('modelVariant')"/> -->
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label for="year">Year:</mat-label>
+            <select
+              matNativeControl
+              id="year"
+              formControlName="year"
+              (change)="changeColor($event)"
+            >
+              <option
+                value=""
+                disabled
+                [hidden]="carLeasingForm.get('year')?.value"
+              >
+                select year of manufacture
+              </option>
+              @if (variantDetails$) { @for (year of (variantDetails$ |
+              async)?.years; track $index) {
+              <option>{{ year }}</option>
+              } } @else if (modelDetails$) { @for (year of (modelDetails$ |
+              async)?.years; track $index) {
+              <option>{{ year }}</option>
+              } }
+            </select>
+            <!-- <app-error-handler [control]="carLeasingForm.get('year')"/> -->
+          </mat-form-field>
+        </div>
+        <div class="rightColumn">
+          <mat-form-field>
+            <mat-label for="fuelType">Fuel type:</mat-label>
+            <select
+              matNativeControl
+              id="fuelType"
+              formControlName="fuelType"
+              (change)="changeColor($event)"
+            >
+              <option
+                value=""
+                disabled
+                [hidden]="carLeasingForm.get('fuelType')?.value"
+              >
+                select fuel type
+              </option>
+              @if (variantDetails$) { @for (fuelType of (variantDetails$ |
+              async)?.fuelTypes; track $index) {
+              <option>{{ fuelType }}</option>
+              } } @else if (modelDetails$) { @for (fuelType of (modelDetails$ |
+              async)?.fuelTypes; track $index) {
+              <option>{{ fuelType }}</option>
+              } }
+            </select>
+            <!-- <app-error-handler [control]="carLeasingForm.get('fuelType')"/> -->
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label for="enginePower">Engine power:</mat-label>
+            <select
+              matNativeControl
+              id="enginePower"
+              formControlName="enginePower"
+              (change)="changeColor($event)"
+            >
+              <option
+                value=""
+                disabled
+                [hidden]="carLeasingForm.get('enginePower')?.value"
+              >
+                select engine power
+              </option>
+              @if (variantDetails$) { @for (enginePower of (variantDetails$ |
+              async)?.enginePowers; track $index) {
+              <option>{{ enginePower }}</option>
+              } } @else if (modelDetails$) { @for (enginePower of (modelDetails$
+              | async)?.enginePowers; track $index) {
+              <option>{{ enginePower }}</option>
+              } }
+            </select>
+            <!-- <app-error-handler [control]="carLeasingForm.get('enginePower')"/> -->
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label for="engineSize">Engine size:</mat-label>
+            <select
+              matNativeControl
+              id="engineSize"
+              formControlName="engineSize"
+              (change)="changeColor($event)"
+            >
+              <option
+                value=""
+                disabled
+                [hidden]="carLeasingForm.get('engineSize')?.value"
+              >
+                select engine size
+              </option>
+              @if (variantDetails$) { @for (engineSize of (variantDetails$ |
+              async)?.engineSizes; track $index) {
+              <option>{{ engineSize }}</option>
+              } } @else if (modelDetails$) { @for (engineSize of (modelDetails$
+              | async)?.engineSizes; track $index) {
+              <option>{{ engineSize }}</option>
+              } }
+            </select>
+            <!-- <app-error-handler [control]="carLeasingForm.get('engineSize')"/> -->
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label for="url">URL:</mat-label>
+            <input matInput type="url" id="url" formControlName="url" />
+            <!-- <app-error-handler [control]="carLeasingForm.get('url')"/> -->
+          </mat-form-field>
+
+
+            <button type="button" mat-raised-button (click)="fileInput.click()">Attach car offer</button>
+            <input hidden (change)="onFileSelected($event)" #fileInput type="file">
+            <span class="file-name">{{selectedFile?.name}}</span>
+
+        </div>
       </div>
-
-      <div>
-        <label for="model">*Model:</label>
-        <br>
-        <select id="model" formControlName="model" (change)="changeColor($event)" >
-          <option value="" disabled [hidden]="carLeasingForm.get('model')?.value">
-            select model
-          </option>
-          @for (carModel of carModels$ | async; track $index) {
-            <option>{{carModel}}</option>
-          }
-        </select>
-        <!-- <app-error-handler [control]="carLeasingForm.get('model')"/> -->
+      <div class="bottomContainer">
+        <mat-checkbox formControlName="confirmation">
+          I confirm that the above information is accurate
+        </mat-checkbox>
+        <mat-checkbox formControlName="terms">
+          I have read and agree with the Terms and Conditions:
+        </mat-checkbox>
+        <button
+          class="submitButton"
+          mat-raised-button
+          [color]="getButtonColor()"
+          type="submit"
+          [disabled]="!carLeasingForm.valid"
+        >
+          APPLY FOR LOAN
+        </button>
       </div>
-
-      <div>
-        <label for="modelVariant">Model variant:</label>
-        <br>
-        <select id="modelVariant" formControlName="modelVariant" (change)="changeColor($event)">
-          <option value="" disabled [hidden]="carLeasingForm.get('modelVariant')?.value">
-            select model variant
-          </option>
-          @for (carModelVariant of carModelVariants$ | async; track $index) {
-            <option>{{carModelVariant}}</option>
-          }
-        </select>
-        <!-- <app-error-handler [control]="carLeasingForm.get('modelVariant')"/> -->
-      </div>
-
-      <div>
-        <label for="year">*Year:</label>
-        <br>
-        <select id="year" formControlName="year" (change)="changeColor($event)">
-          <option value="" disabled [hidden]="carLeasingForm.get('year')?.value">
-            select year of manufacture
-          </option>
-          @if (variantDetails$) {
-            @for (year of (variantDetails$ | async)?.years; track $index) {
-              <option>{{year}}</option>
-            }
-          }
-          @else if (modelDetails$) {
-            @for (year of (modelDetails$ | async)?.years; track $index) {
-              <option>{{year}}</option>
-            }
-          }
-        </select>
-        <!-- <app-error-handler [control]="carLeasingForm.get('year')"/> -->
-      </div>
-
-      <div>
-        <label for="fuelType">*Fuel type:</label>
-        <br>
-        <select id="fuelType" formControlName="fuelType" (change)="changeColor($event)">
-          <option value="" disabled [hidden]="carLeasingForm.get('fuelType')?.value">
-            select fuel type
-          </option>
-          @if (variantDetails$) {
-            @for (fuelType of (variantDetails$ | async)?.fuelTypes; track $index) {
-              <option>{{fuelType}}</option>
-            }
-          }
-          @else if (modelDetails$) {
-            @for (fuelType of (modelDetails$ | async)?.fuelTypes; track $index) {
-              <option>{{fuelType}}</option>
-            }
-          }
-        </select>
-        <!-- <app-error-handler [control]="carLeasingForm.get('fuelType')"/> -->
-      </div>
-
-      <div>
-        <label for="enginePower">*Engine power:</label>
-        <br>
-        <select id="enginePower" formControlName="enginePower" (change)="changeColor($event)">
-          <option value="" disabled [hidden]="carLeasingForm.get('enginePower')?.value">
-            select engine power
-          </option>
-          @if (variantDetails$) {
-            @for (enginePower of (variantDetails$ | async)?.enginePowers; track $index) {
-              <option>{{enginePower}}</option>
-            }
-          }
-          @else if (modelDetails$) {
-            @for (enginePower of (modelDetails$ | async)?.enginePowers; track $index) {
-              <option>{{enginePower}}</option>
-            }
-          }
-        </select>
-        <!-- <app-error-handler [control]="carLeasingForm.get('enginePower')"/> -->
-      </div>
-
-      <div>
-        <label for="engineSize">*Engine size:</label>
-        <br>
-        <select id="engineSize" formControlName="engineSize" (change)="changeColor($event)">
-          <option value="" disabled [hidden]="carLeasingForm.get('engineSize')?.value">
-            select engine size
-          </option>
-          @if (variantDetails$) {
-            @for (engineSize of (variantDetails$ | async)?.engineSizes; track $index) {
-              <option>{{engineSize}}</option>
-            }
-          }
-          @else if (modelDetails$) {
-            @for (engineSize of (modelDetails$ | async)?.engineSizes; track $index) {
-              <option>{{engineSize}}</option>
-            }
-          }
-        </select>
-        <!-- <app-error-handler [control]="carLeasingForm.get('engineSize')"/> -->
-      </div>
-
-      <div>
-        <label for="url">URL:</label>
-        <br>
-        <input type="url" id="url" formControlName="url">
-        <!-- <app-error-handler [control]="carLeasingForm.get('url')"/> -->
-      </div>
-
-      <div>
-        <label for="offer">Attach car offer:</label>
-        <br>
-        <input type="file" id="offer" formControlName="offer">
-        <!-- <app-error-handler [control]="carLeasingForm.get('offer')"/> -->
-      </div>
-
-      <br>
-
-      <div>
-        <label for="terms">I confirm that the above information is accurate:</label>
-        <input type="checkbox" id="confirmation" formControlName="confirmation">
-        <!-- <app-error-handler [control]="carLeasingForm.get('terms')"/> -->
-      </div>
-
-      <div>
-        <label for="terms">I have read and agree with the Terms and Conditions:</label>
-        <input type="checkbox" id="terms" formControlName="terms">
-        <!-- <app-error-handler [control]="carLeasingForm.get('terms')"/> -->
-      </div>
-
-
-      <!-- <app-error-handler [control]="carLeasingForm"/> -->
-
-      <button type="submit" [disabled]="!carLeasingForm.valid">APPLY FOR LOAN</button>
     </form>
   </div>
 </div>
