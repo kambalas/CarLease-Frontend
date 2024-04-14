@@ -58,10 +58,16 @@
         <mat-slide-toggle formControlName="envFriendly" (change)="calculateMonthlyPayment()"></mat-slide-toggle>
     </div>
 
-    <mat-form-field>
-        <mat-label>Monthly payment from</mat-label>
-        <input matInput value={{monthlyPayment}} type="text" />
-    </mat-form-field>
+    <div class="form-row">
+        <label>Monthly payment from:</label>
+        <mat-form-field>
+        @if(monthlyPayment$ | async; as monthlyPayment){
+             <input matInput value="{{monthlyPayment.monthlyPayment}}" type="text" id="monthlyPayment" disabled />
+        } @else { 
+            <input matInput value="0" type="text" id="monthlyPayment" disabled />
+        }
+        </mat-form-field>
+    </div>
 
     <button type="submit" mat-raised-button>APPLY</button>
 </form>
