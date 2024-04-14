@@ -1,15 +1,56 @@
 .container {
   .carLeasingForm {
     form {
-      select {
-        width: 100%; // Adjust this as per your requirement
-        margin-bottom: 15px;
-        color: #999;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
 
-        option {
-          color: black; // This will make the selected option black
+      .mainContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .leftColumn,
+        .rightColumn {
+          display: flex;
+          flex-direction: column;
+          width: 40%;
         }
       }
+      .bottomContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        margin-top: 15px;
+      }
+
+      select {
+        color: #999;
+        width: 100%;
+        margin-bottom: 15px;
+
+        option {
+          color: black;
+        }
+      }
+
+      .submitButton {
+        width: 170px;
+        color: white;
+
+        .mat-primary {
+          background-color: orange;
+          color: white;
+        }
+
+        .mat-warn {
+          background-color: grey;
+          color: white;
+        }
+      }
+
       ::placeholder {
         font-size: 0.7em;
       }

@@ -14,6 +14,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-car-leasing-form',
@@ -25,7 +27,9 @@ import { MatOptionModule } from '@angular/material/core';
     MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatOptionModule
+    MatOptionModule,
+    MatButtonModule,
+    MatCheckboxModule,
   ],
   templateUrl: './car-leasing-form.component.html',
   styleUrl: './car-leasing-form.component.scss',
@@ -37,6 +41,7 @@ export class CarLeasingFormComponent implements OnInit {
   carModelVariants$!: Observable<string[]>;
   modelDetails$!: Observable<ModelDetails | null>;
   variantDetails$!: Observable<VariantDetails | null>;
+  selectedFile: any = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -83,7 +88,7 @@ export class CarLeasingFormComponent implements OnInit {
       );
     }
 
-    //sets modelDetails$, years, fuelTypes, enginePowers and engineSizes of all variants displayed
+    //sets modelDetails$; years, fuelTypes, enginePowers and engineSizes of all variants displayed
 
     if (modelControl && makeControl) {
       this.modelDetails$ = modelControl.valueChanges.pipe(
@@ -96,7 +101,7 @@ export class CarLeasingFormComponent implements OnInit {
       );
     }
 
-    //sets variantDetails$, years, fuel types, engine powers and engine sizes of the selected variant displayed
+    //sets variantDetails$; years, fuel types, engine powers and engine sizes of the selected variant displayed
 
     if (modelVariantControl && modelControl && makeControl) {
       this.variantDetails$ = modelVariantControl.valueChanges.pipe(
@@ -116,9 +121,16 @@ export class CarLeasingFormComponent implements OnInit {
       console.log('Form Submitted!', this.carLeasingForm.value);
     }
   }
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0] ?? null;
+  }
 
   changeColor(event: Event) {
     const selectElement = event.target as HTMLSelectElement;
     selectElement.style.color = selectElement.value ? 'black' : '#999';
+  }
+
+  getButtonColor() {
+    return this.carLeasingForm.valid ? 'primary' : 'warn';
   }
 }
