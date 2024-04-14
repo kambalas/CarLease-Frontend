@@ -8,7 +8,7 @@ import {
 
 import { Observable, switchMap } from 'rxjs';
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { ModelDetails, VariantDetails } from '../../../types';
+import { LatestDetails, ModelDetails, VariantDetails } from '../../../types';
 import { LeasingFormService } from '../../../services/leasing-form-service.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-car-leasing-form',
@@ -30,17 +31,19 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatOptionModule,
     MatButtonModule,
     MatCheckboxModule,
+    NgIf,
   ],
   templateUrl: './car-leasing-form.component.html',
   styleUrl: './car-leasing-form.component.scss',
 })
 export class CarLeasingFormComponent implements OnInit {
   carLeasingForm!: FormGroup;
-  carMakes: string[] = [];
+  carMakes$!: Observable<string[]>;
   carModels$!: Observable<string[]>;
   carModelVariants$!: Observable<string[]>;
   modelDetails$!: Observable<ModelDetails | null>;
   variantDetails$!: Observable<VariantDetails | null>;
+  latestDetails$!: Observable<LatestDetails | null>;
   selectedFile: any = null;
 
   constructor(
@@ -49,7 +52,7 @@ export class CarLeasingFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.carMakes = this.leasingFormService.getCarMakes();
+    this.carMakes$ = this.leasingFormService.getCarMakes();
 
     this.carLeasingForm = this.formBuilder.group({
       make: ['', Validators.required],
@@ -70,6 +73,23 @@ export class CarLeasingFormComponent implements OnInit {
     const modelVariantControl = this.carLeasingForm.get('modelVariant');
 
     if (makeControl) {
+      makeControl.valueChanges.subscribe(() => {
+        this.carLeasingForm.patchValue({
+          model: '',
+          modelVariant: '',
+          year: '',
+          fuelType: '',
+          enginePower: '',
+          engineSize: '',
+          url: '',
+          offer: '',
+          terms: false,
+          confirmation: false,
+        });
+      });
+    }
+
+    if (makeControl) {
       this.carModels$ = makeControl.valueChanges.pipe(
         switchMap((selectedMake) => {
           return this.leasingFormService.getModelsForMake(selectedMake);
@@ -88,21 +108,6 @@ export class CarLeasingFormComponent implements OnInit {
       );
     }
 
-    //sets modelDetails$; years, fuelTypes, enginePowers and engineSizes of all variants displayed
-
-    if (modelControl && makeControl) {
-      this.modelDetails$ = modelControl.valueChanges.pipe(
-        switchMap((selectedModel) => {
-          return this.leasingFormService.getDetailsForModel(
-            makeControl.value,
-            selectedModel
-          );
-        })
-      );
-    }
-
-    //sets variantDetails$; years, fuel types, engine powers and engine sizes of the selected variant displayed
-
     if (modelVariantControl && modelControl && makeControl) {
       this.variantDetails$ = modelVariantControl.valueChanges.pipe(
         switchMap((selectedVariant) => {
@@ -119,6 +124,7 @@ export class CarLeasingFormComponent implements OnInit {
   onSubmit(): void {
     if (this.carLeasingForm.valid) {
       console.log('Form Submitted!', this.carLeasingForm.value);
+      window.alert('Form Submitted Successfully!');
     }
   }
   onFileSelected(event: any): void {
@@ -132,5 +138,23 @@ export class CarLeasingFormComponent implements OnInit {
 
   getButtonColor() {
     return this.carLeasingForm.valid ? 'primary' : 'warn';
+  }
+
+  onSelectModel(event: Event) {
+    this.changeColor(event);
+    const makeControl = this.carLeasingForm.get('make');
+    const modelControl = this.carLeasingForm.get('model');
+
+    if (modelControl && makeControl) {
+      const selectedMake = makeControl.value;
+      const selectedModel = modelControl.value;
+
+      if (selectedMake && selectedModel) {
+        this.modelDetails$ = this.leasingFormService.getDetailsForModel(
+          selectedMake,
+          selectedModel
+        );
+      }
+    }
   }
 }

@@ -1,10 +1,10 @@
 export interface CalculatorFormFields {
-    carValue: number;
-    period: string;
-    downPayment: number;
-    residualValuePercentage: string;
-    isEcoFriendly: boolean,
-    monthlyPayment: string
+  carValue: number;
+  period: string;
+  downPayment: number;
+  residualValuePercentage: string;
+  isEcoFriendly: boolean;
+  monthlyPayment: string;
 }
 
 export interface Car {
@@ -37,6 +37,13 @@ export interface ModelDetails {
 }
 
 export interface VariantDetails {
+  years: number[];
+  fuelTypes: string[];
+  enginePowers: number[];
+  engineSizes: number[];
+}
+
+export interface LatestDetails {
   years: number[];
   fuelTypes: string[];
   enginePowers: number[];
