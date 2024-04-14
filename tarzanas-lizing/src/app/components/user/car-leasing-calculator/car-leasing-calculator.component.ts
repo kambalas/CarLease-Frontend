@@ -6,9 +6,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MonthlyPaymentCalculatorService } from '../../../services/car-leasing-calculator.service';
-import { CalculatorFormFields } from '../../../types';
+import { CalculatorFormFields, CalculatorResponse } from '../../../types';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-car-leasing-calculator',
@@ -20,7 +22,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatSelectModule,
     MatOptionModule,
-    MatButtonModule],
+    MatButtonModule,
+    AsyncPipe],
   templateUrl: './car-leasing-calculator.component.html',
   styleUrl: './car-leasing-calculator.component.scss'
 })
@@ -29,7 +32,7 @@ export class CarLeasingCalculatorComponent implements OnInit {
   private router = inject(Router);
 
   calculatorForm = this.makeForm();
-  monthlyPayment: string = "CUSTOM VALUE";
+  monthlyPayment$: Observable<CalculatorResponse> | undefined;
   noteActive: boolean = true;
 
   ngOnInit(): void {
@@ -70,7 +73,7 @@ export class CarLeasingCalculatorComponent implements OnInit {
       downPayment: this.downPayment?.value!,
       residualValuePercentage: this.residual?.value!,
       isEcoFriendly: this.envFriendly?.value!,
-      monthlyPayment: this.monthlyPayment
+      monthlyPayment: (document.getElementById('monthlyPayment') as HTMLInputElement).value
     });
 
     this.router.navigate(['registration']);
@@ -78,7 +81,8 @@ export class CarLeasingCalculatorComponent implements OnInit {
 
   calculateMonthlyPayment(): void {
     if (this.calculatorForm.valid) {
-      this.monthlyPayment = this.service.getMonthlyPayment(this.calculatorForm.value as Partial<CalculatorFormFields>);
+      this.monthlyPayment$ = this.service.getMonthlyPayment(this.calculatorForm.value as Partial<CalculatorFormFields>);
+      this.monthlyPayment$.subscribe(x => console.log(x));
     }
 
     return;
