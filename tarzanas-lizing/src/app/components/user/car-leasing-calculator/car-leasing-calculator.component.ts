@@ -6,11 +6,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MonthlyPaymentCalculatorService } from '../../../services/car-leasing-calculator.service';
-import { CalculatorFormFields, CalculatorRequest, CalculatorResponse } from '../../../types';
+import { CalculatorRequest, CalculatorResponse } from '../../../types';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { FormDataTransferService } from '../../../services/form-data-transfer.service';
 
 @Component({
   selector: 'app-car-leasing-calculator',
@@ -29,6 +30,7 @@ import { AsyncPipe } from '@angular/common';
 })
 export class CarLeasingCalculatorComponent implements OnInit {
   private service = inject(MonthlyPaymentCalculatorService);
+  private transferDataService = inject(FormDataTransferService);
   private router = inject(Router);
 
   calculatorForm = this.makeForm();
@@ -67,7 +69,7 @@ export class CarLeasingCalculatorComponent implements OnInit {
       return;
     }
 
-    this.service.postCarCalculatorData({
+    this.transferDataService.setCalculatorData({
       carValue: this.carValue?.value!,
       period: this.period?.value!,
       downPayment: this.downPayment?.value!,
@@ -82,8 +84,6 @@ export class CarLeasingCalculatorComponent implements OnInit {
   calculateMonthlyPayment(): void {
     if (this.calculatorForm.valid) {
       this.monthlyPayment$ = this.service.getMonthlyPayment(this.calculatorForm.value as Partial<CalculatorRequest>);
-      this.monthlyPayment$.subscribe(x => console.log(x));
-      console.log(this.calculatorForm.value)
     }
     return;
   }
