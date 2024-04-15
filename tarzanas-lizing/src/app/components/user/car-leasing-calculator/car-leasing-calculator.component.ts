@@ -58,7 +58,7 @@ export class CarLeasingCalculatorComponent implements OnInit {
           Validators.min(0)
         ]),
         residualValuePercentage: new FormControl<string>('0'),
-        envFriendly: new FormControl<boolean>(false)
+        isEcoFriendly: new FormControl<boolean>(false)
       });
   }
 
@@ -72,7 +72,7 @@ export class CarLeasingCalculatorComponent implements OnInit {
       period: this.period?.value!,
       downPayment: this.downPayment?.value!,
       residualValuePercentage: this.residualValuePercentage?.value!,
-      isEcoFriendly: this.envFriendly?.value!,
+      isEcoFriendly: this.isEcoFriendly?.value!,
       monthlyPayment: (document.getElementById('monthlyPayment') as HTMLInputElement).value
     });
 
@@ -83,8 +83,8 @@ export class CarLeasingCalculatorComponent implements OnInit {
     if (this.calculatorForm.valid) {
       this.monthlyPayment$ = this.service.getMonthlyPayment(this.calculatorForm.value as Partial<CalculatorRequest>);
       this.monthlyPayment$.subscribe(x => console.log(x));
+      console.log(this.calculatorForm.value)
     }
-
     return;
   }
 
@@ -112,7 +112,7 @@ export class CarLeasingCalculatorComponent implements OnInit {
     return this.calculatorForm.get('residualValuePercentage');
   }
 
-  get envFriendly() {
-    return this.calculatorForm.get('envFriendly');
+  get isEcoFriendly() {
+    return this.calculatorForm.get('isEcoFriendly');
   }
 }
