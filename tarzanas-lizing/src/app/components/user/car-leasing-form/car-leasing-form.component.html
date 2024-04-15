@@ -52,7 +52,7 @@
               matNativeControl
               id="modelVariant"
               formControlName="modelVariant"
-              (change)="changeColor($event)"
+              (change)="onSelectModelVariant($event)"
             >
               <option
                 value=""
@@ -83,21 +83,10 @@
               >
                 select year of manufacture
               </option>
-              <ng-container
-                *ngIf="{
-                  variantDetails: variantDetails$ | async,
-                  modelDetails: modelDetails$ | async
-                } as data"
-              >
-                @if (data.variantDetails && data.variantDetails.years.length) {
-                @for (year of data.variantDetails.years; track $index) {
-                <option>{{ year }}</option>
-                } } @else if (data.modelDetails &&
-                data.modelDetails.years.length) { @for (year of
-                data.modelDetails.years; track $index) {
-                <option>{{ year }}</option>
-                } }
-              </ng-container>
+
+              @for (year of (carDetails$ | async)?.years; track $index) {
+              <option>{{ year }}</option>
+              }
             </select>
           </mat-form-field>
         </div>
@@ -117,22 +106,10 @@
               >
                 select fuel type
               </option>
-              <ng-container
-                *ngIf="{
-                  variantDetails: variantDetails$ | async,
-                  modelDetails: modelDetails$ | async
-                } as data"
-              >
-                @if (data.variantDetails &&
-                data.variantDetails.fuelTypes.length) { @for (fuelType of
-                data.variantDetails.fuelTypes; track $index) {
-                <option>{{ fuelType }}</option>
-                } } @else if (data.modelDetails &&
-                data.modelDetails.fuelTypes.length) { @for (fuelType of
-                data.modelDetails.fuelTypes; track $index) {
-                <option>{{ fuelType }}</option>
-                } }
-              </ng-container>
+              @for (fuelType of (carDetails$ | async)?.fuelTypes; track $index)
+              {
+              <option>{{ fuelType }}</option>
+              }
             </select>
           </mat-form-field>
 
@@ -151,22 +128,10 @@
               >
                 select engine power
               </option>
-              <ng-container
-                *ngIf="{
-                  variantDetails: variantDetails$ | async,
-                  modelDetails: modelDetails$ | async
-                } as data"
-              >
-                @if (data.variantDetails &&
-                data.variantDetails.enginePowers.length) { @for (enginePower of
-                data.variantDetails.enginePowers; track $index) {
-                <option>{{ enginePower }}</option>
-                } } @else if (data.modelDetails &&
-                data.modelDetails.enginePowers.length) { @for (enginePower of
-                data.modelDetails.enginePowers; track $index) {
-                <option>{{ enginePower }}</option>
-                } }
-              </ng-container>
+              @for (enginePower of (carDetails$ | async)?.enginePowers; track
+              $index) {
+              <option>{{ enginePower }}</option>
+              }
             </select>
           </mat-form-field>
 
@@ -185,22 +150,10 @@
               >
                 select engine size
               </option>
-              <ng-container
-                *ngIf="{
-                  variantDetails: variantDetails$ | async,
-                  modelDetails: modelDetails$ | async
-                } as data"
-              >
-                @if (data.variantDetails &&
-                data.variantDetails.engineSizes.length) { @for (engineSize of
-                data.variantDetails.engineSizes; track $index) {
-                <option>{{ engineSize }}</option>
-                } } @else if (data.modelDetails &&
-                data.modelDetails.engineSizes.length) { @for (engineSize of
-                data.modelDetails.engineSizes; track $index) {
-                <option>{{ engineSize }}</option>
-                } }
-              </ng-container>
+              @for (engineSize of (carDetails$ | async)?.engineSizes; track
+              $index) {
+              <option>{{ engineSize }}</option>
+              }
             </select>
           </mat-form-field>
 

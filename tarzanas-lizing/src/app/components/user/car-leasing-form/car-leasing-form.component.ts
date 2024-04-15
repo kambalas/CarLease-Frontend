@@ -8,7 +8,7 @@ import {
 
 import { Observable, switchMap } from 'rxjs';
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { LatestDetails, ModelDetails, VariantDetails } from '../../../types';
+import { Details } from '../../../types';
 import { LeasingFormService } from '../../../services/leasing-form-service.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -41,9 +41,7 @@ export class CarLeasingFormComponent implements OnInit {
   carMakes$!: Observable<string[]>;
   carModels$!: Observable<string[]>;
   carModelVariants$!: Observable<string[]>;
-  modelDetails$!: Observable<ModelDetails | null>;
-  variantDetails$!: Observable<VariantDetails | null>;
-  latestDetails$!: Observable<LatestDetails | null>;
+  carDetails$!: Observable<Details | null>;
   selectedFile: any = null;
 
   constructor(
@@ -109,7 +107,7 @@ export class CarLeasingFormComponent implements OnInit {
     }
 
     if (modelVariantControl && modelControl && makeControl) {
-      this.variantDetails$ = modelVariantControl.valueChanges.pipe(
+      this.carDetails$ = modelVariantControl.valueChanges.pipe(
         switchMap((selectedVariant) => {
           return this.leasingFormService.getDetailsForVariant(
             makeControl.value,
@@ -150,9 +148,30 @@ export class CarLeasingFormComponent implements OnInit {
       const selectedModel = modelControl.value;
 
       if (selectedMake && selectedModel) {
-        this.modelDetails$ = this.leasingFormService.getDetailsForModel(
+        this.carDetails$ = this.leasingFormService.getDetailsForModel(
           selectedMake,
           selectedModel
+        );
+      }
+    }
+  }
+
+  onSelectModelVariant(event: Event) {
+    this.changeColor(event);
+    const makeControl = this.carLeasingForm.get('make');
+    const modelControl = this.carLeasingForm.get('model');
+    const modelVariantControl = this.carLeasingForm.get('modelVariant');
+
+    if (modelVariantControl && modelControl && makeControl) {
+      const selectedMake = makeControl.value;
+      const selectedModel = modelControl.value;
+      const selectedVariant = modelVariantControl.value;
+
+      if (selectedMake && selectedModel && selectedVariant) {
+        this.carDetails$ = this.leasingFormService.getDetailsForVariant(
+          selectedMake,
+          selectedModel,
+          selectedVariant
         );
       }
     }

@@ -29,21 +29,7 @@ export interface Variant {
   engineSizes: number[];
 }
 
-export interface ModelDetails {
-  years: number[];
-  fuelTypes: string[];
-  enginePowers: number[];
-  engineSizes: number[];
-}
-
-export interface VariantDetails {
-  years: number[];
-  fuelTypes: string[];
-  enginePowers: number[];
-  engineSizes: number[];
-}
-
-export interface LatestDetails {
+export interface Details {
   years: number[];
   fuelTypes: string[];
   enginePowers: number[];
