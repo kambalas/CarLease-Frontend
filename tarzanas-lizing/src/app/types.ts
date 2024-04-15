@@ -7,6 +7,13 @@ export interface CalculatorFormFields {
   monthlyPayment: string
 }
 
+export interface CalculatorRequest {
+  carValue: number;
+  period: string;
+  downPayment: number;
+  residualValuePercentage: string;
+}
+
 export interface CalculatorResponse {
   monthlyPayment: number
 }

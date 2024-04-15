@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MonthlyPaymentCalculatorService } from '../../../services/car-leasing-calculator.service';
-import { CalculatorFormFields, CalculatorResponse } from '../../../types';
+import { CalculatorFormFields, CalculatorRequest, CalculatorResponse } from '../../../types';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { Observable } from 'rxjs';
@@ -57,7 +57,7 @@ export class CarLeasingCalculatorComponent implements OnInit {
           Validators.required,
           Validators.min(0)
         ]),
-        residual: new FormControl<string>('0'),
+        residualValuePercentage: new FormControl<string>('0'),
         envFriendly: new FormControl<boolean>(false)
       });
   }
@@ -71,7 +71,7 @@ export class CarLeasingCalculatorComponent implements OnInit {
       carValue: this.carValue?.value!,
       period: this.period?.value!,
       downPayment: this.downPayment?.value!,
-      residualValuePercentage: this.residual?.value!,
+      residualValuePercentage: this.residualValuePercentage?.value!,
       isEcoFriendly: this.envFriendly?.value!,
       monthlyPayment: (document.getElementById('monthlyPayment') as HTMLInputElement).value
     });
@@ -81,7 +81,7 @@ export class CarLeasingCalculatorComponent implements OnInit {
 
   calculateMonthlyPayment(): void {
     if (this.calculatorForm.valid) {
-      this.monthlyPayment$ = this.service.getMonthlyPayment(this.calculatorForm.value as Partial<CalculatorFormFields>);
+      this.monthlyPayment$ = this.service.getMonthlyPayment(this.calculatorForm.value as Partial<CalculatorRequest>);
       this.monthlyPayment$.subscribe(x => console.log(x));
     }
 
@@ -108,8 +108,8 @@ export class CarLeasingCalculatorComponent implements OnInit {
     return this.calculatorForm.get('period');
   }
 
-  get residual() {
-    return this.calculatorForm.get('residual');
+  get residualValuePercentage() {
+    return this.calculatorForm.get('residualValuePercentage');
   }
 
   get envFriendly() {
