@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { CalculatorFormFields, CalculatorRequest, CalculatorResponse } from '../types';
+import { CalculatorRequest, CalculatorResponse } from '../types';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -11,9 +11,5 @@ export class MonthlyPaymentCalculatorService {
 
   getMonthlyPayment(inputs: Partial<CalculatorRequest>): Observable<CalculatorResponse> {
     return this.client.post<CalculatorResponse>('https://backend-xa05.onrender.com/car-leasing/calculator', inputs)
-  }
-
-  postCarCalculatorData(formData: CalculatorFormFields) {
-    console.log(formData);
   }
 }

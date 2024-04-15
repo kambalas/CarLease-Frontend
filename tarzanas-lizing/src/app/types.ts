@@ -19,6 +19,33 @@ export interface CalculatorResponse {
   monthlyPayment: number
 }
 
+export interface PersonalInformationFormFields {
+  firstName: string,
+  lastName: string,
+  email: string,
+  phoneNumber: string,
+  pid: number,
+  dateOfBirth: string,
+  maritalStatus: string,
+  numberOfChildren: number,
+  citizenship: string,
+  monthlyIncome: number
+}
+
+export interface CarLeasingFormFields {
+  make: string,
+  model: string
+  modelVariant: string,
+  year: string,
+  fuelType: string,
+  enginePower: number,
+  engineSize: number,
+  url: string,
+  offer: string,
+  terms: boolean,
+  confirmation: boolean
+}
+
 export interface Car {
   make: string;
   models: Model[];
