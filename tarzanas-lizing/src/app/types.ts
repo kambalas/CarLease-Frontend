@@ -3,8 +3,19 @@ export interface CalculatorFormFields {
   period: string;
   downPayment: number;
   residualValuePercentage: string;
-  isEcoFriendly: boolean;
-  monthlyPayment: string;
+  isEcoFriendly: boolean,
+  monthlyPayment: string
+}
+
+export interface CalculatorRequest {
+  carValue: number;
+  period: string;
+  downPayment: number;
+  residualValuePercentage: string;
+}
+
+export interface CalculatorResponse {
+  monthlyPayment: number
 }
 
 export interface Car {
