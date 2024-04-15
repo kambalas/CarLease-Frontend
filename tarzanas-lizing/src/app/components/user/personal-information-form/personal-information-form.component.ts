@@ -67,6 +67,16 @@ export class PersonalInformationFormComponent implements OnInit {
         Validators.required,
         Validators.min(0),
       ]),
+      pid: new FormControl<string | null>(null, [
+        Validators.required,
+      ]),
+      maritalStatus: new FormControl<string | null>(null, [
+        Validators.required,
+      ]),
+      citizenship: new FormControl<string | null>(null, [
+        Validators.required,
+      ]),
+
     });
   }
 
