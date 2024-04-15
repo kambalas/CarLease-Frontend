@@ -19,7 +19,7 @@
               >
                 select make
               </option>
-              @for (carMake of carMakes; track $index) {
+              @for (carMake of carMakes$ | async; track $index) {
               <option>{{ carMake }}</option>
               }
             </select>
@@ -31,7 +31,7 @@
               matNativeControl
               id="model"
               formControlName="model"
-              (change)="changeColor($event)"
+              (change)="onSelectModel($event)"
             >
               <option
                 value=""
@@ -44,16 +44,15 @@
               <option>{{ carModel }}</option>
               }
             </select>
-            <!-- <app-error-handler [control]="carLeasingForm.get('model')"/> -->
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label for="modelVariant">Model variant:</mat-label>
+            <mat-label for="modelVariant">Model variant (optional):</mat-label>
             <select
               matNativeControl
               id="modelVariant"
               formControlName="modelVariant"
-              (change)="changeColor($event)"
+              (change)="onSelectModelVariant($event)"
             >
               <option
                 value=""
@@ -67,7 +66,6 @@
               <option>{{ carModelVariant }}</option>
               }
             </select>
-            <!-- <app-error-handler [control]="carLeasingForm.get('modelVariant')"/> -->
           </mat-form-field>
 
           <mat-form-field>
@@ -85,15 +83,11 @@
               >
                 select year of manufacture
               </option>
-              @if (variantDetails$) { @for (year of (variantDetails$ |
-              async)?.years; track $index) {
+
+              @for (year of (carDetails$ | async)?.years; track $index) {
               <option>{{ year }}</option>
-              } } @else if (modelDetails$) { @for (year of (modelDetails$ |
-              async)?.years; track $index) {
-              <option>{{ year }}</option>
-              } }
+              }
             </select>
-            <!-- <app-error-handler [control]="carLeasingForm.get('year')"/> -->
           </mat-form-field>
         </div>
         <div class="rightColumn">
@@ -112,19 +106,15 @@
               >
                 select fuel type
               </option>
-              @if (variantDetails$) { @for (fuelType of (variantDetails$ |
-              async)?.fuelTypes; track $index) {
+              @for (fuelType of (carDetails$ | async)?.fuelTypes; track $index)
+              {
               <option>{{ fuelType }}</option>
-              } } @else if (modelDetails$) { @for (fuelType of (modelDetails$ |
-              async)?.fuelTypes; track $index) {
-              <option>{{ fuelType }}</option>
-              } }
+              }
             </select>
-            <!-- <app-error-handler [control]="carLeasingForm.get('fuelType')"/> -->
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label for="enginePower">Engine power:</mat-label>
+            <mat-label for="enginePower">Engine power (hp):</mat-label>
             <select
               matNativeControl
               id="enginePower"
@@ -138,19 +128,15 @@
               >
                 select engine power
               </option>
-              @if (variantDetails$) { @for (enginePower of (variantDetails$ |
-              async)?.enginePowers; track $index) {
+              @for (enginePower of (carDetails$ | async)?.enginePowers; track
+              $index) {
               <option>{{ enginePower }}</option>
-              } } @else if (modelDetails$) { @for (enginePower of (modelDetails$
-              | async)?.enginePowers; track $index) {
-              <option>{{ enginePower }}</option>
-              } }
+              }
             </select>
-            <!-- <app-error-handler [control]="carLeasingForm.get('enginePower')"/> -->
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label for="engineSize">Engine size:</mat-label>
+            <mat-label for="engineSize">Engine size (liters):</mat-label>
             <select
               matNativeControl
               id="engineSize"
@@ -164,28 +150,28 @@
               >
                 select engine size
               </option>
-              @if (variantDetails$) { @for (engineSize of (variantDetails$ |
-              async)?.engineSizes; track $index) {
+              @for (engineSize of (carDetails$ | async)?.engineSizes; track
+              $index) {
               <option>{{ engineSize }}</option>
-              } } @else if (modelDetails$) { @for (engineSize of (modelDetails$
-              | async)?.engineSizes; track $index) {
-              <option>{{ engineSize }}</option>
-              } }
+              }
             </select>
-            <!-- <app-error-handler [control]="carLeasingForm.get('engineSize')"/> -->
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label for="url">URL:</mat-label>
+            <mat-label for="url">URL (optional):</mat-label>
             <input matInput type="url" id="url" formControlName="url" />
-            <!-- <app-error-handler [control]="carLeasingForm.get('url')"/> -->
           </mat-form-field>
 
-
-            <button type="button" mat-raised-button (click)="fileInput.click()">Attach car offer</button>
-            <input hidden (change)="onFileSelected($event)" #fileInput type="file">
-            <span class="file-name">{{selectedFile?.name}}</span>
-
+          <button type="button" mat-raised-button (click)="fileInput.click()">
+            Upload file (optional)
+          </button>
+          <input
+            hidden
+            (change)="onFileSelected($event)"
+            #fileInput
+            type="file"
+          />
+          <span class="file-name">{{ selectedFile?.name }}</span>
         </div>
       </div>
       <div class="bottomContainer">
