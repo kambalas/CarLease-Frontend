@@ -10,13 +10,13 @@ import { Observable, switchMap } from 'rxjs';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Details } from '../../../types';
 import { LeasingFormService } from '../../../services/leasing-form-service.service';
+import { FormSubmissionConfirmationService } from '../../../services/form-submission-confirmation.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-car-leasing-form',
@@ -31,7 +31,6 @@ import { NgIf } from '@angular/common';
     MatOptionModule,
     MatButtonModule,
     MatCheckboxModule,
-    NgIf,
   ],
   templateUrl: './car-leasing-form.component.html',
   styleUrl: './car-leasing-form.component.scss',
@@ -46,7 +45,8 @@ export class CarLeasingFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private leasingFormService: LeasingFormService
+    private leasingFormService: LeasingFormService,
+    private submissionConfirmationService: FormSubmissionConfirmationService
   ) {}
 
   ngOnInit() {
@@ -68,7 +68,6 @@ export class CarLeasingFormComponent implements OnInit {
 
     const makeControl = this.carLeasingForm.get('make');
     const modelControl = this.carLeasingForm.get('model');
-    const modelVariantControl = this.carLeasingForm.get('modelVariant');
 
     if (makeControl) {
       makeControl.valueChanges.subscribe(() => {
@@ -105,24 +104,12 @@ export class CarLeasingFormComponent implements OnInit {
         })
       );
     }
-
-    if (modelVariantControl && modelControl && makeControl) {
-      this.carDetails$ = modelVariantControl.valueChanges.pipe(
-        switchMap((selectedVariant) => {
-          return this.leasingFormService.getDetailsForVariant(
-            makeControl.value,
-            modelControl.value,
-            selectedVariant
-          );
-        })
-      );
-    }
   }
 
   onSubmit(): void {
     if (this.carLeasingForm.valid) {
       console.log('Form Submitted!', this.carLeasingForm.value);
-      window.alert('Form Submitted Successfully!');
+      this.submissionConfirmationService.openConfirmationDialog();
     }
   }
   onFileSelected(event: any): void {
