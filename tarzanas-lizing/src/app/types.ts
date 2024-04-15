@@ -12,6 +12,7 @@ export interface CalculatorRequest {
   period: string;
   downPayment: number;
   residualValuePercentage: string;
+  isEcoFriendly: boolean
 }
 
 export interface CalculatorResponse {
