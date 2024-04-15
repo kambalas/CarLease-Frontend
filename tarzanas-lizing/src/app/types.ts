@@ -46,3 +46,16 @@ export interface Details {
   enginePowers: number[];
   engineSizes: number[];
 }
+
+export interface personalInfoDetails{
+  firstName:string;
+  secondName:string;
+  email:string;
+  phone:string;
+  pid:string;
+  date:Date;
+  maritalStatus:string[];
+  childrenCount:number;
+  citizenship:string[];
+  montlyIncome:number;
+}
