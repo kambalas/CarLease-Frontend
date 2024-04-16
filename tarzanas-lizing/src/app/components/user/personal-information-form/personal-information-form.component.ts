@@ -5,14 +5,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { Router } from '@angular/router';
-import { PersonalInfoService } from '../../../services/personal-info.service';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatStepperModule } from '@angular/material/stepper';
+import { FormDataTransferService } from '../../../services/form-data-transfer.service';
 
 @Component({
   selector: 'app-personal-information-form',
@@ -24,18 +20,19 @@ import {
     MatIconModule,
     MatDatepickerModule,
     ReactiveFormsModule,
+    MatButtonModule,
+    MatStepperModule
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './personal-information-form.component.html',
   styleUrl: './personal-information-form.component.scss',
 })
 export class PersonalInformationFormComponent implements OnInit {
-  private service = inject(PersonalInfoService);
-  private router = inject(Router);
+  private transferService = inject(FormDataTransferService);
 
   personalInformationForm = this.makeForm();
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   private makeForm() {
     return new FormGroup({
       firstName: new FormControl<string | null>(null, [
@@ -81,7 +78,7 @@ export class PersonalInformationFormComponent implements OnInit {
   }
 
   minimumAgeValidator(minAge: number) {
-    return (control:any) => {
+    return (control: any) => {
       const birthDate = new Date(control.value);
       const today = new Date();
       const minAgeDate = new Date();
@@ -92,9 +89,22 @@ export class PersonalInformationFormComponent implements OnInit {
       return null;
     };
   }
+
   onSubmit(): void {
     if (!this.personalInformationForm.valid) {
       return;
     }
+    this.transferService.setPersonalInformationData({
+      firstName: this.personalInformationForm.value.firstName!,
+      lastName: this.personalInformationForm.value.secondName!,
+      email: this.personalInformationForm.value.email!,
+      phoneNumber: this.personalInformationForm.value.phone!,
+      pid: this.personalInformationForm.value.pid!,
+      dateOfBirth: this.personalInformationForm.value.date!,
+      maritalStatus: this.personalInformationForm.value.maritalStatus!,
+      numberOfChildren: this.personalInformationForm.value.childrenCount!,
+      citizenship: this.personalInformationForm.value.citizenship!,
+      monthlyIncome: this.personalInformationForm.value.montlyIncome!
+    });
   }
 }

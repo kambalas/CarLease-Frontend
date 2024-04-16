@@ -1,10 +1,15 @@
 <div class="main_div">
-    <div class="left">
-      <app-personal-information-form>
-      </app-personal-information-form>
-    </div>
-  <div class="right">
-    <app-car-leasing-form>
-    </app-car-leasing-form>
-  </div>
+  <mat-stepper orientation="horizontal" linear>
+    <mat-step [editable]="false" label="Personal information">
+      <div class="left">
+        <app-personal-information-form />
+      </div>
+    </mat-step>
+    <mat-step label="Car information">
+      <div class="right">
+        <app-car-leasing-form>
+        </app-car-leasing-form>
+      </div>
+    </mat-step>
+  </mat-stepper>
 </div>
