@@ -1,4 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormBuilder,
@@ -18,6 +19,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NgIf } from '@angular/common';
+import { FormDataTransferService } from '../../../services/form-data-transfer.service';
 import { FormDataTransferService } from '../../../services/form-data-transfer.service';
 
 @Component({
@@ -44,6 +46,8 @@ export class CarLeasingFormComponent implements OnInit {
   carModelVariants$!: Observable<string[]>;
   carDetails$!: Observable<Details | null>;
   selectedFile: any = null;
+
+  private transferService = inject(FormDataTransferService);
 
   private transferService = inject(FormDataTransferService);
 
