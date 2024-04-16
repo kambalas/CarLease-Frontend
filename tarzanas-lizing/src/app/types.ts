@@ -46,6 +46,12 @@ export interface CarLeasingFormFields {
   confirmation: boolean
 }
 
+export interface FormsPostRequest {
+  ratesRequest: CalculatorFormFields,
+  personalInformationRequest: PersonalInformationFormFields,
+  leaseRequest: CarLeasingFormFields
+}
+
 export interface Car {
   make: string;
   models: Model[];
@@ -75,15 +81,15 @@ export interface Details {
   engineSizes: number[];
 }
 
-export interface personalInfoDetails{
-  firstName:string;
-  secondName:string;
-  email:string;
-  phone:string;
-  pid:string;
-  date:Date;
-  maritalStatus:string[];
-  childrenCount:number;
-  citizenship:string[];
-  montlyIncome:number;
+export interface personalInfoDetails {
+  firstName: string;
+  secondName: string;
+  email: string;
+  phone: string;
+  pid: string;
+  date: Date;
+  maritalStatus: string[];
+  childrenCount: number;
+  citizenship: string[];
+  montlyIncome: number;
 }

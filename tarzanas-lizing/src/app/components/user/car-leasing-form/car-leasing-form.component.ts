@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormBuilder,
@@ -17,6 +17,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NgIf } from '@angular/common';
+import { FormDataTransferService } from '../../../services/form-data-transfer.service';
 
 @Component({
   selector: 'app-car-leasing-form',
@@ -44,10 +45,12 @@ export class CarLeasingFormComponent implements OnInit {
   carDetails$!: Observable<Details | null>;
   selectedFile: any = null;
 
+  private transferService = inject(FormDataTransferService);
+
   constructor(
     private formBuilder: FormBuilder,
     private leasingFormService: LeasingFormService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.carMakes$ = this.leasingFormService.getCarMakes();
@@ -123,6 +126,8 @@ export class CarLeasingFormComponent implements OnInit {
     if (this.carLeasingForm.valid) {
       console.log('Form Submitted!', this.carLeasingForm.value);
       window.alert('Form Submitted Successfully!');
+      this.transferService.setCarLeaseData(this.carLeasingForm.value);
+      this.transferService.postAllFormData();
     }
   }
   onFileSelected(event: any): void {
