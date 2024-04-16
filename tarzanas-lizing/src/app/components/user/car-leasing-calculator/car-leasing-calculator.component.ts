@@ -65,7 +65,8 @@ export class CarLeasingCalculatorComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (!this.calculatorForm.valid) {
+    let monthlyPayment: string = (document.getElementById('monthlyPayment') as HTMLInputElement).value;
+    if (!this.calculatorForm.valid || monthlyPayment === "Incorrect data") {
       return;
     }
 
@@ -75,7 +76,7 @@ export class CarLeasingCalculatorComponent implements OnInit {
       downPayment: this.downPayment?.value!,
       residualValuePercentage: this.residualValuePercentage?.value!,
       isEcoFriendly: this.isEcoFriendly?.value!,
-      monthlyPayment: (document.getElementById('monthlyPayment') as HTMLInputElement).value
+      monthlyPayment: monthlyPayment
     });
 
     this.router.navigate(['registration']);
