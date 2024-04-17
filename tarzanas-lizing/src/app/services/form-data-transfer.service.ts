@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CalculatorFormFields, CarLeasingFormFields, PersonalInformationFormFields } from '../types';
+import { CalculatorFormFields, CarLeasingFormFields, FormsPostRequest, PersonalInformationFormFields } from '../types';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -68,6 +68,6 @@ export class FormDataTransferService {
 
     console.log({ ratesRequest, personalInformationRequest, leaseRequest });
 
-    //this.client.post({ ratesRequest, personalInformationRequest, leaseRequest }: FormsPostRequest){};
+    this.client.post<FormsPostRequest>('https://ci-cd-spring.onrender.com/applications/create', { ratesRequest, personalInformationRequest, leaseRequest });
   }
 }
