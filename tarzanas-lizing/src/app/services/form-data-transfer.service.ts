@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, catchError } from 'rxjs';
 import { CalculatorFormFields, CarLeasingFormFields, FormsPostRequest, PersonalInformationFormFields } from '../types';
 import { HttpClient } from '@angular/common/http';
 
@@ -58,7 +58,7 @@ export class FormDataTransferService {
     this.personalInformationData.next(formData);
   }
 
-  postAllFormData() {
+  postAllFormData(): Observable<any> {
     let ratesRequest;
     let personalInformationRequest;
     let leaseRequest;
@@ -68,6 +68,6 @@ export class FormDataTransferService {
 
     console.log({ ratesRequest, personalInformationRequest, leaseRequest });
 
-    this.client.post<FormsPostRequest>('https://ci-cd-spring.onrender.com/applications/create', { ratesRequest, personalInformationRequest, leaseRequest });
+    return this.client.post<FormsPostRequest>('https://ci-cd-spring.onrender.com/applications/create', { ratesRequest, personalInformationRequest, leaseRequest });
   }
 }
