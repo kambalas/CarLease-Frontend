@@ -42,7 +42,7 @@
 
     <mat-form-field>
         <mat-label>Residual value</mat-label>
-        <mat-select matNativeControl name="residual" id="residual" formControlName="residual" required>
+        <mat-select matNativeControl name="residual" id="residual" formControlName="residualValuePercentage" required>
             <mat-option value="0">0%</mat-option>
             <mat-option value="5">5%</mat-option>
             <mat-option value="10">10%</mat-option>
@@ -55,19 +55,22 @@
 
     <div class="form-row">
         <mat-label>Environmentally friendly car</mat-label>
-        <mat-slide-toggle formControlName="envFriendly" (change)="calculateMonthlyPayment()"></mat-slide-toggle>
+        <mat-slide-toggle formControlName="isEcoFriendly" (change)="calculateMonthlyPayment()"></mat-slide-toggle>
     </div>
 
     <div class="form-row">
         <label>Monthly payment from:</label>
         <mat-form-field>
         @if(monthlyPayment$ | async; as monthlyPayment){
-             <input matInput value="{{monthlyPayment.monthlyPayment}}" type="text" id="monthlyPayment" disabled />
+            @if(monthlyPayment.monthlyPayment < 0){
+                <input matInput value="Incorrect data" type="text" id="monthlyPayment" disabled />
+            } @else {
+                <input matInput value="{{monthlyPayment.monthlyPayment}}" type="text" id="monthlyPayment" disabled />
+            }
         } @else { 
-            <input matInput value="0" type="text" id="monthlyPayment" disabled />
+            <input matInput value="" type="text" id="monthlyPayment" disabled />
         }
         </mat-form-field>
     </div>
-
-    <button type="submit" mat-raised-button>APPLY</button>
+    <button type="submit" mat-raised-button [disabled]="!calculatorForm.valid">Apply</button>
 </form>

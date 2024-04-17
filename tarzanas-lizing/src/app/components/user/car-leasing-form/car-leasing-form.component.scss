@@ -15,9 +15,10 @@
         .rightColumn {
           display: flex;
           flex-direction: column;
-          width: 40%;
+          width: 47%;
         }
       }
+
       .bottomContainer {
         display: flex;
         flex-direction: column;
@@ -38,17 +39,7 @@
 
       .submitButton {
         width: 170px;
-        color: white;
-
-        .mat-primary {
-          background-color: orange;
-          color: white;
-        }
-
-        .mat-warn {
-          background-color: grey;
-          color: white;
-        }
+        margin: 10px auto 0;
       }
 
       ::placeholder {

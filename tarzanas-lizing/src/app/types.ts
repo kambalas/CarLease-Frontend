@@ -7,8 +7,49 @@ export interface CalculatorFormFields {
   monthlyPayment: string
 }
 
+export interface CalculatorRequest {
+  carValue: number;
+  period: string;
+  downPayment: number;
+  residualValuePercentage: string;
+  isEcoFriendly: boolean
+}
+
 export interface CalculatorResponse {
   monthlyPayment: number
+}
+
+export interface PersonalInformationFormFields {
+  firstName: string,
+  lastName: string,
+  email: string,
+  phoneNumber: string,
+  pid: string,
+  dateOfBirth: number,
+  maritalStatus: string,
+  numberOfChildren: number,
+  citizenship: string,
+  monthlyIncome: number
+}
+
+export interface CarLeasingFormFields {
+  make: string,
+  model: string
+  modelVariant: string,
+  year: string,
+  fuelType: string,
+  enginePower: number,
+  engineSize: number,
+  url: string,
+  offer: string,
+  terms: boolean,
+  confirmation: boolean
+}
+
+export interface FormsPostRequest {
+  ratesRequest: CalculatorFormFields,
+  personalInformationRequest: PersonalInformationFormFields,
+  leaseRequest: CarLeasingFormFields
 }
 
 export interface Car {
@@ -33,16 +74,22 @@ export interface Variant {
   engineSizes: number[];
 }
 
-export interface ModelDetails {
+export interface Details {
   years: number[];
   fuelTypes: string[];
   enginePowers: number[];
   engineSizes: number[];
 }
 
-export interface VariantDetails {
-  years: number[];
-  fuelTypes: string[];
-  enginePowers: number[];
-  engineSizes: number[];
+export interface personalInfoDetails {
+  firstName: string;
+  secondName: string;
+  email: string;
+  phone: string;
+  pid: string;
+  date: Date;
+  maritalStatus: string[];
+  childrenCount: number;
+  citizenship: string[];
+  montlyIncome: number;
 }

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Cars } from '../data/cars';
-import { Observable, from, of } from 'rxjs';
-import { ModelDetails, VariantDetails } from '../types';
+import { Observable, of } from 'rxjs';
+import { Details } from '../types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LeasingFormService {
-  getCarMakes(): string[] {
-    return Cars.map((car) => car.make);
+  getCarMakes(): Observable<string[]> {
+    return of(Cars.map((car) => car.make));
   }
 
   getModelsForMake(make: string): Observable<string[]> {
@@ -32,7 +32,7 @@ export class LeasingFormService {
   getDetailsForModel(
     make: string,
     model: string
-  ): Observable<ModelDetails | null> {
+  ): Observable<Details | null> {
     const vehicle = Cars.find((car) => car.make === make);
     const modelObj = vehicle?.models.find(
       (modelObj) => modelObj.modelName === model
@@ -52,7 +52,7 @@ export class LeasingFormService {
     make: string,
     model: string,
     variant: string
-  ): Observable<VariantDetails | null> {
+  ): Observable<Details | null> {
     const vehicle = Cars.find((car) => car.make === make);
     const modelObj = vehicle?.models.find(
       (modelObj) => modelObj.modelName === model

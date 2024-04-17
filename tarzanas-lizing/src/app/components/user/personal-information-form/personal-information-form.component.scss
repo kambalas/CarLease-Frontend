@@ -1,18 +1,21 @@
-
-.mainContainer{
+.mainContainer {
   display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  justify-content: space-between;
+  align-items: center;
 }
-.leftRow, .rightRow{
+
+.leftRow,
+.rightRow {
   display: grid;
-  width: 40%;
+  width: 47%;
 }
-.bottom{
+
+.bottom {
   display: grid;
   width: 100%;
 }
-::placeholder,.mat-form-field-label {
+
+::placeholder,
+.mat-form-field-label {
   font-size: 0.7em;
 }

@@ -6,11 +6,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MonthlyPaymentCalculatorService } from '../../../services/car-leasing-calculator.service';
-import { CalculatorFormFields, CalculatorResponse } from '../../../types';
+import { CalculatorRequest, CalculatorResponse } from '../../../types';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { FormDataTransferService } from '../../../services/form-data-transfer.service';
 
 @Component({
   selector: 'app-car-leasing-calculator',
@@ -29,6 +30,7 @@ import { AsyncPipe } from '@angular/common';
 })
 export class CarLeasingCalculatorComponent implements OnInit {
   private service = inject(MonthlyPaymentCalculatorService);
+  private transferDataService = inject(FormDataTransferService);
   private router = inject(Router);
 
   calculatorForm = this.makeForm();
@@ -57,23 +59,24 @@ export class CarLeasingCalculatorComponent implements OnInit {
           Validators.required,
           Validators.min(0)
         ]),
-        residual: new FormControl<string>('0'),
-        envFriendly: new FormControl<boolean>(false)
+        residualValuePercentage: new FormControl<string>('0'),
+        isEcoFriendly: new FormControl<boolean>(false)
       });
   }
 
   onSubmit(): void {
-    if (!this.calculatorForm.valid) {
+    let monthlyPayment: string = (document.getElementById('monthlyPayment') as HTMLInputElement).value;
+    if (!this.calculatorForm.valid || monthlyPayment === "Incorrect data") {
       return;
     }
 
-    this.service.postCarCalculatorData({
+    this.transferDataService.setCalculatorData({
       carValue: this.carValue?.value!,
       period: this.period?.value!,
       downPayment: this.downPayment?.value!,
-      residualValuePercentage: this.residual?.value!,
-      isEcoFriendly: this.envFriendly?.value!,
-      monthlyPayment: (document.getElementById('monthlyPayment') as HTMLInputElement).value
+      residualValuePercentage: this.residualValuePercentage?.value!,
+      isEcoFriendly: this.isEcoFriendly?.value!,
+      monthlyPayment: monthlyPayment
     });
 
     this.router.navigate(['registration']);
@@ -81,10 +84,8 @@ export class CarLeasingCalculatorComponent implements OnInit {
 
   calculateMonthlyPayment(): void {
     if (this.calculatorForm.valid) {
-      this.monthlyPayment$ = this.service.getMonthlyPayment(this.calculatorForm.value as Partial<CalculatorFormFields>);
-      this.monthlyPayment$.subscribe(x => console.log(x));
+      this.monthlyPayment$ = this.service.getMonthlyPayment(this.calculatorForm.value as Partial<CalculatorRequest>);
     }
-
     return;
   }
 
@@ -108,11 +109,11 @@ export class CarLeasingCalculatorComponent implements OnInit {
     return this.calculatorForm.get('period');
   }
 
-  get residual() {
-    return this.calculatorForm.get('residual');
+  get residualValuePercentage() {
+    return this.calculatorForm.get('residualValuePercentage');
   }
 
-  get envFriendly() {
-    return this.calculatorForm.get('envFriendly');
+  get isEcoFriendly() {
+    return this.calculatorForm.get('isEcoFriendly');
   }
 }
