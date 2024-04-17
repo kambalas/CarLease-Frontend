@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class FormDataTransferService {
   private client = inject(HttpClient);
 
-  private calculatorData = new BehaviorSubject<CalculatorFormFields>({
+  private calculatorData$ = new BehaviorSubject<CalculatorFormFields>({
     carValue: 0,
     period: "",
     downPayment: 0,
@@ -19,7 +19,7 @@ export class FormDataTransferService {
     monthlyPayment: ""
   });
 
-  private carLeaseData = new BehaviorSubject<CarLeasingFormFields>({
+  private carLeaseData$ = new BehaviorSubject<CarLeasingFormFields>({
     make: "",
     model: "",
     modelVariant: "",
@@ -33,7 +33,7 @@ export class FormDataTransferService {
     confirmation: false
   });
 
-  private personalInformationData = new BehaviorSubject<PersonalInformationFormFields>({
+  private personalInformationData$ = new BehaviorSubject<PersonalInformationFormFields>({
     firstName: "",
     lastName: "",
     email: "",
@@ -47,24 +47,26 @@ export class FormDataTransferService {
   })
 
   setCalculatorData(formData: CalculatorFormFields) {
-    this.calculatorData.next(formData);
+    this.calculatorData$.next(formData);
   }
 
   setCarLeaseData(formData: CarLeasingFormFields) {
-    this.carLeaseData.next(formData);
+    this.carLeaseData$.next(formData);
   }
 
   setPersonalInformationData(formData: PersonalInformationFormFields) {
-    this.personalInformationData.next(formData);
+    this.personalInformationData$.next(formData);
   }
 
   postAllFormData(): Observable<any> {
     let ratesRequest;
     let personalInformationRequest;
     let leaseRequest;
-    this.calculatorData.subscribe(x => ratesRequest = x);
-    this.personalInformationData.subscribe(x => personalInformationRequest = x);
-    this.carLeaseData.subscribe(x => leaseRequest = x);
+    this.calculatorData$.subscribe(x => ratesRequest = x);
+    this.personalInformationData$.subscribe(x => personalInformationRequest = x);
+    this.carLeaseData$.subscribe(x => leaseRequest = x);
+
+    //combinelaetst
 
     console.log({ ratesRequest, personalInformationRequest, leaseRequest });
 

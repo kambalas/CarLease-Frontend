@@ -1,0 +1,51 @@
+@use "@angular/material" as mat;
+
+mat-card {
+
+    .header,
+    .search-filter {
+        display: flex;
+    }
+
+    .search-filter {
+        align-items: center;
+        justify-content: center;
+    }
+
+    img {
+        width: 60px;
+        height: 50px;
+        border-radius: 50%;
+        margin: 10px 0 10px 10px;
+    }
+
+    .smallerFormField {
+        @include mat.form-field-density(-5);
+    }
+
+    mat-form-field {
+        width: 80%;
+    }
+
+    ul {
+        padding: 0;
+    }
+
+    .list {
+        text-align: left;
+
+        mat-divider {
+            margin-bottom: 10px;
+        }
+    }
+
+    li {
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+
+        h3 {
+            margin: 0;
+        }
+    }
+}
