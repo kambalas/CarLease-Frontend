@@ -72,6 +72,5 @@
         }
         </mat-form-field>
     </div>
-
-    <button type="submit" mat-raised-button>APPLY</button>
+    <button type="submit" mat-raised-button [disabled]="!calculatorForm.valid">Apply</button>
 </form>
