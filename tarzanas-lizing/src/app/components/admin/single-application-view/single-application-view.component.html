@@ -4,13 +4,15 @@
     </mat-card-header>
     <mat-divider></mat-divider>
     <mat-card-content>
-        <p><strong>Full Name:</strong></p>
-        <p><strong>Citizenship:</strong></p>
-        <p><strong>Age:</strong></p>
-        <p><strong>Phone No.:</strong></p>
-        <p><strong>Marital Status:</strong></p>
-        <p><strong>Number of Children:</strong></p>
-        <p><strong>Monthly Net Income:</strong></p>
+    @if(responseData$ | async; as responseData){
+        <p><strong>Full Name:</strong> {{responseData.firstName + " " + responseData.lastName}}</p>
+        <p><strong>Citizenship:</strong> {{responseData.citizenship}}</p>
+        <p><strong>Age:</strong> {{calulateAge(responseData.dateOfBirth)}}</p>
+        <p><strong>Phone No.:</strong> {{responseData.phone}}</p>
+        <p><strong>Marital Status:</strong> {{responseData.maritalStatus}}</p>
+        <p><strong>Number of Children:</strong> {{responseData.numberOfChildren}}</p>
+        <p><strong>Monthly Net Income:</strong> {{responseData.monthlyIncome}}&euro;</p>
+    }
     </mat-card-content>
 </mat-card>
 
@@ -20,13 +22,15 @@
     </mat-card-header>
     <mat-divider></mat-divider>
     <mat-card-content>
-        <p><strong>Car brand:</strong></p>
-        <p><strong>Car model:</strong></p>
-        <p><strong>Car model variant:</strong></p>
-        <p><strong>Car offer url:</strong></p>
-        <p><strong>Period:</strong></p>
-        <p><strong>Monthly payments:</strong> /month</p>
-        <p><strong>Car value:</strong> &euro;</p>
+        @if(responseData$ | async; as responseData){
+            <p><strong>Car brand:</strong> {{responseData.carMake}}</p>
+            <p><strong>Car model:</strong> {{responseData.carModel}}</p>
+            <p><strong>Car model variant:</strong> {{responseData.carModelVatiant}}</p>
+            <p><strong>Car offer url:</strong> {{responseData.carOfferUrl}}</p>
+            <p><strong>Period:</strong> {{responseData.period}}</p>
+            <p><strong>Monthly payments:</strong> {{responseData.monthlyPayment}}/month</p>
+            <p><strong>Car value:</strong> {{responseData.carValue}}&euro;</p>
+        }
     </mat-card-content>
 </mat-card>
   
