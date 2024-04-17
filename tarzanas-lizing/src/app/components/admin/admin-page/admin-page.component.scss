@@ -1,0 +1,17 @@
+.centered-title {
+  text-align: center;
+}
+
+.main {
+  min-height: 80vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.right,
+.middle,
+.left {
+  text-align: center;
+  margin: 10px;
+  flex: 1;
+}
