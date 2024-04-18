@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, catchError } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, of } from 'rxjs';
 import { CalculatorFormFields, CarLeasingFormFields, FormsPostRequest, PersonalInformationFormFields } from '../types';
 import { HttpClient } from '@angular/common/http';
 
@@ -59,17 +59,14 @@ export class FormDataTransferService {
   }
 
   postAllFormData(): Observable<any> {
-    let ratesRequest;
-    let personalInformationRequest;
-    let leaseRequest;
-    this.calculatorData$.subscribe(x => ratesRequest = x);
-    this.personalInformationData$.subscribe(x => personalInformationRequest = x);
-    this.carLeaseData$.subscribe(x => leaseRequest = x);
+    combineLatest({
+      ratesRequest: this.calculatorData$,
+      personalInformationRequest: this.personalInformationData$,
+      leaseRequest: this.carLeaseData$
+    })
+      .subscribe(x => console.log(x));
 
-    //combinelaetst
-
-    console.log({ ratesRequest, personalInformationRequest, leaseRequest });
-
-    return this.client.post<FormsPostRequest>('https://ci-cd-spring.onrender.com/applications/create', { ratesRequest, personalInformationRequest, leaseRequest });
+    return of('temporary');
+    //return this.client.post<FormsPostRequest>('https://ci-cd-spring.onrender.com/applications/create', { ratesRequest, personalInformationRequest, leaseRequest });
   }
 }
