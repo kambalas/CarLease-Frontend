@@ -93,6 +93,7 @@ export interface personalInfoDetails {
   citizenship: string[];
   montlyIncome: number;
 }
+
 export interface Application {
   id: string;
   firstName: string;
@@ -101,6 +102,7 @@ export interface Application {
   dateUpdated: Date;
   status: Status;
 }
+
 export const enum Status {
   NEW = 'new',
   UPDATED = 'updated',
@@ -108,3 +110,13 @@ export const enum Status {
   ACCEPTED = 'accepted',
   REJECTED = 'rejected',
 }
+
+export interface NoteRequest {
+  applicationId: number;
+  noteText: string;
+}
+
+export interface NoteResponse {
+  noteText: string;
+}
+
