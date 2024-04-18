@@ -12,3 +12,8 @@ mat-card {
 mat-divider {
   margin: 15px 0;
 }
+
+mat-card-content {
+  max-height: 70%;
+  overflow-y: auto;
+}
