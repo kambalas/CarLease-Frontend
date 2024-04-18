@@ -28,6 +28,9 @@ export class SingleApplicationViewComponent {
     carOfferUrl: "",
     period: 24,
     monthlyPayment: 500,
+    residualValue: 10,
+    isEnvFriendly: true,
+    downPayment: 500,
     carValue: 30000
   })
 
