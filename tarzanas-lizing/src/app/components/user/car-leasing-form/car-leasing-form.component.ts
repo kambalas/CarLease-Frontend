@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { Observable, switchMap } from 'rxjs';
+import { Observable, switchMap, take } from 'rxjs';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Details } from '../../../types';
 import { LeasingFormService } from '../../../services/leasing-form-service.service';
@@ -114,7 +114,7 @@ export class CarLeasingFormComponent implements OnInit {
       console.log('Form Submitted!', this.carLeasingForm.value);
       this.submissionConfirmationService.openConfirmationDialog();
       this.transferService.setCarLeaseData(this.carLeasingForm.value);
-      this.transferService.postAllFormData().subscribe(x => console.log(x));
+      this.transferService.postAllFormData().pipe(take(1));
     }
   }
   onFileSelected(event: any): void {
