@@ -5,7 +5,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
 import { FormDataTransferService } from '../../../services/form-data-transfer.service';
@@ -21,7 +26,7 @@ import { FormDataTransferService } from '../../../services/form-data-transfer.se
     MatDatepickerModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatStepperModule
+    MatStepperModule,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './personal-information-form.component.html',
@@ -32,7 +37,7 @@ export class PersonalInformationFormComponent implements OnInit {
 
   personalInformationForm = this.makeForm();
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
   private makeForm() {
     return new FormGroup({
       firstName: new FormControl<string | null>(null, [
@@ -54,26 +59,29 @@ export class PersonalInformationFormComponent implements OnInit {
 
       childrenCount: new FormControl<number | null>(null, [
         Validators.required,
-        Validators.pattern(/^\d+$/),
+        Validators.pattern(/^[0-9]\d*$/),
       ]),
 
       date: new FormControl<number | null>(null, [
-        Validators.required, this.minimumAgeValidator(18),
+        Validators.required,
+        this.minimumAgeValidator(18),
       ]),
       montlyIncome: new FormControl<number | null>(null, [
         Validators.required,
         Validators.min(0),
+        Validators.pattern(/^\d+$/),
       ]),
-      pid: new FormControl<string | null>(null, [
-        Validators.required,
-      ]),
+      pid: new FormControl<string | null>(null, [Validators.required]),
       maritalStatus: new FormControl<string | null>(null, [
         Validators.required,
+        Validators.pattern(/^(Single|Married|Partnership)$/),
       ]),
-      citizenship: new FormControl<string | null>(null, [
+      citizenship: new FormControl<string>('Lithuania', [
         Validators.required,
+        Validators.pattern(
+          /^(Austria|Belgium|Bulgaria|Croatia|Cyprus|Czech Republic|Denmark|Estonia|Finland|France|Germany|Greece|Hungary|Ireland|Italy|Latvia|Lithuania|Luxembourg|Malta|Netherlands|Poland|Portugal|Romania|Slovakia|Slovenia|Spain|Sweden)$/
+        ),
       ]),
-
     });
   }
 
@@ -104,7 +112,7 @@ export class PersonalInformationFormComponent implements OnInit {
       maritalStatus: this.personalInformationForm.value.maritalStatus!,
       numberOfChildren: this.personalInformationForm.value.childrenCount!,
       citizenship: this.personalInformationForm.value.citizenship!,
-      monthlyIncome: this.personalInformationForm.value.montlyIncome!
+      monthlyIncome: this.personalInformationForm.value.montlyIncome!,
     });
   }
 }

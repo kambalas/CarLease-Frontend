@@ -3,6 +3,7 @@
     <div class="leftRow">
       <mat-form-field>
         <mat-label>First name</mat-label>
+        <mat-hint>only letters and “-”</mat-hint>
         <input
           required
           matInput
@@ -13,6 +14,7 @@
       /></mat-form-field>
       <mat-form-field>
         <mat-label>Last name</mat-label>
+        <mat-hint>only letters and “-”</mat-hint>
         <input
           required
           matInput
@@ -24,6 +26,7 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Email address</mat-label>
+        <mat-hint>test&#64;test.com</mat-hint>
         <input
           required
           matInput
@@ -33,7 +36,10 @@
           placeholder="Email address"
       /></mat-form-field>
       <mat-form-field
-        ><mat-label>Phone number</mat-label>
+        >
+        <mat-hint>+37060999666</mat-hint>
+        <mat-label>Phone number</mat-label>
+
         <input
           required
           matInput
@@ -46,6 +52,7 @@
     <div class="rightRow">
       <mat-form-field>
         <mat-label>Personal ID number</mat-label>
+        <mat-hint>just letters and numbers</mat-hint>
         <input
           required
           matInput
@@ -57,6 +64,7 @@
 
       <mat-form-field class="example-full-width">
         <mat-label class="mat-form-field-label">Date of birth</mat-label>
+        <mat-hint>you must be at least 18 years old</mat-hint>
         <input
           required
           matInput
@@ -72,25 +80,25 @@
 
       <mat-form-field>
         <mat-label>Marital status</mat-label>
-        <select
+        <mat-hint>select from the dropdown list</mat-hint>
+        <mat-select
           required
           id="maritalStatus"
           formControlName="maritalStatus"
-          matNativeControl
         >
-          <option>----------</option>
-          <option value="Single">Single</option>
-          <option value="Married">Married</option>
-          <option value="Partnership">Partnership</option>
-        </select>
+          <mat-option value="Single">Single</mat-option>
+          <mat-option value="Married">Married</mat-option>
+          <mat-option value="Partnership">Partnership</mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Number of children</mat-label>
+        <mat-hint>enter an integer greater than 0</mat-hint>
         <input
           required
           matInput
-          type="number"
+          type="text"
           id="childrenCount"
           formControlName="childrenCount"
           placeholder="Number of children"
@@ -100,43 +108,45 @@
   </div>
   <mat-form-field required class="bottom">
     <mat-label>Citizenship</mat-label>
-    <select
+    <mat-hint>select an EU country from dropdown list</mat-hint>
+    <mat-select
       id="citizenship"
       formControlName="citizenship"
       matNativeControl
       required
     >
-      <option value="Austria">Austria</option>
-      <option value="Belgium">Belgium</option>
-      <option value="Bulgaria">Bulgaria</option>
-      <option value="Croatia">Croatia</option>
-      <option value="Cyprus">Cyprus</option>
-      <option value="Czech Republic">Czech Republic</option>
-      <option value="Denmark">Denmark</option>
-      <option value="Estonia">Estonia</option>
-      <option value="Finland">Finland</option>
-      <option value="France">France</option>
-      <option value="Germany">Germany</option>
-      <option value="Greece">Greece</option>
-      <option value="Hungary">Hungary</option>
-      <option value="Ireland">Ireland</option>
-      <option value="Italy">Italy</option>
-      <option value="Latvia">Latvia</option>
-      <option value="Lithuania" selected>Lithuania</option>
-      <option value="Luxembourg">Luxembourg</option>
-      <option value="Malta">Malta</option>
-      <option value="Netherlands">Netherlands</option>
-      <option value="Poland">Poland</option>
-      <option value="Portugal">Portugal</option>
-      <option value="Romania">Romania</option>
-      <option value="Slovakia">Slovakia</option>
-      <option value="Slovenia">Slovenia</option>
-      <option value="Spain">Spain</option>
-      <option value="Sweden">Sweden</option>
-      <option value="United Kingdom">United Kingdom</option>
-      <option value="Other">Other</option>
-    </select>
+    <mat-option value="Austria">Austria</mat-option>
+    <mat-option value="Belgium">Belgium</mat-option>
+    <mat-option value="Bulgaria">Bulgaria</mat-option>
+    <mat-option value="Croatia">Croatia</mat-option>
+    <mat-option value="Cyprus">Cyprus</mat-option>
+    <mat-option value="Czech Republic">Czech Republic</mat-option>
+    <mat-option value="Denmark">Denmark</mat-option>
+    <mat-option value="Estonia">Estonia</mat-option>
+    <mat-option value="Finland">Finland</mat-option>
+    <mat-option value="France">France</mat-option>
+    <mat-option value="Germany">Germany</mat-option>
+    <mat-option value="Greece">Greece</mat-option>
+    <mat-option value="Hungary">Hungary</mat-option>
+    <mat-option value="Ireland">Ireland</mat-option>
+    <mat-option value="Italy">Italy</mat-option>
+    <mat-option value="Latvia">Latvia</mat-option>
+    <mat-option value="Lithuania">Lithuania</mat-option>
+    <mat-option value="Luxembourg">Luxembourg</mat-option>
+    <mat-option value="Malta">Malta</mat-option>
+    <mat-option value="Netherlands">Netherlands</mat-option>
+    <mat-option value="Poland">Poland</mat-option>
+    <mat-option value="Portugal">Portugal</mat-option>
+    <mat-option value="Romania">Romania</mat-option>
+    <mat-option value="Slovakia">Slovakia</mat-option>
+    <mat-option value="Slovenia">Slovenia</mat-option>
+    <mat-option value="Spain">Spain</mat-option>
+    <mat-option value="Sweden">Sweden</mat-option>
+    <mat-option value="Other">Other</mat-option>
+    </mat-select>
+
   </mat-form-field>
+
   <mat-form-field class="bottom"
     ><mat-label>Monthly income after taxes and commitments</mat-label>
     <input
