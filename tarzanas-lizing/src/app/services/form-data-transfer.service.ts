@@ -59,14 +59,15 @@ export class FormDataTransferService {
   }
 
   postAllFormData(): Observable<any> {
+    let combinedRequest;
+
     combineLatest({
       ratesRequest: this.calculatorData$,
       personalInformationRequest: this.personalInformationData$,
       leaseRequest: this.carLeaseData$
     })
-      .subscribe(x => console.log(x));
+      .subscribe(x => combinedRequest = x);
 
-    return of('temporary');
-    //return this.client.post<FormsPostRequest>('https://ci-cd-spring.onrender.com/applications/create', { ratesRequest, personalInformationRequest, leaseRequest });
+    return this.client.post<FormsPostRequest>('https://ci-cd-spring.onrender.com/applications/create', combinedRequest);
   }
 }
