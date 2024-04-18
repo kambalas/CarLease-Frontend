@@ -1,7 +1,14 @@
-.notes-box {
-  display: block;
+.container {
+  position: relative;
   border: 2px solid #d6d6d6;
-  height: 40vh;
+  height: 35vh;
   text-align: left;
   overflow-y: auto;
 }
+
+.botom-left {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
