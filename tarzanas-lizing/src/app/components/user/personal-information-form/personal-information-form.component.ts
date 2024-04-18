@@ -71,7 +71,9 @@ export class PersonalInformationFormComponent implements OnInit {
         Validators.min(0),
         Validators.pattern(/^\d+$/),
       ]),
-      pid: new FormControl<string | null>(null, [Validators.required]),
+      pid: new FormControl<string | null>(null, [
+        Validators.required]),
+
       maritalStatus: new FormControl<string | null>(null, [
         Validators.required,
         Validators.pattern(/^(Single|Married|Partnership)$/),
