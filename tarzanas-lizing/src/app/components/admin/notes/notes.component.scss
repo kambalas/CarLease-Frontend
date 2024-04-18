@@ -1,14 +1,14 @@
-.notes-box {
+mat-card {
   display: block;
   text-align: left;
-  height: 40vh;
-  overflow-y: auto;
-  box-shadow: 1px 1px 2px rgb(213, 213, 213),
-    -1px -1px 2px rgb(213, 213, 213);
-  border-radius: 5px;
+  height: 100%;
 }
 
-h1 {
-  background-color: lightgray;
+#note-title {
+  justify-content: center;
   text-align: center;
+}
+
+mat-divider {
+  margin: 15px 0;
 }
