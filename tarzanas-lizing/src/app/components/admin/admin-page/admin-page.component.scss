@@ -13,5 +13,22 @@
 .left {
   text-align: center;
   margin: 10px;
-  flex: 1;
+}
+
+.left {
+  width: 25%;
+  height: 95vh;
+  overflow-y: scroll;
+}
+
+.right {
+  width: 18%;
+  position: sticky;
+  top: 5px;
+  align-self: center;
+}
+
+.middle {
+  width: 57%;
+  height: 95vh;
 }
