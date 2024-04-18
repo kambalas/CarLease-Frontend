@@ -49,15 +49,17 @@ export class CarLeasingCalculatorComponent implements OnInit {
       {
         carValue: new FormControl<number | null>(null, [
           Validators.required,
-          Validators.min(300)
+          Validators.min(300),
+          Validators.pattern('^[0-9]*$')
         ]),
         period: new FormControl<string>('months', [
           Validators.required,
-          Validators.pattern('[^a-zA-Z]*')
+          Validators.pattern('^[0-9]*$')
         ]),
         downPayment: new FormControl<number | null>(null, [
           Validators.required,
-          Validators.min(0)
+          Validators.min(0),
+          Validators.pattern('^[0-9]*$')
         ]),
         residualValuePercentage: new FormControl<string>('0'),
         isEcoFriendly: new FormControl<boolean>(false)

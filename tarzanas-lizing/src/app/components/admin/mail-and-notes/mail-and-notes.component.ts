@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { MailComponent } from '../mail/mail.component';
+import { MailTabComponent } from '../mail-tab/mail-tab.component';
 import { NotesComponent } from '../notes/notes.component';
+import { NotesTabComponent } from '../notes-tab/notes-tab.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-mail-and-notes',
   standalone: true,
-  imports: [MailComponent, NotesComponent],
+  imports: [MailTabComponent, NotesTabComponent, NotesComponent, MatTabsModule],
   templateUrl: './mail-and-notes.component.html',
   styleUrl: './mail-and-notes.component.scss'
 })

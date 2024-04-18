@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MailComponent } from './mail.component';
+import { NotesTabComponent } from './notes-tab.component';
 
-describe('MailComponent', () => {
-  let component: MailComponent;
-  let fixture: ComponentFixture<MailComponent>;
+describe('NotesTabComponent', () => {
+  let component: NotesTabComponent;
+  let fixture: ComponentFixture<NotesTabComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MailComponent]
+      imports: [NotesTabComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(MailComponent);
+    fixture = TestBed.createComponent(NotesTabComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
