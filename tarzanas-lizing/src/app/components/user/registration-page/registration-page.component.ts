@@ -3,6 +3,8 @@ import { PersonalInformationFormComponent } from '../personal-information-form/p
 import { CarLeasingFormComponent } from '../car-leasing-form/car-leasing-form.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
+import { FooterComponent } from '../../general/footer/footer.component';
+import { HeaderComponent } from '../../general/header/header.component';
 
 @Component({
   selector: 'app-registration-page',
@@ -11,7 +13,9 @@ import { MatButtonModule } from '@angular/material/button';
     PersonalInformationFormComponent,
     CarLeasingFormComponent,
     MatStepperModule,
-    MatButtonModule],
+    MatButtonModule,
+    FooterComponent,
+    HeaderComponent],
   templateUrl: './registration-page.component.html',
   styleUrl: './registration-page.component.scss'
 })

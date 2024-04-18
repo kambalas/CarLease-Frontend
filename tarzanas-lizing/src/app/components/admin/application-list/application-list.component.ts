@@ -50,6 +50,41 @@ export class ApplicationListComponent {
       lastName: "Rodder",
       date: new Date(),
       status: "declined"
+    },
+    {
+      id: 6,
+      firstName: "Bob",
+      lastName: "Bobber",
+      date: new Date(),
+      status: "pending"
+    },
+    {
+      id: 7,
+      firstName: "Rob",
+      lastName: "Robber",
+      date: new Date(),
+      status: "accepted"
+    },
+    {
+      id: 8,
+      firstName: "Ben",
+      lastName: "Benner",
+      date: new Date(),
+      status: "declined"
+    },
+    {
+      id: 9,
+      firstName: "Todd",
+      lastName: "Todder",
+      date: new Date(),
+      status: "pending"
+    },
+    {
+      id: 10,
+      firstName: "Rod",
+      lastName: "Rodder",
+      date: new Date(),
+      status: "declined"
     }
   ]);
 }
