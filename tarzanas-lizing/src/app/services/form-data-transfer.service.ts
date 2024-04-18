@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, combineLatest, of } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, of, switchMap } from 'rxjs';
 import { CalculatorFormFields, CarLeasingFormFields, FormsPostRequest, PersonalInformationFormFields } from '../types';
 import { HttpClient } from '@angular/common/http';
 
@@ -59,15 +59,12 @@ export class FormDataTransferService {
   }
 
   postAllFormData(): Observable<any> {
-    let combinedRequest;
-
-    combineLatest({
+    return combineLatest({
       ratesRequest: this.calculatorData$,
       personalInformationRequest: this.personalInformationData$,
       leaseRequest: this.carLeaseData$
-    })
-      .subscribe(x => combinedRequest = x);
-
-    return this.client.post<FormsPostRequest>('https://ci-cd-spring.onrender.com/applications/create', combinedRequest);
+    }).pipe(
+      switchMap(req => this.client.post<FormsPostRequest>('https://ci-cd-spring.onrender.com/applications/create', req))
+    )
   }
 }
