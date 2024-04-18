@@ -10,16 +10,15 @@ export class AuthService {
 
   setToken(token: string): void {
     this.token = token;
-    localStorage.setItem('jwt', token);  // Store token in localStorage
+    sessionStorage.setItem('jwt', token);
   }
 
   getToken(): string | null {
-    return localStorage.getItem('jwt');
+    return sessionStorage.getItem('jwt');
   }
 
   isLoggedIn(): boolean {
     const token = this.getToken();
-    // Here you might add more complex checks like token expiration
     return !!token;
   }
 }
