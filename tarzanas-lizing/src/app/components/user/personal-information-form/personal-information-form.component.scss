@@ -16,6 +16,11 @@
 }
 
 ::placeholder,
-.mat-form-field-label {
+.mat-form-field-label,
+mat-hint {
   font-size: 0.7em;
+}
+mat-hint {
+  color: rgb(171, 171, 171);
+  margin-top: -5px;
 }
