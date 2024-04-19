@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { ApplicationListComponent} from '../application-list/application-list.component';
+import { Component, inject } from '@angular/core';
+import { ApplicationListComponent } from '../application-list/application-list.component';
 import { MailAndNotesComponent } from '../mail-and-notes/mail-and-notes.component';
 import { SingleApplicationViewComponent } from '../single-application-view/single-application-view.component';
+import { ApplicationListService } from '../../../services/application-list.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -11,5 +12,11 @@ import { SingleApplicationViewComponent } from '../single-application-view/singl
   styleUrl: './admin-page.component.scss'
 })
 export class AdminPageComponent {
+  service = inject(ApplicationListService);
 
+  selectedId: string | undefined;
+
+  setSelectedId(id: string) {
+    this.selectedId = id;
+  }
 }

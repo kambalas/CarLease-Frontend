@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
@@ -18,10 +18,18 @@ import { Application } from '../../../types';
 })
 export class ApplicationListComponent implements OnInit {
   private service = inject(ApplicationListService);
+  OnSelectedId = output<string>();
+
 
   listResponse$: Observable<Application[]> | undefined;
 
   ngOnInit(): void {
     this.listResponse$ = this.service.getAllApplications();
+  }
+
+  openSelected(id: string) {
+    if (id) {
+      this.OnSelectedId.emit(id)
+    }
   }
 }

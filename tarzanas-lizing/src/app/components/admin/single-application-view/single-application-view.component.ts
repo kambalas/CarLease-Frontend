@@ -1,8 +1,9 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { GeneralFormsResponse } from '../../../types';
 
 @Component({
   selector: 'app-single-application-view',
@@ -12,6 +13,8 @@ import { of } from 'rxjs';
   styleUrl: './single-application-view.component.scss'
 })
 export class SingleApplicationViewComponent {
+  response$ = input<Observable<GeneralFormsResponse>>();
+
   responseData$ = of({
     firstName: "Bob",
     lastName: "Bobby",

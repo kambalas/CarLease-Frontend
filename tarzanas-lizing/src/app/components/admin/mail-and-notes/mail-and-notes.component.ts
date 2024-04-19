@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { MailTabComponent } from '../mail-tab/mail-tab.component';
 import { NotesComponent } from '../notes/notes.component';
 import { NotesTabComponent } from '../notes-tab/notes-tab.component';
@@ -12,5 +12,5 @@ import { MatTabsModule } from '@angular/material/tabs';
   styleUrl: './mail-and-notes.component.scss'
 })
 export class MailAndNotesComponent {
-
+  response$ = input();
 }
