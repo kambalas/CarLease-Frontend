@@ -10,7 +10,7 @@ export class NotesService {
 
   private client = inject(HttpClient);
 
-  getNotesById(inputs: Partial<NoteRequest>): Observable<NoteResponse> {
-    return this.client.post<NoteResponse>('https://backend-xa05.onrender.com/admin/notes/{:id}', inputs)
-  }
+  // getNotesById(inputs: Partial<NoteRequest>): Observable<NoteResponse> {
+  //   return this.client.get<NoteResponse>('https://backend-xa05.onrender.com/admin/notes/${id}', inputs)
+  // }
 }
