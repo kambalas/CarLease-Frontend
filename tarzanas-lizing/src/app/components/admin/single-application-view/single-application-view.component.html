@@ -1,38 +1,40 @@
 <mat-card>
-    <mat-card-header id="client-title">
+    <mat-card-header>
         <mat-card-title>Client data</mat-card-title>
     </mat-card-header>
     <mat-divider></mat-divider>
     <mat-card-content>
-    @if(responseData$ | async; as responseData){
-        <p><strong>Full Name:</strong> {{responseData.firstName + " " + responseData.lastName}}</p>
-        <p><strong>Citizenship:</strong> {{responseData.citizenship}}</p>
-        <p><strong>Age:</strong> {{calulateAge(responseData.dateOfBirth)}}</p>
-        <p><strong>Phone No.:</strong> {{responseData.phone}}</p>
-        <p><strong>Marital Status:</strong> {{responseData.maritalStatus}}</p>
-        <p><strong>Number of Children:</strong> {{responseData.numberOfChildren}}</p>
-        <p><strong>Monthly Net Income:</strong> {{responseData.monthlyIncome}}&euro;</p>
+    @if(responseData$ | async; as res){
+        <p><strong>Full Name:</strong> {{res.PersonalInformationResponse.firstName + " " + res.PersonalInformationResponse.lastName}}</p>
+        <p><strong>Citizenship:</strong> {{res.PersonalInformationResponse.citizenship}}</p>
+        <p><strong>Age:</strong> {{calulateAge(res.PersonalInformationResponse.dateOfBirth)}}</p>
+        <p><strong>Phone No.:</strong> {{res.PersonalInformationResponse.phoneNumber}}</p>
+        <p><strong>Marital Status:</strong> {{res.PersonalInformationResponse.maritalStatus}}</p>
+        <p><strong>Number of Children:</strong> {{res.PersonalInformationResponse.numberOfChildren}}</p>
+        <p><strong>Monthly Net Income:</strong> {{res.PersonalInformationResponse.monthlyIncome}}&euro;</p>
     }
     </mat-card-content>
 </mat-card>
 
 <mat-card>
-    <mat-card-header id="lease-title">
+    <mat-card-header>
         <mat-card-title>Lease data</mat-card-title>
     </mat-card-header>
     <mat-divider></mat-divider>
     <mat-card-content>
-        @if(responseData$ | async; as responseData){
-            <p><strong>Car brand:</strong> {{responseData.carMake}}</p>
-            <p><strong>Car model:</strong> {{responseData.carModel}}</p>
-            <p><strong>Car model variant:</strong> {{responseData.carModelVatiant}}</p>
-            <p><strong>Car offer url:</strong> {{responseData.carOfferUrl}}</p>
-            <p><strong>Period:</strong> {{responseData.period}}</p>
-            <p><strong>Residual value:</strong> {{responseData.residualValue}}</p>
-            <p><strong>Down payment:</strong> {{responseData.downPayment}}</p>
-            <p><strong>Environmentally friendly:</strong> {{responseData.period}}</p>
-            <p><strong>Monthly payments:</strong> {{responseData.monthlyPayment}}/month</p>
-            <p><strong>Car value:</strong> {{responseData.carValue}}&euro;</p>
+        @if(responseData$ | async; as res){
+            <p><strong>Car:</strong> {{res.LeaseResponse.make}} {{res.LeaseResponse.model}} ({{res.LeaseResponse.year}})</p>
+            <p><strong>Car model variant:</strong> {{res.LeaseResponse.modelVariant}}</p>
+            <p><strong>Car fuel type:</strong> {{res.LeaseResponse.fuelType}}</p>
+            <p><strong>Car engine size:</strong> {{res.LeaseResponse.engineSize}} L</p>
+            <p><strong>Car engine power:</strong> {{res.LeaseResponse.enginePower}} hp</p>
+            <p><strong>Car offer url:</strong> {{res.LeaseResponse.url}}</p>
+            <p><strong>Car value:</strong> {{res.RatesResponse.carValue}}&euro;</p>
+            <p><strong>Period:</strong> {{res.RatesResponse.period}} months</p>
+            <p><strong>Residual value:</strong> {{residualToEur(res.RatesResponse.residualValuePercentage, res.RatesResponse.carValue)}}&euro;</p>
+            <p><strong>Down payment:</strong> {{res.RatesResponse.downPayment}}&euro;</p>
+            <p><strong>Environmentally friendly:</strong> {{res.RatesResponse.isEcoFriendly}}</p>
+            <p><strong>Monthly payment:</strong> {{res.RatesResponse.monthlyPayment}}&euro;/month</p>
         }
     </mat-card-content>
 </mat-card>

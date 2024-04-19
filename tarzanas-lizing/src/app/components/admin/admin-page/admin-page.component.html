@@ -5,10 +5,10 @@
   @if(selectedId){
     <div class="middle">
       <!-- change the method to email one -->
-      <app-mail-and-notes [response$]="service.getPersonalAndLeaseData(selectedId)" /> 
+      <app-mail-and-notes [selectedId]="(selectedId)" /> 
     </div>
     <div class="right">
-      <app-single-application-view [response$]="service.getPersonalAndLeaseData(selectedId)" />
+      <app-single-application-view [selectedId]="(selectedId)" />
     </div>
   }
 </div>

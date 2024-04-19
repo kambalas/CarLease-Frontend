@@ -47,13 +47,36 @@ mat-card {
         list-style: none;
         display: flex;
         justify-content: space-between;
+        padding: 5px 10px;
+        border-radius: 2px;
 
         h3 {
             margin: 0;
         }
+
+        h4 {
+            margin-bottom: 0;
+        }
     }
 
     li:hover {
-        filter: brightness(5);
+        background-color: #b29fd4;
+        cursor: pointer;
+    }
+
+    li.opened-false h3,
+    li.opened-false h4,
+    li.opened-false h5 {
+        font-weight: bold;
+    }
+
+    li.rejected {
+        opacity: 0.6;
+        background-color: rgb(224, 224, 224);
+        cursor: default;
+    }
+
+    li .date-icon {
+        text-align: right;
     }
 }

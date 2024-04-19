@@ -16,12 +16,12 @@
     <ul>
         @if(listResponse$ | async; as listResponse){
             @for(res of listResponse; track res.id) {
-                <li class="opened-{{res.isOpened}}" (click)="openSelected(res.id)">
+                <li class="opened-{{res.isOpened}} {{res.status}}" (click)="openSelected(res.id)">
                     <div>
                         <h3>{{res.firstName + " " + res.secondName}}</h3>
                         <h4>ID: {{res.id}}</h4>
                     </div>
-                    <div>
+                    <div class="date-icon">
                         <h5>{{res.dateUpdated.getFullYear() + "-" + res.dateUpdated.getMonth().toString().padStart(2, "0") + "-" + res.dateUpdated.getDate()}}</h5>
                         @if(res.status === 'accepted'){
                             <span class="material-symbols-outlined">done</span>
