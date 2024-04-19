@@ -1,9 +1,9 @@
-import {Component} from '@angular/core';
-import {MatCardModule} from "@angular/material/card";
-import {MatDividerModule} from "@angular/material/divider";
-import {Observable, of} from "rxjs";
-import {AsyncPipe} from "@angular/common";
-import {NoteResponse} from "../../../types";
+import { Component } from '@angular/core';
+import { MatCardModule } from "@angular/material/card";
+import { MatDividerModule } from "@angular/material/divider";
+import { Observable, of } from "rxjs";
+import { AsyncPipe } from "@angular/common";
+import { NoteResponse } from "../../../types";
 
 @Component({
   selector: 'app-notes',

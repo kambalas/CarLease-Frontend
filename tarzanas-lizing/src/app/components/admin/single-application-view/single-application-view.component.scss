@@ -1,12 +1,18 @@
 mat-card {
-    margin-bottom: 20px;
     text-align: left;
+
+    p {
+        margin-bottom: 6px;
+    }
 }
 
-#client-title,
-#lease-title {
+mat-card-header {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+}
+
+mat-card:last-of-type {
+    margin-top: 10px;
 }
 
 mat-divider {

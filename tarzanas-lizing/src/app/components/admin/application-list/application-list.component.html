@@ -16,13 +16,19 @@
     <ul>
         @if(listResponse$ | async; as listResponse){
             @for(res of listResponse; track res.id) {
-                <li>
+                <li class="opened-{{res.isOpened}} {{res.status}}" (click)="openSelected(res.id)">
                     <div>
-                        <h3><strong>{{res.firstName + " " + res.lastName}}</strong></h3>
+                        <h3>{{res.firstName + " " + res.secondName}}</h3>
                         <h4>ID: {{res.id}}</h4>
                     </div>
-                    <div>
-                        <h5>{{res.date.getFullYear() + "-" + res.date.getMonth().toString().padStart(2, "0") + "-" + res.date.getDate()}}</h5>
+                    <div class="date-icon">
+                        <h5>{{res.dateUpdated.getFullYear() + "-" + res.dateUpdated.getMonth().toString().padStart(2, "0") + "-" + res.dateUpdated.getDate()}}</h5>
+                        @if(res.status === 'accepted'){
+                            <span class="material-symbols-outlined">done</span>
+                        }
+                        @if(res.status === 'pending'){
+                            <span class="material-symbols-outlined">schedule</span>
+                        }
                     </div>
                 </li>
                 <mat-divider></mat-divider>

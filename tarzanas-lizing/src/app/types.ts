@@ -7,18 +7,6 @@ export interface CalculatorFormFields {
   monthlyPayment: string;
 }
 
-export interface CalculatorRequest {
-  carValue: number;
-  period: string;
-  downPayment: number;
-  residualValuePercentage: string;
-  isEcoFriendly: boolean;
-}
-
-export interface CalculatorResponse {
-  monthlyPayment: number;
-}
-
 export interface PersonalInformationFormFields {
   firstName: string;
   lastName: string;
@@ -50,6 +38,18 @@ export interface FormsPostRequest {
   ratesRequest: CalculatorFormFields;
   personalInformationRequest: PersonalInformationFormFields;
   leaseRequest: CarLeasingFormFields;
+}
+
+export interface CalculatorRequest {
+  carValue: number;
+  period: string;
+  downPayment: number;
+  residualValuePercentage: string;
+  isEcoFriendly: boolean;
+}
+
+export interface CalculatorResponse {
+  monthlyPayment: number;
 }
 
 export interface Car {
@@ -98,6 +98,7 @@ export interface Application {
   id: string;
   firstName: string;
   secondName: string;
+  isOpened: boolean;
   dateSubmitted: Date;
   dateUpdated: Date;
   status: Status;
@@ -118,5 +119,44 @@ export interface NoteRequest {
 
 export interface NoteResponse {
   noteText: string;
+}
+
+export interface GeneralFormsResponse {
+  RatesResponse: {
+    id: string,
+    carValue: string,
+    period: number,
+    downPayment: string,
+    residualValuePercentage: string,
+    isEcoFriendly: boolean,
+    monthlyPayment: string
+  },
+  PersonalInformationResponse: {
+    id: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    phoneNumber: string,
+    pid: string,
+    dateOfBirth: Date,
+    maritalStatus: string,
+    numberOfChildren: number,
+    citizenship: string,
+    monthlyIncome: string
+  },
+  LeaseResponse: {
+    id: string,
+    make: string,
+    model: string,
+    modelVariant: string,
+    year: string,
+    fuelType: string,
+    enginePower: string,
+    engineSize: string,
+    url: string,
+    offer: string,
+    terms: boolean,
+    confirmation: boolean
+  }
 }
 

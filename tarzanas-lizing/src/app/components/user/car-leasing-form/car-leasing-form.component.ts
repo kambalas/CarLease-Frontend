@@ -114,7 +114,7 @@ export class CarLeasingFormComponent implements OnInit {
       console.log('Form Submitted!', this.carLeasingForm.value);
       this.submissionConfirmationService.openConfirmationDialog();
       this.transferService.setCarLeaseData(this.carLeasingForm.value);
-      this.transferService.postAllFormData().pipe(take(1));
+      this.transferService.postAllFormData().subscribe(x => console.log(x));
     }
   }
   onFileSelected(event: any): void {

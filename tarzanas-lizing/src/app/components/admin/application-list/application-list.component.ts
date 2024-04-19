@@ -1,11 +1,13 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit, inject, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormField } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { ApplicationListService } from '../../../services/application-list.service';
+import { Application } from '../../../types';
 
 @Component({
   selector: 'app-application-list',
@@ -14,77 +16,51 @@ import { of } from 'rxjs';
   templateUrl: './application-list.component.html',
   styleUrl: './application-list.component.scss'
 })
-export class ApplicationListComponent {
+export class ApplicationListComponent implements OnInit {
+  private service = inject(ApplicationListService);
+  OnSelectedId = output<string>();
+
+
+  //listResponse$: Observable<Application[]> | undefined;
+
   listResponse$ = of([
     {
-      id: 1,
+      id: "123",
       firstName: "Bob",
-      lastName: "Bobber",
-      date: new Date(),
-      status: "pending"
+      secondName: "Bobber",
+      isOpened: false,
+      dateSubmitted: new Date(),
+      dateUpdated: new Date(),
+      status: "accepted",
     },
     {
-      id: 2,
+      id: "124",
       firstName: "Rob",
-      lastName: "Robber",
-      date: new Date(),
-      status: "accepted"
+      secondName: "Robber",
+      isOpened: true,
+      dateSubmitted: new Date(),
+      dateUpdated: new Date(),
+      status: "pending",
     },
     {
-      id: 3,
-      firstName: "Ben",
-      lastName: "Benner",
-      date: new Date(),
-      status: "declined"
-    },
-    {
-      id: 4,
-      firstName: "Todd",
-      lastName: "Todder",
-      date: new Date(),
-      status: "pending"
-    },
-    {
-      id: 5,
-      firstName: "Rod",
-      lastName: "Rodder",
-      date: new Date(),
-      status: "declined"
-    },
-    {
-      id: 6,
+      id: "125",
       firstName: "Bob",
-      lastName: "Bobber",
-      date: new Date(),
-      status: "pending"
+      secondName: "Bobber",
+      isOpened: true,
+      dateSubmitted: new Date(),
+      dateUpdated: new Date(),
+      status: "rejected",
     },
-    {
-      id: 7,
-      firstName: "Rob",
-      lastName: "Robber",
-      date: new Date(),
-      status: "accepted"
-    },
-    {
-      id: 8,
-      firstName: "Ben",
-      lastName: "Benner",
-      date: new Date(),
-      status: "declined"
-    },
-    {
-      id: 9,
-      firstName: "Todd",
-      lastName: "Todder",
-      date: new Date(),
-      status: "pending"
-    },
-    {
-      id: 10,
-      firstName: "Rod",
-      lastName: "Rodder",
-      date: new Date(),
-      status: "declined"
-    }
   ]);
+
+
+  ngOnInit(): void {
+    //this.listResponse$ = this.service.getAllApplications();
+  }
+
+  openSelected(id: string) {
+    if (id) {
+      this.OnSelectedId.emit(id)
+    }
+  }
 }

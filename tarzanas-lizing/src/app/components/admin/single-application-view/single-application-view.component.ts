@@ -1,7 +1,8 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import { ApplicationListService } from '../../../services/application-list.service';
 import { of } from 'rxjs';
 
 @Component({
@@ -12,28 +13,57 @@ import { of } from 'rxjs';
   styleUrl: './single-application-view.component.scss'
 })
 export class SingleApplicationViewComponent {
+  selectedId = input<string>();
+  private service = inject(ApplicationListService);
+
+  //responseData$ = this.service.getPersonalAndLeaseData(this.selectedId()!);
+
   responseData$ = of({
-    firstName: "Bob",
-    lastName: "Bobby",
-    numberOfChildren: 2,
-    maritalStatus: "married",
-    citizenship: "Lithuania",
-    dateOfBirth: new Date(1966, 2, 25),
-    phone: "+3705656565",
-    email: "bob.bobby@mail.com",
-    monthlyIncome: 5000,
-    carMake: "Toyota",
-    carModel: "idk",
-    carModelVatiant: "idk",
-    carOfferUrl: "",
-    period: 24,
-    monthlyPayment: 500,
-    carValue: 30000
-  })
+    RatesResponse: {
+      id: "123",
+      carValue: "50000",
+      period: 5,
+      downPayment: "5000",
+      residualValuePercentage: 20,
+      isEcoFriendly: true,
+      monthlyPayment: "5000"
+    },
+    PersonalInformationResponse: {
+      id: "123",
+      firstName: "Bob",
+      lastName: "Bobber",
+      email: "bob.bobber@mail.com",
+      phoneNumber: "+5684254",
+      pid: "4564564645",
+      dateOfBirth: new Date(),
+      maritalStatus: "married",
+      numberOfChildren: 3,
+      citizenship: "Estonia",
+      monthlyIncome: "4000"
+    },
+    LeaseResponse: {
+      id: "123",
+      make: "Toyota",
+      model: "Corolla",
+      modelVariant: "idk",
+      year: "2016",
+      fuelType: "gasoline",
+      enginePower: "idk",
+      engineSize: "idk",
+      url: "",
+      offer: "",
+      terms: true,
+      confirmation: true
+    }
+  });
 
   calulateAge(birthdate: Date): number {
     let timeDiff = Math.abs(Date.now() - birthdate.getTime());
     let age = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
     return age;
+  }
+
+  residualToEur(residualValue: number, carValue: string) {
+    return parseFloat(carValue) * (residualValue / 100)
   }
 }

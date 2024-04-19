@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { MailTabComponent } from '../mail-tab/mail-tab.component';
 import { NotesComponent } from '../notes/notes.component';
 import { NotesTabComponent } from '../notes-tab/notes-tab.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { ApplicationListService } from '../../../services/application-list.service';
 
 @Component({
   selector: 'app-mail-and-notes',
@@ -12,5 +13,6 @@ import { MatTabsModule } from '@angular/material/tabs';
   styleUrl: './mail-and-notes.component.scss'
 })
 export class MailAndNotesComponent {
-
+  selectedId = input();
+  private service = inject(ApplicationListService);
 }
