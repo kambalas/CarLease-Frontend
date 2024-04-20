@@ -13,7 +13,7 @@ import { LeasingFormService } from '../../../services/leasing-form-service.servi
 import { FormSubmissionConfirmationService } from '../../../services/form-submission-confirmation.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -121,17 +121,11 @@ export class CarLeasingFormComponent implements OnInit {
     this.selectedFile = event.target.files[0] ?? null;
   }
 
-  changeColor(event: Event) {
-    const selectElement = event.target as HTMLSelectElement;
-    selectElement.style.color = selectElement.value ? 'black' : '#999';
-  }
-
   getButtonColor() {
     return this.carLeasingForm.valid ? 'primary' : 'warn';
   }
 
-  onSelectModel(event: Event) {
-    this.changeColor(event);
+  onSelectModel() {
     const makeControl = this.carLeasingForm.get('make');
     const modelControl = this.carLeasingForm.get('model');
 
@@ -148,8 +142,7 @@ export class CarLeasingFormComponent implements OnInit {
     }
   }
 
-  onSelectModelVariant(event: Event) {
-    this.changeColor(event);
+  onSelectModelVariant() {
     const makeControl = this.carLeasingForm.get('make');
     const modelControl = this.carLeasingForm.get('model');
     const modelVariantControl = this.carLeasingForm.get('modelVariant');
