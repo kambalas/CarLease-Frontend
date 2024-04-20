@@ -1,4 +1,24 @@
 <mat-card-content class="container">
-  email-box
-  <button mat-stroked-button color="warn" class="botom-left">Send</button>
+  <mat-form-field class="dropdown-template">
+    <mat-label>Template</mat-label>
+    <mat-select [(value)]="selectedTemplate">
+      <mat-option value="rejected">Rejected</mat-option>
+      <mat-option value="accepted">Accepted</mat-option>
+      <mat-option value="more-info">More info required</mat-option>
+      <mat-option value="cancelled">Cancelled</mat-option>
+    </mat-select>
+  </mat-form-field>
+  @if(selectedTemplate === 'rejected') {
+    [Rejection template]
+  }
+  @if(selectedTemplate === 'accepted') {
+    [Acceptance template]
+  }
+  @if(selectedTemplate === 'more-info') {
+    [More info required template]
+  }
+  @if(selectedTemplate === 'cancelled') {
+    [Cancellation template]
+  }
+  <button mat-stroked-button color="warn" class="bottom-left">Send</button>
 </mat-card-content>
