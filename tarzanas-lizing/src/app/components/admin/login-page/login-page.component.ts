@@ -28,10 +28,10 @@ export class LoginPageComponent {
   }
   submit() {
     const body = {
-      email: this.username,
+      username: this.username,
       password: this.password
     }
-    this.http.post('http://localhost:8080/api/v1/auth/authenticate', body)
+    this.http.post('https://ci-cd-spring.onrender.com/api/v1/auth/authenticate', body)
       .subscribe({
         next: (response: any) => {
           console.log('Login succesful', response);
