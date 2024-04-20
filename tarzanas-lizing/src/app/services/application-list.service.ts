@@ -14,6 +14,6 @@ export class ApplicationListService {
   }
 
   getPersonalAndLeaseData(id: string): Observable<GeneralFormsResponse> {
-    return this.client.get<GeneralFormsResponse>('https://ci-cd-spring.onrender.com/admin/personal-information/{id}')
+    return this.client.get<GeneralFormsResponse>(`https://ci-cd-spring.onrender.com/applications/${id}`)
   }
 }
