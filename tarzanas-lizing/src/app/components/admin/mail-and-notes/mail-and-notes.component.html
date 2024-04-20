@@ -1,12 +1,13 @@
-  <div class="top">
-    <!-- preserveContent true ??? -->
-
-    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start"
-    >
-      <mat-tab label="Mail"><app-mail-tab /></mat-tab>
-      <mat-tab label="Notes"><app-notes-tab /> </mat-tab>
+<mat-card>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="Mail">
+        <app-mail-tab/>
+      </mat-tab>
+      <mat-tab label="Notes">
+        <app-notes-tab/>
+      </mat-tab>
     </mat-tab-group>
-  </div>
-  <div class="bottom">
-    <app-notes />
-  </div>
+</mat-card>
+<div class="bottom">
+  <app-notes />
+</div>

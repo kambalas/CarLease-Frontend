@@ -1,12 +1,13 @@
 .container {
   position: relative;
-  border: 2px solid #d6d6d6;
+  border-top: 1px solid #d6d6d6;
   height: 35vh;
   text-align: left;
-  overflow-y: auto;
+  overflow-y: hidden;
+  display: block;
+  overflow-x: hidden;
 }
-
-.botom-left {
+.bottom-left {
   position: absolute;
   bottom: 0;
   right: 0;
