@@ -5,6 +5,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class LoginPageComponent {
   username: string = "";
   password: string = "";
 
-  constructor(private authService: AuthService,private http: HttpClient) {
+  constructor(private authService: AuthService,private http: HttpClient, private router:Router) {
   }
   submit() {
     const body = {
@@ -37,6 +38,7 @@ export class LoginPageComponent {
           console.log('Login succesful', response);
           const token = response.token;
           this.authService.setToken(token);
+          this.router.navigate(['/admin']);
         },
         error: (error) => {
           console.log('Login failed', error);
