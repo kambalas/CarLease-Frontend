@@ -10,6 +10,6 @@ export class MonthlyPaymentCalculatorService {
   private client = inject(HttpClient);
 
   getMonthlyPayment(inputs: Partial<CalculatorRequest>): Observable<CalculatorResponse> {
-    return this.client.post<CalculatorResponse>('https://backend-xa05.onrender.com/car-leasing/calculator', inputs)
+    return this.client.post<CalculatorResponse>('https://ci-cd-spring.onrender.com/user/calculator', inputs)
   }
 }

@@ -68,7 +68,7 @@ export class CarLeasingCalculatorComponent implements OnInit {
 
   onSubmit(): void {
     let monthlyPayment: string = (document.getElementById('monthlyPayment') as HTMLInputElement).value;
-    if (!this.calculatorForm.valid || monthlyPayment === "Incorrect data") {
+    if (!this.calculatorForm.valid || monthlyPayment === "Incorrect data" || monthlyPayment === "") {
       return;
     }
 

@@ -122,7 +122,7 @@ export interface NoteResponse {
 }
 
 export interface GeneralFormsResponse {
-  RatesResponse: {
+  ratesResponse: {
     id: string,
     carValue: string,
     period: number,
@@ -131,20 +131,20 @@ export interface GeneralFormsResponse {
     isEcoFriendly: boolean,
     monthlyPayment: string
   },
-  PersonalInformationResponse: {
+  personalInformationResponse: {
     id: string,
     firstName: string,
     lastName: string,
     email: string,
     phoneNumber: string,
     pid: string,
-    dateOfBirth: Date,
+    dateOfBirth: string,
     maritalStatus: string,
     numberOfChildren: number,
     citizenship: string,
     monthlyIncome: string
   },
-  LeaseResponse: {
+  leaseResponse: {
     id: string,
     make: string,
     model: string,
@@ -159,4 +159,52 @@ export interface GeneralFormsResponse {
     confirmation: boolean
   }
 }
+
+export interface GeneralAllFormsResponse {
+  ratesResponse: {
+    id: string,
+    carValue: string,
+    period: number,
+    downPayment: string,
+    residualValuePercentage: string,
+    isEcoFriendly: boolean,
+    monthlyPayment: string
+  },
+  personalInformationResponse: {
+    id: number,
+    firstName: string,
+    lastName: string,
+    email: string,
+    phoneNumber: string,
+    pid: string,
+    dateOfBirth: string,
+    maritalStatus: string,
+    numberOfChildren: number,
+    citizenship: string,
+    monthlyIncome: string
+  },
+  leaseResponse: {
+    id: number,
+    make: string,
+    model: string,
+    modelVariant: string,
+    year: string,
+    fuelType: string,
+    enginePower: string,
+    engineSize: string,
+    url: string,
+    offer: string,
+    terms: boolean,
+    confirmation: boolean
+  },
+  statusResponse: {
+    id: number,
+    applicationStatus: Status,
+    isOpened: boolean,
+    updatedAt: string,
+    createdAt: string
+  }
+}
+
+
 

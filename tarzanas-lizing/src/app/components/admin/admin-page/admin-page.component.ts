@@ -11,9 +11,10 @@ import { SingleApplicationViewComponent } from '../single-application-view/singl
   styleUrl: './admin-page.component.scss'
 })
 export class AdminPageComponent {
-  selectedId: string | undefined;
+  selectedId!: string;
 
   setSelectedId(id: string) {
     this.selectedId = id;
+    console.log(id);
   }
 }
