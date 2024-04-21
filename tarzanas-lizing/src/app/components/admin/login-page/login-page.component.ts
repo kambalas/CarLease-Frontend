@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
-import {MatFormField, MatLabel} from "@angular/material/form-field";
-import {FormsModule} from "@angular/forms";
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
+import { MatFormField, MatLabel } from "@angular/material/form-field";
+import { FormsModule } from "@angular/forms";
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../services/auth.service';
 
@@ -24,14 +24,14 @@ export class LoginPageComponent {
   username: string = "";
   password: string = "";
 
-  constructor(private authService: AuthService,private http: HttpClient) {
+  constructor(private authService: AuthService, private http: HttpClient) {
   }
   submit() {
     const body = {
       username: this.username,
       password: this.password
     }
-    this.http.post('https://ci-cd-spring.onrender.com/api/v1/auth/authenticate', body)
+    this.http.post('https://ci-cd-spring.onrender.com/user/api/v1/auth/authenticate', body)
       .subscribe({
         next: (response: any) => {
           console.log('Login succesful', response);
@@ -45,10 +45,9 @@ export class LoginPageComponent {
     this.clear();
   }
 
-    clear()
-    {
-      this.username = "";
-      this.password = "";
-    }
+  clear() {
+    this.username = "";
+    this.password = "";
   }
+}
 

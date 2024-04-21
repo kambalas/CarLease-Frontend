@@ -5,13 +5,13 @@
     <mat-divider></mat-divider>
     <mat-card-content>
     @if(responseData$ | async; as res){
-        <p><strong>Full Name:</strong> {{res.PersonalInformationResponse.firstName + " " + res.PersonalInformationResponse.lastName}}</p>
-        <p><strong>Citizenship:</strong> {{res.PersonalInformationResponse.citizenship}}</p>
-        <p><strong>Age:</strong> {{calulateAge(res.PersonalInformationResponse.dateOfBirth)}}</p>
-        <p><strong>Phone No.:</strong> {{res.PersonalInformationResponse.phoneNumber}}</p>
-        <p><strong>Marital Status:</strong> {{res.PersonalInformationResponse.maritalStatus}}</p>
-        <p><strong>Number of Children:</strong> {{res.PersonalInformationResponse.numberOfChildren}}</p>
-        <p><strong>Monthly Net Income:</strong> {{res.PersonalInformationResponse.monthlyIncome}}&euro;</p>
+        <p><strong>Full Name:</strong> {{res.personalInformationResponse.firstName + " " + res.personalInformationResponse.lastName}}</p>
+        <p><strong>Citizenship:</strong> {{res.personalInformationResponse.citizenship}}</p>
+        <p><strong>Age:</strong> {{calulateAge(res.personalInformationResponse.dateOfBirth)}}</p>
+        <p><strong>Phone No.:</strong> {{res.personalInformationResponse.phoneNumber}}</p>
+        <p><strong>Marital Status:</strong> {{res.personalInformationResponse.maritalStatus}}</p>
+        <p><strong>Number of Children:</strong> {{res.personalInformationResponse.numberOfChildren}}</p>
+        <p><strong>Monthly Net Income:</strong> {{res.personalInformationResponse.monthlyIncome}}&euro;</p>
     }
     </mat-card-content>
 </mat-card>
@@ -23,18 +23,18 @@
     <mat-divider></mat-divider>
     <mat-card-content>
         @if(responseData$ | async; as res){
-            <p><strong>Car:</strong> {{res.LeaseResponse.make}} {{res.LeaseResponse.model}} ({{res.LeaseResponse.year}})</p>
-            <p><strong>Car model variant:</strong> {{res.LeaseResponse.modelVariant}}</p>
-            <p><strong>Car fuel type:</strong> {{res.LeaseResponse.fuelType}}</p>
-            <p><strong>Car engine size:</strong> {{res.LeaseResponse.engineSize}} L</p>
-            <p><strong>Car engine power:</strong> {{res.LeaseResponse.enginePower}} hp</p>
-            <p><strong>Car offer url:</strong> {{res.LeaseResponse.url}}</p>
-            <p><strong>Car value:</strong> {{res.RatesResponse.carValue}}&euro;</p>
-            <p><strong>Period:</strong> {{res.RatesResponse.period}} months</p>
-            <p><strong>Residual value:</strong> {{residualToEur(res.RatesResponse.residualValuePercentage, res.RatesResponse.carValue)}}&euro;</p>
-            <p><strong>Down payment:</strong> {{res.RatesResponse.downPayment}}&euro;</p>
-            <p><strong>Environmentally friendly:</strong> {{res.RatesResponse.isEcoFriendly}}</p>
-            <p><strong>Monthly payment:</strong> {{res.RatesResponse.monthlyPayment}}&euro;/month</p>
+            <p><strong>Car:</strong> {{res.leaseResponse.make}} {{res.leaseResponse.model}} ({{res.leaseResponse.year}})</p>
+            <p><strong>Car model variant:</strong> {{res.leaseResponse.modelVariant}}</p>
+            <p><strong>Car fuel type:</strong> {{res.leaseResponse.fuelType}}</p>
+            <p><strong>Car engine size:</strong> {{res.leaseResponse.engineSize}} L</p>
+            <p><strong>Car engine power:</strong> {{res.leaseResponse.enginePower}} hp</p>
+            <p><strong>Car offer url:</strong> {{res.leaseResponse.url}}</p>
+            <p><strong>Car value:</strong> {{res.ratesResponse.carValue}}&euro;</p>
+            <p><strong>Period:</strong> {{res.ratesResponse.period}} months</p>
+            <p><strong>Residual value:</strong> {{residualToEur(res.ratesResponse.residualValuePercentage, res.ratesResponse.carValue)}}&euro;</p>
+            <p><strong>Down payment:</strong> {{res.ratesResponse.downPayment}}&euro;</p>
+            <p><strong>Environmentally friendly:</strong> {{res.ratesResponse.isEcoFriendly}}</p>
+            <p><strong>Monthly payment:</strong> {{res.ratesResponse.monthlyPayment}}&euro;/month</p>
         }
     </mat-card-content>
 </mat-card>

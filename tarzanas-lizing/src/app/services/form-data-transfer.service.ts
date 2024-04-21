@@ -64,7 +64,7 @@ export class FormDataTransferService {
       personalInformationRequest: this.personalInformationData$,
       leaseRequest: this.carLeaseData$
     }).pipe(
-      switchMap(req => this.client.post<FormsPostRequest>('https://ci-cd-spring.onrender.com/applications/create', req))
+      switchMap(req => this.client.post<FormsPostRequest>('https://ci-cd-spring.onrender.com/user/applications/create', req))
     )
   }
 }
