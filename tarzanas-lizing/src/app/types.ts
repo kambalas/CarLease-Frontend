@@ -205,6 +205,14 @@ export interface GeneralAllFormsResponse {
     createdAt: string;
   };
 }
+export interface LoginFormFields{
+  username: string;
+  password: string;
+}
+export interface LoginFormRequest{
+  username: string;
+  password: string;
+}
 
 export interface MailRequest {
   applicationId: number;
