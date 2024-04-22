@@ -1,9 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { MatCardModule } from "@angular/material/card";
 import { MatDividerModule } from "@angular/material/divider";
-import { Observable, of } from "rxjs";
 import { AsyncPipe } from "@angular/common";
-import { NoteResponse } from "../../../types";
 
 @Component({
   selector: 'app-notes',
@@ -13,11 +11,10 @@ import { NoteResponse } from "../../../types";
   styleUrl: './notes.component.scss'
 })
 
-export class NotesComponent {
+export class NotesComponent implements OnInit {
+  dataForNotes = input();
 
-  noteText$: Observable<NoteResponse> | undefined;
-
-  responseData$ = of({
-    noteText: "Ka meta, ta pataiko, patikimas",
-  })
+  ngOnInit(): void {
+    console.log(this.dataForNotes());
+  }
 }
