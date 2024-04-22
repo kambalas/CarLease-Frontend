@@ -1,73 +1,96 @@
 import { Injectable } from '@angular/core';
-import { Cars } from '../data/cars';
-import { Observable, of } from 'rxjs';
-import { Details } from '../types';
+import { Observable } from 'rxjs';
+import {
+  Details,
+  Model,
+  ModelInfo,
+  ModelInfoAPIResponse,
+  Variant,
+} from '../types';
+import { HttpClient } from '@angular/common/http';
+import { map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LeasingFormService {
+  constructor(private http: HttpClient) {}
+
   getCarMakes(): Observable<string[]> {
-    return of(Cars.map((car) => car.make));
+    return this.http
+      .get<{ carMakes: string[] }>('http://localhost:8080/carApi/makes')
+      .pipe(map((response) => response.carMakes));
   }
 
-  getModelsForMake(make: string): Observable<string[]> {
-    const makeModels =
-      Cars.find((car) => car.make === make)?.models.map(
-        (model) => model.modelName
-      ) || [];
-    return of(makeModels);
+  getModelsForMake(make: string): Observable<Model[]> {
+    return this.http
+      .get<{ carModels: Model[] }>(
+        `http://localhost:8080/carApi/models?make=${make}`
+      )
+      .pipe(map((response) => response.carModels));
   }
 
-  getVariantsForModel(make: string, model: string): Observable<string[]> {
-    const vehicle = Cars.find((car) => car.make === make);
-    const modelObj = vehicle?.models.find(
-      (modelObj) => modelObj.modelName === model
-    );
-    const modelVariants =
-      modelObj?.variants.map((variant) => variant.variantName) || [];
-    return of(modelVariants);
+  getInfoForModel(modelID: number): Observable<ModelInfo> {
+    return this.http
+      .get<ModelInfoAPIResponse>(
+        `http://localhost:8080/carApi/model_info?model_id=${modelID}`
+      )
+      .pipe(
+        map((response) => {
+          if (response) {
+            return {
+              variants: response.variants,
+              details: {
+                years: response.years,
+                fuelTypes: response.fuelTypes,
+                enginePowers: response.enginePowers,
+                engineSizes: response.engineSizes,
+              },
+            };
+          } else {
+            throw new Error('Invalid response from server');
+          }
+        })
+      );
   }
 
-  getDetailsForModel(
-    make: string,
-    model: string
-  ): Observable<Details | null> {
-    const vehicle = Cars.find((car) => car.make === make);
-    const modelObj = vehicle?.models.find(
-      (modelObj) => modelObj.modelName === model
+  getInfoForVariant(variantID: number): Observable<Details> {
+    return this.http.get<Details>(
+      `http://localhost:8080/carApi/variant_info?variant_id=${variantID}`
     );
-    if (modelObj) {
-      return of({
-        years: modelObj.years,
-        fuelTypes: modelObj.fuelTypes,
-        enginePowers: modelObj.enginePowers,
-        engineSizes: modelObj.engineSizes,
-      });
-    }
-    return of(null);
   }
 
-  getDetailsForVariant(
-    make: string,
-    model: string,
-    variant: string
-  ): Observable<Details | null> {
-    const vehicle = Cars.find((car) => car.make === make);
-    const modelObj = vehicle?.models.find(
-      (modelObj) => modelObj.modelName === model
+  findModelByName(
+    modelName: string,
+    carModels$: Observable<Model[]>
+  ): Observable<Model> {
+    return carModels$.pipe(
+      map((models) => {
+        const model = models.find((model) => model.name === modelName);
+        if (model) {
+          return model;
+        } else {
+          throw new Error(`Model with name ${modelName} not found`);
+        }
+      })
     );
-    const variantObj = modelObj?.variants.find(
-      (v) => v.variantName === variant
+  }
+
+  findVariantByName(
+    variantName: string,
+    carModelVariants$: Observable<Variant[]>
+  ): Observable<Variant> {
+    return carModelVariants$.pipe(
+      map((variants) => {
+        const variant = variants.find(
+          (variant) => variant.name === variantName
+        );
+        if (variant) {
+          return variant;
+        } else {
+          throw new Error(`Variant with name ${variantName} not found`);
+        }
+      })
     );
-    if (variantObj) {
-      return of({
-        years: variantObj.years,
-        fuelTypes: variantObj.fuelTypes,
-        enginePowers: variantObj.enginePowers,
-        engineSizes: variantObj.engineSizes,
-      });
-    }
-    return of(null);
   }
 }
