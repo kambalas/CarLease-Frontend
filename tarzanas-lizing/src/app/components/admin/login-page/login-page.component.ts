@@ -1,11 +1,12 @@
 import { Component, Inject } from '@angular/core';
 import { MatFormField, MatLabel } from "@angular/material/form-field";
-import { FormsModule } from "@angular/forms";
+import {FormsModule, FormBuilder, FormGroup, Validators, ReactiveFormsModule} from "@angular/forms";
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
+import {MatIcon} from "@angular/material/icon";
 
 
 @Component({
@@ -17,39 +18,41 @@ import { Router } from '@angular/router';
     FormsModule,
     MatButtonModule,
     MatInputModule,
+    ReactiveFormsModule,
+    MatIcon,
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
 export class LoginPageComponent {
-  username: string = "";
-  password: string = "";
+  loginForm: FormGroup;
+  passwordHidden: boolean = true;
 
-  constructor(private authService: AuthService,private http: HttpClient, private router:Router) {
+
+  constructor(private authService: AuthService,private http: HttpClient, private router:Router, private fb: FormBuilder) {
+    this.loginForm = this.fb.group({
+      username: ['',Validators.required],
+      password: ['',Validators.required]
+    });
   }
+
   submit() {
-    const body = {
-      username: this.username,
-      password: this.password
-    }
-    this.http.post('https://ci-cd-spring.onrender.com/user/api/v1/auth/authenticate', body)
-      .subscribe({
-        next: (response: any) => {
-          console.log('Login succesful', response);
-          const token = response.token;
-          this.authService.setToken(token);
-          this.router.navigate(['/admin']);
-        },
-        error: (error) => {
-          console.log('Login failed', error);
-        }
-      });
+    this.authService.setLoginData(this.loginForm.value);
+    this.authService.postLogin().subscribe({
+      next: (data) => {
+        console.log("Success!")
+        this.authService.setToken(data.token);
+        console.log(data)
+      },
+      error: (error) => {
+        console.error('There was an error!', error);
+      }
+    });
     this.clear();
-  }
+    }
 
   clear() {
-    this.username = "";
-    this.password = "";
+    this.loginForm.reset();
   }
 }
 
