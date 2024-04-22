@@ -10,11 +10,9 @@ import { Observable } from 'rxjs';
 export class MailService {
   private client = inject(HttpClient);
 
-  sendMail(mailRequest:MailRequest):Observable<MailResponse> {
+  sendMail(mailRequest:MailRequest):Observable<any> {
 
-    const response =  this.client
-    .post<MailResponse>('https://ci-cd-spring.onrender.com/admin/mail/create', mailRequest)
-
-    return response;
+    return this.client
+    .post<MailResponse>('https://ci-cd-spring.onrender.com/admin/mail/create', mailRequest);
   }
 }
