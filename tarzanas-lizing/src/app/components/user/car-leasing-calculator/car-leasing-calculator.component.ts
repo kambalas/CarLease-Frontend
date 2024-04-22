@@ -86,7 +86,8 @@ export class CarLeasingCalculatorComponent implements OnInit {
 
   calculateMonthlyPayment(): void {
     if (this.calculatorForm.valid) {
-      this.monthlyPayment$ = this.service.getMonthlyPayment(this.calculatorForm.value as Partial<CalculatorRequest>);
+      this.monthlyPayment$ = this.service.getMonthlyPayment
+      (this.calculatorForm.value as Partial<CalculatorRequest>);
     }
     return;
   }

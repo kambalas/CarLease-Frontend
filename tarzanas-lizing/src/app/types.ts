@@ -123,88 +123,96 @@ export interface NoteResponse {
 
 export interface GeneralFormsResponse {
   ratesResponse: {
-    id: string,
-    carValue: string,
-    period: number,
-    downPayment: string,
-    residualValuePercentage: string,
-    isEcoFriendly: boolean,
-    monthlyPayment: string
-  },
+    id: string;
+    carValue: string;
+    period: number;
+    downPayment: string;
+    residualValuePercentage: string;
+    isEcoFriendly: boolean;
+    monthlyPayment: string;
+  };
   personalInformationResponse: {
-    id: string,
-    firstName: string,
-    lastName: string,
-    email: string,
-    phoneNumber: string,
-    pid: string,
-    dateOfBirth: string,
-    maritalStatus: string,
-    numberOfChildren: number,
-    citizenship: string,
-    monthlyIncome: string
-  },
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+    pid: string;
+    dateOfBirth: string;
+    maritalStatus: string;
+    numberOfChildren: number;
+    citizenship: string;
+    monthlyIncome: string;
+  };
   leaseResponse: {
-    id: string,
-    make: string,
-    model: string,
-    modelVariant: string,
-    year: string,
-    fuelType: string,
-    enginePower: string,
-    engineSize: string,
-    url: string,
-    offer: string,
-    terms: boolean,
-    confirmation: boolean
-  }
+    id: string;
+    make: string;
+    model: string;
+    modelVariant: string;
+    year: string;
+    fuelType: string;
+    enginePower: string;
+    engineSize: string;
+    url: string;
+    offer: string;
+    terms: boolean;
+    confirmation: boolean;
+  };
 }
 
 export interface GeneralAllFormsResponse {
   ratesResponse: {
-    id: string,
-    carValue: string,
-    period: number,
-    downPayment: string,
-    residualValuePercentage: string,
-    isEcoFriendly: boolean,
-    monthlyPayment: string
-  },
+    id: string;
+    carValue: string;
+    period: number;
+    downPayment: string;
+    residualValuePercentage: string;
+    isEcoFriendly: boolean;
+    monthlyPayment: string;
+  };
   personalInformationResponse: {
-    id: number,
-    firstName: string,
-    lastName: string,
-    email: string,
-    phoneNumber: string,
-    pid: string,
-    dateOfBirth: string,
-    maritalStatus: string,
-    numberOfChildren: number,
-    citizenship: string,
-    monthlyIncome: string
-  },
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+    pid: string;
+    dateOfBirth: string;
+    maritalStatus: string;
+    numberOfChildren: number;
+    citizenship: string;
+    monthlyIncome: string;
+  };
   leaseResponse: {
-    id: number,
-    make: string,
-    model: string,
-    modelVariant: string,
-    year: string,
-    fuelType: string,
-    enginePower: string,
-    engineSize: string,
-    url: string,
-    offer: string,
-    terms: boolean,
-    confirmation: boolean
-  },
+    id: number;
+    make: string;
+    model: string;
+    modelVariant: string;
+    year: string;
+    fuelType: string;
+    enginePower: string;
+    engineSize: string;
+    url: string;
+    offer: string;
+    terms: boolean;
+    confirmation: boolean;
+  };
   statusResponse: {
-    id: number,
-    applicationStatus: Status,
-    isOpened: boolean,
-    updatedAt: string,
-    createdAt: string
-  }
+    id: number;
+    applicationStatus: Status;
+    isOpened: boolean;
+    updatedAt: string;
+    createdAt: string;
+  };
 }
 
-
-
+export interface MailRequest {
+  applicationId: number;
+  mailText: string;
+  mailRecipient: string;
+}
+export interface MailResponse {
+  applicationId: number;
+  mailText: string;
+  mailRecipient: string;
+}
