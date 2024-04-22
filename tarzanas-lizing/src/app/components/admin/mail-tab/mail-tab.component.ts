@@ -30,15 +30,15 @@ export class MailTabComponent {
 
 
   private mailService = inject(MailService);
-   testMailRequest: MailRequest = {
+  testMailRequest: MailRequest = {
     applicationId: -1,
     mailText: 'mock',
     mailRecipient: 'mock@address.com',
   };
-  sendMail(testMailRequest:MailRequest): void {
 
+  sendMail(): void {
     alert('Your email sent!');
-    this.mailService.sendMail(testMailRequest).subscribe((x)=>console.log(x)
-   );
+    this.mailService.sendMail(this.testMailRequest).subscribe((x) => console.log(x)
+    );
   }
 }
