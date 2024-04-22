@@ -42,6 +42,7 @@ export class LoginPageComponent {
       next: (data) => {
         console.log("Success!")
         this.authService.setToken(data.token);
+        this.router.navigate(['/admin']);
         console.log(data)
       },
       error: (error) => {
