@@ -35,8 +35,7 @@
           formControlName="email"
           placeholder="Email address"
       /></mat-form-field>
-      <mat-form-field
-        >
+      <mat-form-field>
         <mat-hint>+37060999666</mat-hint>
         <mat-label>Phone number</mat-label>
 
@@ -81,11 +80,7 @@
       <mat-form-field>
         <mat-label>Marital status</mat-label>
         <mat-hint>select from the dropdown list</mat-hint>
-        <mat-select
-          required
-          id="maritalStatus"
-          formControlName="maritalStatus"
-        >
+        <mat-select required id="maritalStatus" formControlName="maritalStatus">
           <mat-option value="Single">Single</mat-option>
           <mat-option value="Married">Married</mat-option>
           <mat-option value="Partnership">Partnership</mat-option>
@@ -115,36 +110,35 @@
       matNativeControl
       required
     >
-    <mat-option value="Austria">Austria</mat-option>
-    <mat-option value="Belgium">Belgium</mat-option>
-    <mat-option value="Bulgaria">Bulgaria</mat-option>
-    <mat-option value="Croatia">Croatia</mat-option>
-    <mat-option value="Cyprus">Cyprus</mat-option>
-    <mat-option value="Czech Republic">Czech Republic</mat-option>
-    <mat-option value="Denmark">Denmark</mat-option>
-    <mat-option value="Estonia">Estonia</mat-option>
-    <mat-option value="Finland">Finland</mat-option>
-    <mat-option value="France">France</mat-option>
-    <mat-option value="Germany">Germany</mat-option>
-    <mat-option value="Greece">Greece</mat-option>
-    <mat-option value="Hungary">Hungary</mat-option>
-    <mat-option value="Ireland">Ireland</mat-option>
-    <mat-option value="Italy">Italy</mat-option>
-    <mat-option value="Latvia">Latvia</mat-option>
-    <mat-option value="Lithuania">Lithuania</mat-option>
-    <mat-option value="Luxembourg">Luxembourg</mat-option>
-    <mat-option value="Malta">Malta</mat-option>
-    <mat-option value="Netherlands">Netherlands</mat-option>
-    <mat-option value="Poland">Poland</mat-option>
-    <mat-option value="Portugal">Portugal</mat-option>
-    <mat-option value="Romania">Romania</mat-option>
-    <mat-option value="Slovakia">Slovakia</mat-option>
-    <mat-option value="Slovenia">Slovenia</mat-option>
-    <mat-option value="Spain">Spain</mat-option>
-    <mat-option value="Sweden">Sweden</mat-option>
-    <mat-option value="Other">Other</mat-option>
+      <mat-option value="Austria">Austria</mat-option>
+      <mat-option value="Belgium">Belgium</mat-option>
+      <mat-option value="Bulgaria">Bulgaria</mat-option>
+      <mat-option value="Croatia">Croatia</mat-option>
+      <mat-option value="Cyprus">Cyprus</mat-option>
+      <mat-option value="Czech Republic">Czech Republic</mat-option>
+      <mat-option value="Denmark">Denmark</mat-option>
+      <mat-option value="Estonia">Estonia</mat-option>
+      <mat-option value="Finland">Finland</mat-option>
+      <mat-option value="France">France</mat-option>
+      <mat-option value="Germany">Germany</mat-option>
+      <mat-option value="Greece">Greece</mat-option>
+      <mat-option value="Hungary">Hungary</mat-option>
+      <mat-option value="Ireland">Ireland</mat-option>
+      <mat-option value="Italy">Italy</mat-option>
+      <mat-option value="Latvia">Latvia</mat-option>
+      <mat-option value="Lithuania">Lithuania</mat-option>
+      <mat-option value="Luxembourg">Luxembourg</mat-option>
+      <mat-option value="Malta">Malta</mat-option>
+      <mat-option value="Netherlands">Netherlands</mat-option>
+      <mat-option value="Poland">Poland</mat-option>
+      <mat-option value="Portugal">Portugal</mat-option>
+      <mat-option value="Romania">Romania</mat-option>
+      <mat-option value="Slovakia">Slovakia</mat-option>
+      <mat-option value="Slovenia">Slovenia</mat-option>
+      <mat-option value="Spain">Spain</mat-option>
+      <mat-option value="Sweden">Sweden</mat-option>
+      <mat-option value="Other">Other</mat-option>
     </mat-select>
-
   </mat-form-field>
 
   <mat-form-field class="bottom"
@@ -156,6 +150,16 @@
       formControlName="montlyIncome"
       type="text"
       placeholder="Monthly income after taxes and commitments"
-  /></mat-form-field>
-    <button mat-raised-button color="primary" matStepperNext [disabled]="!personalInformationForm.valid" (click)="onSubmit()">Next</button>
+    />
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="primary"
+    matStepperNext
+    [disabled]="!personalInformationForm.valid"
+    (click)="onSubmit()"
+  >
+    Next
+  </button>
+  />
 </form>

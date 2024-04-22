@@ -8,17 +8,17 @@
       <mat-option value="cancelled">Cancelled</mat-option>
     </mat-select>
   </mat-form-field>
-  @if(selectedTemplate === 'rejected') {
-    [Rejection template]
-  }
-  @if(selectedTemplate === 'accepted') {
-    [Acceptance template]
-  }
-  @if(selectedTemplate === 'more-info') {
-    [More info required template]
-  }
-  @if(selectedTemplate === 'cancelled') {
-    [Cancellation template]
-  }
-  <button mat-stroked-button color="warn" class="bottom-left">Send</button>
+  @if(selectedTemplate === 'rejected') { [Rejection template] }
+  @if(selectedTemplate === 'accepted') { [Acceptance template] }
+  @if(selectedTemplate === 'more-info') { [More info required template] }
+  @if(selectedTemplate === 'cancelled') { [Cancellation template] }
+  <button
+    mat-stroked-button
+    color="warn"
+    type="button"
+    (click)="sendMail()"
+    class="botom-left"
+  >
+    Send
+  </button>
 </mat-card-content>
