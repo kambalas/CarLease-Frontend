@@ -37,8 +37,7 @@ export class LoginPageComponent {
   }
 
   submit() {
-    this.authService.setLoginData(this.loginForm.value);
-    this.authService.postLogin().subscribe({
+    this.authService.postLogin(this.loginForm).subscribe({
       next: (data) => {
         console.log("Success!")
         this.authService.setToken(data.token);

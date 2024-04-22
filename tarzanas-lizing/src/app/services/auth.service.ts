@@ -2,6 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, switchMap} from "rxjs";
 import {LoginFormFields, LoginFormRequest} from "../types";
 import {HttpClient} from "@angular/common/http";
+import {FormGroup} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +10,10 @@ import {HttpClient} from "@angular/common/http";
 export class AuthService {
   private token: string | null = null;
   private client = inject(HttpClient);
-  private loginFields = new BehaviorSubject<LoginFormFields>(
-    {
-      username: '',
-      password: ''
-    }
-  );
 
-  constructor() {}
+
+  constructor() {
+  }
 
   setToken(token: string): void {
     this.token = token;
@@ -32,12 +29,11 @@ export class AuthService {
     return !!token;
   }
 
-  setLoginData(formData: LoginFormFields): void {
-    this.loginFields.next(formData);
-  }
-
-  postLogin(): Observable<any>{
-    return this.loginFields
-      .pipe(switchMap(req => this.client.post<LoginFormRequest>('https://ci-cd-spring.onrender.com/user/api/v1/auth/authenticate', req)));
+  postLogin(loginFields: FormGroup): Observable<any> {
+    return this.client.post<LoginFormRequest>('https://ci-cd-spring.onrender.com/user/api/v1/auth/authenticate',
+      {
+        "username": loginFields.get('username')?.value,
+        "password": loginFields.get('password')?.value
+      });
   }
 }
