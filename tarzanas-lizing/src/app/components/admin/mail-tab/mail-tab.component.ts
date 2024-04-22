@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatOption } from '@angular/material/autocomplete';
 import { MatSelect } from '@angular/material/select';
+import { MailService } from '../../../services/mail.service';
+import { MailRequest } from '../../../types';
+
 
 @Component({
   selector: 'app-mail-tab',
@@ -25,7 +28,17 @@ import { MatSelect } from '@angular/material/select';
 export class MailTabComponent {
   selectedTemplate: string = '';
 
-  sendMail(): void {
+
+  private mailService = inject(MailService);
+   testMailRequest: MailRequest = {
+    applicationId: -1,
+    mailText: 'mock',
+    mailRecipient: 'mock@address.com',
+  };
+  sendMail(testMailRequest:MailRequest): void {
+
     alert('Your email sent!');
+    this.mailService.sendMail(testMailRequest).subscribe((x)=>console.log(x)
+   );
   }
 }
