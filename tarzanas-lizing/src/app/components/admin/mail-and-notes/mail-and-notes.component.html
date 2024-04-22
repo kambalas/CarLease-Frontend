@@ -1,13 +1,16 @@
-<mat-card>
+@if(responseObject$ | async; as response){
+  <mat-card>
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
       <mat-tab label="Mail">
-        <app-mail-tab/>
+        <app-mail-tab [dataForEmailTab]="(response.personalInformationResponse)" />
       </mat-tab>
       <mat-tab label="Notes">
-        <app-notes-tab/>
+        <app-notes-tab />
       </mat-tab>
     </mat-tab-group>
 </mat-card>
 <div class="bottom">
-  <app-notes />
+  <app-notes [dataForNotes]="(response)" />
 </div>
+}
+

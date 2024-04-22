@@ -6,9 +6,10 @@
     <mat-card-content>
     @if(responseData$ | async; as res){
         <p><strong>Full Name:</strong> {{res.personalInformationResponse.firstName + " " + res.personalInformationResponse.lastName}}</p>
-        <p><strong>Citizenship:</strong> {{res.personalInformationResponse.citizenship}}</p>
-        <p><strong>Age:</strong> {{calulateAge(res.personalInformationResponse.dateOfBirth)}}</p>
+        <p><strong>Citizenship:</strong> {{res.personalInformationResponse.citizenship}} (pid: {{res.personalInformationResponse.pid}})</p>
+        <p><strong>Age:</strong> {{calulateAge(res.personalInformationResponse.dateOfBirth)}} years</p>
         <p><strong>Phone No.:</strong> {{res.personalInformationResponse.phoneNumber}}</p>
+        <p><strong>E-mail:</strong> {{res.personalInformationResponse.email}}</p>
         <p><strong>Marital Status:</strong> {{res.personalInformationResponse.maritalStatus}}</p>
         <p><strong>Number of Children:</strong> {{res.personalInformationResponse.numberOfChildren}}</p>
         <p><strong>Monthly Net Income:</strong> {{res.personalInformationResponse.monthlyIncome}}&euro;</p>
@@ -23,7 +24,7 @@
     <mat-divider></mat-divider>
     <mat-card-content>
         @if(responseData$ | async; as res){
-            <p><strong>Car:</strong> {{res.leaseResponse.make}} {{res.leaseResponse.model}} ({{res.leaseResponse.year}})</p>
+            <p><strong>Car:</strong> {{res.leaseResponse.make}} {{res.leaseResponse.model}} ({{res.leaseResponse.year.trim()}})</p>
             <p><strong>Car model variant:</strong> {{res.leaseResponse.modelVariant}}</p>
             <p><strong>Car fuel type:</strong> {{res.leaseResponse.fuelType}}</p>
             <p><strong>Car engine size:</strong> {{res.leaseResponse.engineSize}} L</p>
