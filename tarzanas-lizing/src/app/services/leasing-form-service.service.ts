@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import {
   Details,
   Model,
@@ -8,7 +8,8 @@ import {
   Variant,
 } from '../types';
 import { HttpClient } from '@angular/common/http';
-import { map} from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
+import { environment } from '../../environment/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -18,22 +19,34 @@ export class LeasingFormService {
 
   getCarMakes(): Observable<string[]> {
     return this.http
-      .get<{ carMakes: string[] }>('http://localhost:8080/carApi/makes')
-      .pipe(map((response) => response.carMakes));
+      .get<{ carMakes: string[] }>(`${environment.API_URL}/carApi/makes`)
+      .pipe(
+        map((response) => response.carMakes),
+        catchError((error) => {
+          console.error('Error fetching car makes', error);
+          return throwError(() => error);
+        })
+      );
   }
 
   getModelsForMake(make: string): Observable<Model[]> {
     return this.http
       .get<{ carModels: Model[] }>(
-        `http://localhost:8080/carApi/models?make=${make}`
+        `${environment.API_URL}/carApi/models?make=${make}`
       )
-      .pipe(map((response) => response.carModels));
+      .pipe(
+        map((response) => response.carModels),
+        catchError((error) => {
+          console.error('Error fetching car models', error);
+          return throwError(() => error);
+        })
+      );
   }
 
   getInfoForModel(modelID: number): Observable<ModelInfo> {
     return this.http
       .get<ModelInfoAPIResponse>(
-        `http://localhost:8080/carApi/model_info?model_id=${modelID}`
+        `${environment.API_URL}/carApi/model_info?model_id=${modelID}`
       )
       .pipe(
         map((response) => {
@@ -50,14 +63,25 @@ export class LeasingFormService {
           } else {
             throw new Error('Invalid response from server');
           }
+        }),
+        catchError((error) => {
+          console.error('Error fetching model info', error);
+          return throwError(() => error);
         })
       );
   }
 
   getInfoForVariant(variantID: number): Observable<Details> {
-    return this.http.get<Details>(
-      `http://localhost:8080/carApi/variant_info?variant_id=${variantID}`
-    );
+    return this.http
+      .get<Details>(
+        `${environment.API_URL}/carApi/variant_info?variant_id=${variantID}`
+      )
+      .pipe(
+        catchError((error) => {
+          console.error('Error fetching variant info', error);
+          return throwError(() => error);
+        })
+      );
   }
 
   findModelByName(
@@ -72,6 +96,10 @@ export class LeasingFormService {
         } else {
           throw new Error(`Model with name ${modelName} not found`);
         }
+      }),
+      catchError((error) => {
+        console.error('Error finding model by name', error);
+        return throwError(() => error);
       })
     );
   }
@@ -90,6 +118,10 @@ export class LeasingFormService {
         } else {
           throw new Error(`Variant with name ${variantName} not found`);
         }
+      }),
+      catchError((error) => {
+        console.error('Error finding variant by name', error);
+        return throwError(() => error);
       })
     );
   }

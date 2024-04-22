@@ -9,12 +9,10 @@ import {
 import {
   BehaviorSubject,
   Observable,
-  first,
-  map,
+  Subject,
   of,
   switchMap,
-  take,
-  tap,
+  takeUntil,
 } from 'rxjs';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Details, Model, Variant } from '../../../types';
@@ -22,7 +20,7 @@ import { LeasingFormService } from '../../../services/leasing-form-service.servi
 import { FormSubmissionConfirmationService } from '../../../services/form-submission-confirmation.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -54,6 +52,7 @@ export class CarLeasingFormComponent implements OnInit {
   selectedFile: any = null;
 
   private transferService = inject(FormDataTransferService);
+  private makeChange$ = new Subject<void>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -94,6 +93,7 @@ export class CarLeasingFormComponent implements OnInit {
           terms: false,
           confirmation: false,
         });
+        this.makeChange$.next();
       });
     }
 
@@ -121,7 +121,8 @@ export class CarLeasingFormComponent implements OnInit {
         .pipe(
           switchMap((model) =>
             this.leasingFormService.getInfoForModel(model.id)
-          )
+          ),
+          takeUntil(this.makeChange$)
         )
         .subscribe((response) => {
           this.carModelVariants$ = of(response.variants);
@@ -157,7 +158,7 @@ export class CarLeasingFormComponent implements OnInit {
       this.transferService.postAllFormData().subscribe((x) => console.log(x));
     }
   }
-  
+
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0] ?? null;
   }
