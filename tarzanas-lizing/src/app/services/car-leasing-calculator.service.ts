@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class MonthlyPaymentCalculatorService {
   private client = inject(HttpClient);
 
+
   getMonthlyPayment(inputs: Partial<CalculatorRequest>): Observable<CalculatorResponse> {
     return this.client.post<CalculatorResponse>('https://backend-xa05.onrender.com/car-leasing/calculator', inputs)
   }

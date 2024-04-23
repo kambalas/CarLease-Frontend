@@ -32,7 +32,7 @@ export class LoginPageComponent {
       username: this.username,
       password: this.password
     }
-    this.http.post('https://ci-cd-spring.onrender.com/api/v1/auth/authenticate', body)
+    this.http.post('https://ci-cd-spring.onrender.com/user/api/v1/auth/authenticate', body)
       .subscribe({
         next: (response: any) => {
           console.log('Login succesful', response);

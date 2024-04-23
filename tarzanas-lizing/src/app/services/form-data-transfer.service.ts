@@ -28,7 +28,7 @@ export class FormDataTransferService {
     engineSize: 0,
     year: "",
     url: "",
-    offer: "",
+    offer: undefined,
     terms: false,
     confirmation: false
   });

@@ -42,7 +42,9 @@ export class CarLeasingFormComponent implements OnInit {
   carModels$!: Observable<string[]>;
   carModelVariants$!: Observable<string[]>;
   carDetails$!: Observable<Details | null>;
-  selectedFile: any = null;
+  selectedFile: File | null = null;
+  base64File: string = '';
+
 
   private transferService = inject(FormDataTransferService);
 
@@ -82,7 +84,7 @@ export class CarLeasingFormComponent implements OnInit {
           enginePower: '',
           engineSize: '',
           url: '',
-          offer: '',
+          offer: undefined,
           terms: false,
           confirmation: false,
         });
@@ -118,8 +120,16 @@ export class CarLeasingFormComponent implements OnInit {
     }
   }
   onFileSelected(event: any): void {
-    this.selectedFile = event.target.files[0] ?? null;
-  }
+    const file = event.target.files[0] ?? null;
+    if (file) {
+        this.convertFileToBase64(file, (base64: string) => {
+            this.base64File = base64;
+            console.log('File in Base64:', this.base64File);
+        });
+    } else {
+        this.base64File = '';
+    }
+}
 
   getButtonColor() {
     return this.carLeasingForm.valid ? 'primary' : 'warn';
@@ -161,4 +171,15 @@ export class CarLeasingFormComponent implements OnInit {
       }
     }
   }
+  convertFileToBase64(file: File, callback: (result: string) => void): void {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+        const base64String = reader.result as string;
+        callback(base64String.split(',')[1]);
+    };
+    reader.onerror = (error) => {
+        console.error('Error converting file:', error);
+    };
+}
 }
