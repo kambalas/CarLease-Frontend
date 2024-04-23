@@ -5,8 +5,16 @@
             <mat-card-title>Tarzan leasing</mat-card-title>
         </mat-card-header>
     </div>
-    <div class="search-filter smallerFormField">
-        <button mat-icon-button><span class="material-symbols-outlined">tune</span></button>
+    <div class="search-sort smallerFormField">
+        <button mat-icon-button id="sort-button" (click)="showStatusSelect()"><span class="material-symbols-outlined">tune</span></button>
+        @if(statusSelect){
+            <div class="select-box">
+                <p>New</p>
+                <p>Pending</p>
+                <p>Accepted</p>
+                <p>Rejected</p>
+            </div>
+        }
         <mat-form-field appearance="outline" subscriptSizing="dynamic">
             <input matInput placeholder="Search">
           </mat-form-field>

@@ -1,12 +1,12 @@
-import {Component} from '@angular/core';
-import {MatFormField, MatLabel} from "@angular/material/form-field";
-import {FormsModule, FormBuilder, FormGroup, Validators, ReactiveFormsModule} from "@angular/forms";
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
-import {AuthService} from '../../../services/auth.service';
-import {Router} from '@angular/router';
-import {MatIcon} from "@angular/material/icon";
-import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import { Component } from '@angular/core';
+import { MatFormField, MatLabel } from "@angular/material/form-field";
+import { FormsModule, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
+import { MatIcon } from "@angular/material/icon";
+import { MatProgressSpinner } from "@angular/material/progress-spinner";
 
 
 
@@ -60,7 +60,7 @@ export class LoginPageComponent {
   }
   clear(): void {
     this.loginForm.reset();
-}
+  }
 
   get username() {
     return this.loginForm.get('username');
