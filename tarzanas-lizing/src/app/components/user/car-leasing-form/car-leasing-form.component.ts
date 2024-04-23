@@ -52,7 +52,6 @@ export class CarLeasingFormComponent implements OnInit {
   selectedFile: File | null = null;
   base64File: string = '';
 
-
   private transferService = inject(FormDataTransferService);
   private makeChange$ = new Subject<void>();
 
@@ -111,6 +110,28 @@ export class CarLeasingFormComponent implements OnInit {
         });
     }
   }
+
+  onSelectModel() {
+    const modelControl = this.carLeasingForm.get('model');
+
+    if (modelControl) {
+      const selectedModelName = modelControl.value;
+
+      this.leasingFormService
+        .findModelByName(selectedModelName, this.carModels$)
+        .pipe(
+          switchMap((model) =>
+            this.leasingFormService.getInfoForModel(model.id)
+          ),
+          takeUntil(this.makeChange$)
+        )
+        .subscribe((response) => {
+          this.carModelVariants$ = of(response.variants);
+          this.carDetails$ = of(response.details);
+        });
+    }
+  }
+
   onSelectModelVariant() {
     const variantControl = this.carLeasingForm.get('modelVariant');
 
@@ -140,9 +161,9 @@ export class CarLeasingFormComponent implements OnInit {
   }
 
   onFileSelected(event: any): void {
-    const file = event.target.files[0] ?? null;
-    if (file) {
-        this.convertFileToBase64(file, (base64: string) => {
+    this.selectedFile = event.target.files[0] ?? null;
+    if (this.selectedFile) {
+        this.convertFileToBase64(this.selectedFile, (base64: string) => {
             this.base64File = base64;
             console.log('File in Base64:', this.base64File);
         });
@@ -154,30 +175,12 @@ export class CarLeasingFormComponent implements OnInit {
   getButtonColor() {
     return this.carLeasingForm.valid ? 'primary' : 'warn';
   }
-
-  onSelectModel() {
-    const makeControl = this.carLeasingForm.get('make');
-    const modelControl = this.carLeasingForm.get('model');
-
-    if (modelControl && makeControl) {
-      const selectedMake = makeControl.value;
-      const selectedModel = modelControl.value;
-
-      if (selectedMake && selectedModel) {
-        this.carDetails$ = this.leasingFormService.getDetailsForModel(
-          selectedMake,
-          selectedModel
-        );
-      }
-    }
-  }
-
   convertFileToBase64(file: File, callback: (result: string) => void): void {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
         const base64String = reader.result as string;
-        callback(base64String.split(',')[1]);
+        callback(base64String.split(',')[1]);  // Split and remove the data URL prefix
     };
     reader.onerror = (error) => {
         console.error('Error converting file:', error);

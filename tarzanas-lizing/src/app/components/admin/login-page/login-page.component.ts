@@ -37,24 +37,6 @@ export class LoginPageComponent {
   }
 
   submit() {
-<<<<<<< HEAD
-    const body = {
-      username: this.username,
-      password: this.password
-    }
-    this.http.post('https://ci-cd-spring.onrender.com/user/api/v1/auth/authenticate', body)
-      .subscribe({
-        next: (response: any) => {
-          console.log('Login succesful', response);
-          const token = response.token;
-          this.authService.setToken(token);
-          this.router.navigate(['/admin']);
-        },
-        error: (error) => {
-          console.log('Login failed', error);
-        }
-      });
-=======
     this.authService.postLogin(this.loginForm).subscribe({
       next: (data) => {
         console.log("Success!")
@@ -66,7 +48,7 @@ export class LoginPageComponent {
         console.error('There was an error!', error);
       }
     });
->>>>>>> 6998b6fa06259afea800b644474864935950ee07
+
     this.clear();
     }
 
