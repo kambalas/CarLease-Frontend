@@ -122,6 +122,8 @@ export interface NoteResponse {
   noteText: string;
 }
 
+type Notes = NoteResponse[];
+
 export interface GeneralFormsResponse {
   ratesResponse: {
     id: string;
