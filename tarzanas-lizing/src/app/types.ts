@@ -82,17 +82,17 @@ export interface Details {
   engineSizes: string[];
 }
 
-export interface personalInfoDetails {
+export interface PersonalInfoDetails {
   firstName: string;
-  secondName: string;
+  lastName: string;
   email: string;
-  phone: string;
+  phoneNumber: string;
   pid: string;
-  date: Date;
-  maritalStatus: string[];
-  childrenCount: number;
-  citizenship: string[];
-  montlyIncome: number;
+  dateOfBirth: string;
+  maritalStatus: string;
+  numberOfChildren: number;
+  citizenship: string;
+  monthlyIncome: string;
 }
 
 export interface Application {
@@ -205,6 +205,14 @@ export interface GeneralAllFormsResponse {
     updatedAt: string;
     createdAt: string;
   };
+}
+export interface LoginFormFields{
+  username: string;
+  password: string;
+}
+export interface LoginFormRequest{
+  username: string;
+  password: string;
 }
 
 export interface MailRequest {

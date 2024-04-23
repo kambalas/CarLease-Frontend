@@ -24,7 +24,6 @@ export class ApplicationListComponent implements OnInit {
 
   ngOnInit(): void {
     this.listResponse$ = this.service.getAllApplications();
-    this.listResponse$.subscribe(x => console.log(x))
   }
 
   openSelected(id: number) {

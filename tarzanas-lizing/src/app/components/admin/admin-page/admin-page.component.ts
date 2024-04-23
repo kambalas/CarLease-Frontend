@@ -15,6 +15,5 @@ export class AdminPageComponent {
 
   setSelectedId(id: string) {
     this.selectedId = id;
-    console.log(id);
   }
 }
