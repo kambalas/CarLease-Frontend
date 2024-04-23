@@ -19,7 +19,7 @@ export class LeasingFormService {
 
   getCarMakes(): Observable<string[]> {
     return this.http
-      .get<{ carMakes: string[] }>(`${environment.API_URL}/carApi/makes`)
+      .get<{ carMakes: string[] }>(`${environment.API_URL}/user/carApi/makes`)
       .pipe(
         map((response) => response.carMakes),
         catchError((error) => {
@@ -32,7 +32,7 @@ export class LeasingFormService {
   getModelsForMake(make: string): Observable<Model[]> {
     return this.http
       .get<{ carModels: Model[] }>(
-        `${environment.API_URL}/carApi/models?make=${make}`
+        `${environment.API_URL}/user/carApi/models?make=${make}`
       )
       .pipe(
         map((response) => response.carModels),
@@ -46,7 +46,7 @@ export class LeasingFormService {
   getInfoForModel(modelID: number): Observable<ModelInfo> {
     return this.http
       .get<ModelInfoAPIResponse>(
-        `${environment.API_URL}/carApi/model_info?model_id=${modelID}`
+        `${environment.API_URL}/user/carApi/model_info?model_id=${modelID}`
       )
       .pipe(
         map((response) => {
@@ -74,7 +74,7 @@ export class LeasingFormService {
   getInfoForVariant(variantID: number): Observable<Details> {
     return this.http
       .get<Details>(
-        `${environment.API_URL}/carApi/variant_info?variant_id=${variantID}`
+        `${environment.API_URL}/user/carApi/variant_info?variant_id=${variantID}`
       )
       .pipe(
         catchError((error) => {
