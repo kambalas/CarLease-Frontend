@@ -6,8 +6,6 @@ import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { MatIcon } from "@angular/material/icon";
-import { MatProgressSpinner } from "@angular/material/progress-spinner";
-
 
 
 @Component({
@@ -34,7 +32,7 @@ export class LoginPageComponent {
 
 
 
-  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
+  constructor(private authService: AuthService, private http: HttpClient, private router: Router, private fb: FormBuilder) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -58,7 +56,8 @@ export class LoginPageComponent {
     this.loginFailed = true;
     this.clear();
   }
-  clear(): void {
+
+  clear() {
     this.loginForm.reset();
   }
 
