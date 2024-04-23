@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GeneralAllFormsResponse, GeneralFormsResponse } from '../types';
+import { Application, GeneralFormsResponse, Status, sortAndFilterRequest } from '../types';
 import { environment } from '../../environment/environment';
 
 @Injectable({
@@ -10,8 +10,12 @@ import { environment } from '../../environment/environment';
 export class ApplicationListService {
   private client = inject(HttpClient);
 
-  getAllApplications(): Observable<GeneralAllFormsResponse[]> {
-    return this.client.get<GeneralAllFormsResponse[]>(`${environment.API_URL}/admin/applications/page/1`)
+  getAllApplications(): Observable<Application[]> {
+    return this.client.post<Application[]>(`${environment.API_URL}/admin/applications`, { "page": "1" })
+  }
+
+  getApplicationsByStatusAndQuery(inputs: sortAndFilterRequest): Observable<Application[]> {
+    return this.client.post<Application[]>(`${environment.API_URL}/admin/applications`, inputs)
   }
 
   getPersonalAndLeaseData(id: string): Observable<GeneralFormsResponse> {
