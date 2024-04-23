@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {
   ReactiveFormsModule,
   FormBuilder,
@@ -14,17 +14,18 @@ import {
   switchMap,
   takeUntil,
 } from 'rxjs';
-import { AsyncPipe, JsonPipe } from '@angular/common';
-import { Details, Model, Variant } from '../../../types';
-import { LeasingFormService } from '../../../services/leasing-form-service.service';
-import { FormSubmissionConfirmationService } from '../../../services/form-submission-confirmation.service';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import { MatOptionModule } from '@angular/material/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { FormDataTransferService } from '../../../services/form-data-transfer.service';
+import {AsyncPipe, JsonPipe} from '@angular/common';
+import {Details, Model, Variant} from '../../../types';
+import {LeasingFormService} from '../../../services/leasing-form-service.service';
+import {FormSubmissionConfirmationService} from '../../../services/form-submission-confirmation.service';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatOptionModule} from '@angular/material/core';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {FormDataTransferService} from '../../../services/form-data-transfer.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-car-leasing-form',
@@ -57,8 +58,10 @@ export class CarLeasingFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private leasingFormService: LeasingFormService,
-    private submissionConfirmationService: FormSubmissionConfirmationService
-  ) {}
+    private submissionConfirmationService: FormSubmissionConfirmationService,
+    private router: Router
+  ) {
+  }
 
   ngOnInit() {
     this.carMakes$ = this.leasingFormService.getCarMakes();
@@ -153,9 +156,12 @@ export class CarLeasingFormComponent implements OnInit {
   onSubmit(): void {
     if (this.carLeasingForm.valid) {
       console.log('Form Submitted!', this.carLeasingForm.value);
-      this.submissionConfirmationService.openConfirmationDialog();
       this.transferService.setCarLeaseData(this.carLeasingForm.value);
       this.transferService.postAllFormData().subscribe((x) => console.log(x));
+      this.submissionConfirmationService.openConfirmationDialog().afterClosed().subscribe(result => {
+        this.router.navigate(['/']);
+      });
+
     }
   }
 
