@@ -6,14 +6,21 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { Observable, switchMap, take } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  Subject,
+  of,
+  switchMap,
+  takeUntil,
+} from 'rxjs';
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { Details } from '../../../types';
+import { Details, Model, Variant } from '../../../types';
 import { LeasingFormService } from '../../../services/leasing-form-service.service';
 import { FormSubmissionConfirmationService } from '../../../services/form-submission-confirmation.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -39,18 +46,19 @@ import { FormDataTransferService } from '../../../services/form-data-transfer.se
 export class CarLeasingFormComponent implements OnInit {
   carLeasingForm!: FormGroup;
   carMakes$!: Observable<string[]>;
-  carModels$!: Observable<string[]>;
-  carModelVariants$!: Observable<string[]>;
+  carModels$ = new BehaviorSubject<Model[]>([]);
+  carModelVariants$!: Observable<Variant[]>;
   carDetails$!: Observable<Details | null>;
   selectedFile: any = null;
 
   private transferService = inject(FormDataTransferService);
+  private makeChange$ = new Subject<void>();
 
   constructor(
     private formBuilder: FormBuilder,
     private leasingFormService: LeasingFormService,
     private submissionConfirmationService: FormSubmissionConfirmationService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.carMakes$ = this.leasingFormService.getCarMakes();
@@ -70,7 +78,6 @@ export class CarLeasingFormComponent implements OnInit {
     });
 
     const makeControl = this.carLeasingForm.get('make');
-    const modelControl = this.carLeasingForm.get('model');
 
     if (makeControl) {
       makeControl.valueChanges.subscribe(() => {
@@ -86,26 +93,60 @@ export class CarLeasingFormComponent implements OnInit {
           terms: false,
           confirmation: false,
         });
+        this.makeChange$.next();
       });
     }
 
     if (makeControl) {
-      this.carModels$ = makeControl.valueChanges.pipe(
-        switchMap((selectedMake) => {
-          return this.leasingFormService.getModelsForMake(selectedMake);
-        })
-      );
+      makeControl.valueChanges
+        .pipe(
+          switchMap((selectedMake) => {
+            return this.leasingFormService.getModelsForMake(selectedMake);
+          })
+        )
+        .subscribe((models) => {
+          this.carModels$.next(models);
+        });
     }
+  }
 
-    if (modelControl && makeControl) {
-      this.carModelVariants$ = modelControl.valueChanges.pipe(
-        switchMap((selectedModel) => {
-          return this.leasingFormService.getVariantsForModel(
-            makeControl.value,
-            selectedModel
-          );
-        })
-      );
+  onSelectModel() {
+    const modelControl = this.carLeasingForm.get('model');
+
+    if (modelControl) {
+      const selectedModelName = modelControl.value;
+
+      this.leasingFormService
+        .findModelByName(selectedModelName, this.carModels$)
+        .pipe(
+          switchMap((model) =>
+            this.leasingFormService.getInfoForModel(model.id)
+          ),
+          takeUntil(this.makeChange$)
+        )
+        .subscribe((response) => {
+          this.carModelVariants$ = of(response.variants);
+          this.carDetails$ = of(response.details);
+        });
+    }
+  }
+
+  onSelectModelVariant() {
+    const variantControl = this.carLeasingForm.get('modelVariant');
+
+    if (variantControl) {
+      const selectedVariantName = variantControl.value;
+
+      this.leasingFormService
+        .findVariantByName(selectedVariantName, this.carModelVariants$)
+        .pipe(
+          switchMap((variant) =>
+            this.leasingFormService.getInfoForVariant(variant.id)
+          )
+        )
+        .subscribe((response) => {
+          this.carDetails$ = of(response);
+        });
     }
   }
 
@@ -114,51 +155,15 @@ export class CarLeasingFormComponent implements OnInit {
       console.log('Form Submitted!', this.carLeasingForm.value);
       this.submissionConfirmationService.openConfirmationDialog();
       this.transferService.setCarLeaseData(this.carLeasingForm.value);
-      this.transferService.postAllFormData().subscribe(x => console.log(x));
+      this.transferService.postAllFormData().subscribe((x) => console.log(x));
     }
   }
+
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0] ?? null;
   }
 
   getButtonColor() {
     return this.carLeasingForm.valid ? 'primary' : 'warn';
-  }
-
-  onSelectModel() {
-    const makeControl = this.carLeasingForm.get('make');
-    const modelControl = this.carLeasingForm.get('model');
-
-    if (modelControl && makeControl) {
-      const selectedMake = makeControl.value;
-      const selectedModel = modelControl.value;
-
-      if (selectedMake && selectedModel) {
-        this.carDetails$ = this.leasingFormService.getDetailsForModel(
-          selectedMake,
-          selectedModel
-        );
-      }
-    }
-  }
-
-  onSelectModelVariant() {
-    const makeControl = this.carLeasingForm.get('make');
-    const modelControl = this.carLeasingForm.get('model');
-    const modelVariantControl = this.carLeasingForm.get('modelVariant');
-
-    if (modelVariantControl && modelControl && makeControl) {
-      const selectedMake = makeControl.value;
-      const selectedModel = modelControl.value;
-      const selectedVariant = modelVariantControl.value;
-
-      if (selectedMake && selectedModel && selectedVariant) {
-        this.carDetails$ = this.leasingFormService.getDetailsForVariant(
-          selectedMake,
-          selectedModel,
-          selectedVariant
-        );
-      }
-    }
   }
 }

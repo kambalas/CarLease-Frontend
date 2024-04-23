@@ -52,33 +52,34 @@ export interface CalculatorResponse {
   monthlyPayment: number;
 }
 
-export interface Car {
-  make: string;
-  models: Model[];
+export interface Model {
+  id: number;
+  name: string;
 }
 
-export interface Model {
-  modelName: string;
+export interface Variant {
+  id: number;
+  name: string;
+}
+
+export interface ModelInfoAPIResponse {
   variants: Variant[];
   years: number[];
   fuelTypes: string[];
   enginePowers: number[];
-  engineSizes: number[];
+  engineSizes: string[];
 }
 
-export interface Variant {
-  variantName: string;
-  years: number[];
-  fuelTypes: string[];
-  enginePowers: number[];
-  engineSizes: number[];
+export interface ModelInfo {
+  variants: Variant[];
+  details: Details;
 }
 
 export interface Details {
   years: number[];
   fuelTypes: string[];
   enginePowers: number[];
-  engineSizes: number[];
+  engineSizes: string[];
 }
 
 export interface PersonalInfoDetails {
