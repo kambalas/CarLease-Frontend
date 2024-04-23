@@ -42,11 +42,12 @@ export class PersonalInformationFormComponent implements OnInit {
     return new FormGroup({
       firstName: new FormControl<string | null>(null, [
         Validators.required,
-        Validators.pattern('^[a-zA-Z-]*$'),
+        Validators.pattern('^[a-zA-ZÀ-ÿ]*$'),
+
       ]),
       secondName: new FormControl<string | null>(null, [
         Validators.required,
-        Validators.pattern('^[a-zA-Z-]*$'),
+        Validators.pattern('^[a-zA-ZÀ-ÿ]*$'),
       ]),
       email: new FormControl<string | null>(null, [
         Validators.required,
