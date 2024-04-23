@@ -36,7 +36,7 @@ export class MailTabComponent implements OnInit {
   private mailService = inject(MailService);
   testMailRequest: MailRequest = {
     applicationId: -1,
-    mailText: 'mock',
+    mailText: 'mocked',
     mailRecipient: 'mock@address.com',
   };
 
