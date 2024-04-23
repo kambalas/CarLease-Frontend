@@ -8,17 +8,19 @@ import { MatInput } from '@angular/material/input';
 import { Observable, of } from 'rxjs';
 import { ApplicationListService } from '../../../services/application-list.service';
 import { GeneralAllFormsResponse } from '../../../types';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-application-list',
   standalone: true,
-  imports: [MatCardModule, MatDividerModule, MatButtonModule, MatFormField, MatInput, AsyncPipe],
+  imports: [MatCardModule, MatDividerModule, MatButtonModule, MatFormField, MatInput, AsyncPipe, MatSelectModule],
   templateUrl: './application-list.component.html',
   styleUrl: './application-list.component.scss'
 })
 export class ApplicationListComponent implements OnInit {
   private service = inject(ApplicationListService);
   OnSelectedId = output<string>();
+  statusSelect = false;
 
   listResponse$: Observable<GeneralAllFormsResponse[]> = of([]);
 
@@ -30,5 +32,9 @@ export class ApplicationListComponent implements OnInit {
     if (id) {
       this.OnSelectedId.emit(id.toString())
     }
+  }
+
+  showStatusSelect() {
+    this.statusSelect = !this.statusSelect;
   }
 }
