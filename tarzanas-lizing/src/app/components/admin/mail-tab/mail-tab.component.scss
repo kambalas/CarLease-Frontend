@@ -3,7 +3,7 @@
   border-top: 1px solid #d6d6d6;
   height: 35vh;
   text-align: left;
-  overflow-y: hidden;
+  overflow-y: auto;
   display: block;
   overflow-x: hidden;
 }
@@ -17,5 +17,5 @@
 .dropdown-template{
   position: absolute;
   right: 0;
-  margin: 0px 10px ;
+  margin: 0 10px ;
 }
