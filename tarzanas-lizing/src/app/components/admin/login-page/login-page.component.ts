@@ -6,8 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { MatIcon } from "@angular/material/icon";
-import { MatProgressSpinner } from "@angular/material/progress-spinner";
-
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 
 @Component({
@@ -58,6 +57,7 @@ export class LoginPageComponent {
     this.loginFailed = true;
     this.clear();
   }
+
   clear(): void {
     this.loginForm.reset();
   }
