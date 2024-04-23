@@ -6,6 +6,8 @@ import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { MatIcon } from "@angular/material/icon";
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
