@@ -10,32 +10,6 @@ mat-card {
     .search-sort {
         align-items: center;
         justify-content: center;
-
-        #sort-button {
-            position: relative;
-        }
-
-        .select-box {
-            position: absolute;
-            background-color: white;
-            left: 0;
-            top: 115px;
-            z-index: 100;
-            text-align: left;
-            border: 1px solid lightgray;
-            width: 150px;
-            box-shadow: 3px 3px 5px lightgrey;
-
-            p {
-                cursor: pointer;
-                padding: 15px 20px;
-                margin: 0;
-            }
-
-            P:hover {
-                background-color: rgb(230, 229, 229);
-            }
-        }
     }
 
     img {
