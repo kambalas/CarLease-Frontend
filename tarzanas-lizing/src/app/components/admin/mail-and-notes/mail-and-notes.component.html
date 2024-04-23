@@ -2,7 +2,7 @@
   <mat-card>
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
       <mat-tab label="Mail">
-        <app-mail-tab [dataForEmailTab]="(response.personalInformationResponse)"/>
+        <app-mail-tab [dataForEmailTab]="(response)" [applicationId] = "(selectedId())"/>
       </mat-tab>
       <mat-tab label="Notes">
         <app-notes-tab />
@@ -10,7 +10,7 @@
     </mat-tab-group>
 </mat-card>
 <div class="bottom">
-  <app-notes [dataForNotes]="(response)" />
+  <app-notes [dataForNotes]="(response)" [applicationId] = "(selectedId())" />
 </div>
 }
 

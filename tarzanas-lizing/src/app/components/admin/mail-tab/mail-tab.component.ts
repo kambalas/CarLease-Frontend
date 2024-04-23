@@ -6,7 +6,8 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatOption } from '@angular/material/autocomplete';
 import { MatSelect } from '@angular/material/select';
 import { MailService } from '../../../services/mail.service';
-import { MailRequest, PersonalInfoDetails } from '../../../types';
+import {GeneralFormsResponse, MailRequest } from '../../../types';
+import {MailTemplateService } from "../../../services/mail-template.service";
 
 @Component({
   selector: 'app-mail-tab',
@@ -26,11 +27,30 @@ import { MailRequest, PersonalInfoDetails } from '../../../types';
 })
 
 export class MailTabComponent implements OnInit {
-  dataForEmailTab = input<PersonalInfoDetails>();
+  dataForEmailTab = input<GeneralFormsResponse>();
+  applicationId = input<string>();
+
   selectedTemplate: string = '';
+  private service = inject(MailTemplateService);
+
+  get mailContent(): string {
+    const data: Partial<GeneralFormsResponse> = {...this.dataForEmailTab()};
+    switch (this.selectedTemplate) {
+      case 'rejected':
+        return this.service.getRejectionTemplate(data);
+      case 'accepted':
+        return this.service.getAcceptanceTemplate(data);
+      case 'more-info':
+        return this.service.getMoreInfoTemplate(data);
+      case 'cancelled':
+        return this.service.getCancellationTemplate(data);
+      default:
+        return '';
+    }
+  }
 
   ngOnInit(): void {
-    console.log(this.dataForEmailTab()?.email);
+    console.log(this.dataForEmailTab()?.personalInformationResponse?.email);
   }
 
   private mailService = inject(MailService);
