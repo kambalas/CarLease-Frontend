@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { CalculatorRequest, CalculatorResponse } from '../types';
 import { Observable } from 'rxjs';
+import { environment } from '../../environment/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,6 @@ export class MonthlyPaymentCalculatorService {
 
 
   getMonthlyPayment(inputs: Partial<CalculatorRequest>): Observable<CalculatorResponse> {
-    return this.client.post<CalculatorResponse>('https://backend-xa05.onrender.com/car-leasing/calculator', inputs)
+    return this.client.post<CalculatorResponse>(`${environment.API_URL}/user/calculator`, inputs)
   }
 }

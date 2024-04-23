@@ -1,13 +1,14 @@
 <div class="container">
   <div class="carLeasingForm">
-    <h2>Information about car</h2>
     <form [formGroup]="carLeasingForm" (ngSubmit)="onSubmit()">
       <div class="mainContainer">
         <div class="leftColumn">
           <mat-form-field>
             <mat-label>Make</mat-label>
             <mat-hint>select car make</mat-hint>
-            <mat-select formControlName="make">
+            <mat-select
+              formControlName="make"
+              >
               @for (carMake of carMakes$ | async; track $index) {
               <mat-option [value]="carMake">{{ carMake }}</mat-option>
               }
@@ -21,8 +22,8 @@
               formControlName="model"
               (selectionChange)="onSelectModel()"
             >
-              @for (carModel of carModels$ | async; track $index) {
-              <mat-option [value]="carModel">{{ carModel }}</mat-option>
+              @for (model of (carModels$ | async); track $index) {
+              <mat-option [value]="model.name">{{ model.name}}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -34,10 +35,10 @@
               formControlName="modelVariant"
               (selectionChange)="onSelectModelVariant()"
             >
-              @for (carModelVariant of carModelVariants$ | async; track $index)
+              @for (variant of carModelVariants$ | async; track $index)
               {
-              <mat-option [value]="carModelVariant">{{
-                carModelVariant
+              <mat-option [value]="variant.name">{{
+                variant.name
               }}</mat-option>
               }
             </mat-select>

@@ -7,7 +7,7 @@ import { MatFormField } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { Observable, of } from 'rxjs';
 import { ApplicationListService } from '../../../services/application-list.service';
-import { Application } from '../../../types';
+import { GeneralAllFormsResponse } from '../../../types';
 
 @Component({
   selector: 'app-application-list',
@@ -20,47 +20,15 @@ export class ApplicationListComponent implements OnInit {
   private service = inject(ApplicationListService);
   OnSelectedId = output<string>();
 
-
-  //listResponse$: Observable<Application[]> | undefined;
-
-  listResponse$ = of([
-    {
-      id: "123",
-      firstName: "Bob",
-      secondName: "Bobber",
-      isOpened: false,
-      dateSubmitted: new Date(),
-      dateUpdated: new Date(),
-      status: "accepted",
-    },
-    {
-      id: "124",
-      firstName: "Rob",
-      secondName: "Robber",
-      isOpened: true,
-      dateSubmitted: new Date(),
-      dateUpdated: new Date(),
-      status: "pending",
-    },
-    {
-      id: "125",
-      firstName: "Bob",
-      secondName: "Bobber",
-      isOpened: true,
-      dateSubmitted: new Date(),
-      dateUpdated: new Date(),
-      status: "rejected",
-    },
-  ]);
-
+  listResponse$: Observable<GeneralAllFormsResponse[]> = of([]);
 
   ngOnInit(): void {
-    //this.listResponse$ = this.service.getAllApplications();
+    this.listResponse$ = this.service.getAllApplications();
   }
 
-  openSelected(id: string) {
+  openSelected(id: number) {
     if (id) {
-      this.OnSelectedId.emit(id)
+      this.OnSelectedId.emit(id.toString())
     }
   }
 }

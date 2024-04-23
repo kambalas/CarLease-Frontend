@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, combineLatest, map, of, switchMap, tap } from 'rxjs';
 import { CalculatorFormFields, CarLeasingFormFields, FormsPostRequest, PersonalInformationFormFields } from '../types';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environment/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -64,7 +65,7 @@ export class FormDataTransferService {
       personalInformationRequest: this.personalInformationData$,
       leaseRequest: this.carLeaseData$
     }).pipe(
-      switchMap(req => this.client.post<FormsPostRequest>('https://ci-cd-spring.onrender.com/applications/create', req))
+      switchMap(req => this.client.post<FormsPostRequest>(`${environment.API_URL}/user/applications/create`, req))
     )
   }
 }

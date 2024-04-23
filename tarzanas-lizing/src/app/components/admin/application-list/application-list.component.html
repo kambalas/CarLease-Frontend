@@ -15,18 +15,18 @@
     <mat-card-content class="list">
     <ul>
         @if(listResponse$ | async; as listResponse){
-            @for(res of listResponse; track res.id) {
-                <li class="opened-{{res.isOpened}} {{res.status}}" (click)="openSelected(res.id)">
+            @for(res of listResponse; track res.statusResponse.id) {
+                <li class="opened-{{res.statusResponse.isOpened}} {{res.statusResponse.applicationStatus}}" (click)="openSelected(res.statusResponse.id)">
                     <div>
-                        <h3>{{res.firstName + " " + res.secondName}}</h3>
-                        <h4>ID: {{res.id}}</h4>
+                        <h3>{{res.personalInformationResponse.firstName + " " + res.personalInformationResponse.lastName}}</h3>
+                        <h4>ID: {{res.statusResponse.id}}</h4>
                     </div>
                     <div class="date-icon">
-                        <h5>{{res.dateUpdated.getFullYear() + "-" + res.dateUpdated.getMonth().toString().padStart(2, "0") + "-" + res.dateUpdated.getDate()}}</h5>
-                        @if(res.status === 'accepted'){
+                        <h5>{{res.statusResponse.updatedAt.slice(0,10)}}</h5>
+                        @if(res.statusResponse.applicationStatus === 'accepted'){
                             <span class="material-symbols-outlined">done</span>
                         }
-                        @if(res.status === 'pending'){
+                        @if(res.statusResponse.applicationStatus === 'pending'){
                             <span class="material-symbols-outlined">schedule</span>
                         }
                     </div>

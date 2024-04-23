@@ -1,15 +1,17 @@
-
 <div class="login-container">
-<form class="login-form">
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>User Name</mat-label>
-    <input matInput placeholder="Enter your name" name="usename"
-           [(ngModel)] ="username">
-  </mat-form-field>
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Password</mat-label>
-    <input matInput placeholder="Enter your password" value="" name="password" type="password" [(ngModel)]= "password">
-  </mat-form-field>
-  <button mat-raised-button color="primary" (click)="submit()">Submit</button>
-</form>
+  <form [formGroup]="loginForm"
+        (ngSubmit)="submit()">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>User Name</mat-label>
+      <input matInput placeholder="Enter your name" name="usename"
+             formControlName="username">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="Enter your password" value="" name="password" [type]="passwordHidden ? 'password' : 'text'"
+             formControlName="password">
+      <mat-icon matSuffix (click)="passwordHidden = !passwordHidden">{{ passwordHidden ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </mat-form-field>
+    <button [disabled]="!loginForm.valid" mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
 </div>

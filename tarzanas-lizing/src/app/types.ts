@@ -52,46 +52,47 @@ export interface CalculatorResponse {
   monthlyPayment: number;
 }
 
-export interface Car {
-  make: string;
-  models: Model[];
+export interface Model {
+  id: number;
+  name: string;
 }
 
-export interface Model {
-  modelName: string;
+export interface Variant {
+  id: number;
+  name: string;
+}
+
+export interface ModelInfoAPIResponse {
   variants: Variant[];
   years: number[];
   fuelTypes: string[];
   enginePowers: number[];
-  engineSizes: number[];
+  engineSizes: string[];
 }
 
-export interface Variant {
-  variantName: string;
-  years: number[];
-  fuelTypes: string[];
-  enginePowers: number[];
-  engineSizes: number[];
+export interface ModelInfo {
+  variants: Variant[];
+  details: Details;
 }
 
 export interface Details {
   years: number[];
   fuelTypes: string[];
   enginePowers: number[];
-  engineSizes: number[];
+  engineSizes: string[];
 }
 
-export interface personalInfoDetails {
+export interface PersonalInfoDetails {
   firstName: string;
-  secondName: string;
+  lastName: string;
   email: string;
-  phone: string;
+  phoneNumber: string;
   pid: string;
-  date: Date;
-  maritalStatus: string[];
-  childrenCount: number;
-  citizenship: string[];
-  montlyIncome: number;
+  dateOfBirth: string;
+  maritalStatus: string;
+  numberOfChildren: number;
+  citizenship: string;
+  monthlyIncome: string;
 }
 
 export interface Application {
@@ -122,41 +123,105 @@ export interface NoteResponse {
 }
 
 export interface GeneralFormsResponse {
-  RatesResponse: {
-    id: string,
-    carValue: string,
-    period: number,
-    downPayment: string,
-    residualValuePercentage: string,
-    isEcoFriendly: boolean,
-    monthlyPayment: string
-  },
-  PersonalInformationResponse: {
-    id: string,
-    firstName: string,
-    lastName: string,
-    email: string,
-    phoneNumber: string,
-    pid: string,
-    dateOfBirth: Date,
-    maritalStatus: string,
-    numberOfChildren: number,
-    citizenship: string,
-    monthlyIncome: string
-  },
-  LeaseResponse: {
-    id: string,
-    make: string,
-    model: string,
-    modelVariant: string,
-    year: string,
-    fuelType: string,
-    enginePower: string,
-    engineSize: string,
-    url: string,
-    offer: string,
-    terms: boolean,
-    confirmation: boolean
-  }
+  ratesResponse: {
+    id: string;
+    carValue: string;
+    period: number;
+    downPayment: string;
+    residualValuePercentage: string;
+    isEcoFriendly: boolean;
+    monthlyPayment: string;
+  };
+  personalInformationResponse: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+    pid: string;
+    dateOfBirth: string;
+    maritalStatus: string;
+    numberOfChildren: number;
+    citizenship: string;
+    monthlyIncome: string;
+  };
+  leaseResponse: {
+    id: string;
+    make: string;
+    model: string;
+    modelVariant: string;
+    year: string;
+    fuelType: string;
+    enginePower: string;
+    engineSize: string;
+    url: string;
+    offer: string;
+    terms: boolean;
+    confirmation: boolean;
+  };
 }
 
+export interface GeneralAllFormsResponse {
+  ratesResponse: {
+    id: string;
+    carValue: string;
+    period: number;
+    downPayment: string;
+    residualValuePercentage: string;
+    isEcoFriendly: boolean;
+    monthlyPayment: string;
+  };
+  personalInformationResponse: {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+    pid: string;
+    dateOfBirth: string;
+    maritalStatus: string;
+    numberOfChildren: number;
+    citizenship: string;
+    monthlyIncome: string;
+  };
+  leaseResponse: {
+    id: number;
+    make: string;
+    model: string;
+    modelVariant: string;
+    year: string;
+    fuelType: string;
+    enginePower: string;
+    engineSize: string;
+    url: string;
+    offer: string;
+    terms: boolean;
+    confirmation: boolean;
+  };
+  statusResponse: {
+    id: number;
+    applicationStatus: Status;
+    isOpened: boolean;
+    updatedAt: string;
+    createdAt: string;
+  };
+}
+export interface LoginFormFields{
+  username: string;
+  password: string;
+}
+export interface LoginFormRequest{
+  username: string;
+  password: string;
+}
+
+export interface MailRequest {
+  applicationId: number;
+  mailText: string;
+  mailRecipient: string;
+}
+export interface MailResponse {
+  applicationId: number;
+  mailText: string;
+  mailRecipient: string;
+}
