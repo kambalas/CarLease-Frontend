@@ -29,7 +29,7 @@ export interface CarLeasingFormFields {
   enginePower: number;
   engineSize: number;
   url: string;
-  offer: string;
+  offer?: string;
   terms: boolean;
   confirmation: boolean;
 }

@@ -96,13 +96,8 @@
 
           <button type="button" mat-raised-button (click)="fileInput.click()">
             Upload file (optional)
-          </button>
-          <input
-            hidden
-            (change)="onFileSelected($event)"
-            #fileInput
-            type="file"
-          />
+        </button>
+        <input hidden (change)="onFileSelected($event)" #fileInput type="file" accept="application/pdf" />
           <span class="file-name">{{ selectedFile?.name }}</span>
         </div>
       </div>
