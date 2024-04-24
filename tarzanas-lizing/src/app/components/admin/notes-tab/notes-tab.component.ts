@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, input } from '@angular/core';
+import { Component,inject} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -7,12 +7,14 @@ import { MatOption } from '@angular/material/autocomplete';
 import { MatSelect } from '@angular/material/select';
 import { NoteRequest } from '../../../types';
 import { NotesService } from '../../../services/notes.service';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-notes-tab',
   standalone: true,
   imports: [
     MatButtonModule,
+    MatInputModule,
     MatCardModule,
     FormsModule,
     MatFormField,
@@ -25,7 +27,6 @@ import { NotesService } from '../../../services/notes.service';
   styleUrl: './notes-tab.component.scss',
 })
 export class NotesTabComponent {
-
 
   private notesService = inject(NotesService);
   testNoteRequest: NoteRequest = {
