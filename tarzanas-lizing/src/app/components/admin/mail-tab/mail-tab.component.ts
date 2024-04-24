@@ -8,6 +8,7 @@ import { MatSelect } from '@angular/material/select';
 import { MailService } from '../../../services/mail.service';
 import {GeneralFormsResponse, MailRequest } from '../../../types';
 import {MailTemplateService } from "../../../services/mail-template.service";
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-mail-tab',
@@ -16,6 +17,7 @@ import {MailTemplateService } from "../../../services/mail-template.service";
     MatCardModule,
     MatButtonModule,
     FormsModule,
+    MatInputModule,
     MatFormField,
     MatLabel,
     MatOption,
