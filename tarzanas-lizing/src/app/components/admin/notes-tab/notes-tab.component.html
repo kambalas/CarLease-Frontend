@@ -1,11 +1,23 @@
-<mat-card-content class="container">
-  <p>notes-tab works!</p>
-  <button
-    mat-stroked-button
-    color="warn"
-    class="bottom-left"
-    (click)="saveNote()"
-  >
-    Save
-  </button>
-</mat-card-content>
+<div class="container">
+  <div class="text-area">
+    <mat-form-field class="notes-text-field" appearance="outline">
+      <textarea
+        matInput
+        style="resize: none"
+        rows="8"
+        placeholder="Type your note here..."
+      ></textarea>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <button
+      mat-stroked-button
+      color="warn"
+      class="bottom-left"
+      (click)="saveNote()"
+    >
+      Save
+    </button>
+  </div>
+</div>
