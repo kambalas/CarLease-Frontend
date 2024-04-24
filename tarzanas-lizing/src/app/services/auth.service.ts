@@ -31,7 +31,6 @@ export class AuthService {
   }
 
   postLogin(loginFields: FormGroup): Observable<any> {
-
     return this.client.post<LoginFormRequest>(`${environment.API_URL}/user/api/v1/auth/authenticate`,
       {
         "username": loginFields.get('username')?.value,

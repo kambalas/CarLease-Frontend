@@ -27,6 +27,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {FormDataTransferService} from '../../../services/form-data-transfer.service';
 import {Router} from "@angular/router";
 
+
 @Component({
   selector: 'app-car-leasing-form',
   standalone: true,
@@ -51,7 +52,6 @@ export class CarLeasingFormComponent implements OnInit {
   carModelVariants$!: Observable<Variant[]>;
   carDetails$!: Observable<Details | null>;
   selectedFile: File | null = null;
-  base64File: string = '';
   maxFileSize = 2 * 1024 * 1024;
 
   private transferService = inject(FormDataTransferService);
@@ -191,7 +191,7 @@ export class CarLeasingFormComponent implements OnInit {
     reader.readAsDataURL(file);
     reader.onload = () => {
         const base64String = reader.result as string;
-        callback(base64String.split(',')[1]);  // Split and remove the data URL prefix
+        callback(base64String.split(',')[1]);
     };
     reader.onerror = (error) => {
         console.error('Error converting file:', error);

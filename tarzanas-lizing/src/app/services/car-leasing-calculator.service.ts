@@ -10,7 +10,6 @@ import { environment } from '../../environment/environment';
 export class MonthlyPaymentCalculatorService {
   private client = inject(HttpClient);
 
-
   getMonthlyPayment(inputs: Partial<CalculatorRequest>): Observable<CalculatorResponse> {
     return this.client.post<CalculatorResponse>(`${environment.API_URL}/user/calculator`, inputs)
   }
