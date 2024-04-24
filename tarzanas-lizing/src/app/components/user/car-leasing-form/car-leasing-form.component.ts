@@ -1,4 +1,4 @@
-import {Component, OnInit, inject} from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormBuilder,
@@ -14,19 +14,18 @@ import {
   switchMap,
   takeUntil,
 } from 'rxjs';
-import {AsyncPipe, JsonPipe} from '@angular/common';
-import {Details, Model, Variant} from '../../../types';
-import {LeasingFormService} from '../../../services/leasing-form-service.service';
-import {FormSubmissionConfirmationService} from '../../../services/form-submission-confirmation.service';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select';
-import {MatOptionModule} from '@angular/material/core';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {FormDataTransferService} from '../../../services/form-data-transfer.service';
-import {Router} from "@angular/router";
-
+import { AsyncPipe, JsonPipe } from '@angular/common';
+import { Details, Model, Variant } from '../../../types';
+import { LeasingFormService } from '../../../services/leasing-form-service.service';
+import { FormSubmissionConfirmationService } from '../../../services/form-submission-confirmation.service';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormDataTransferService } from '../../../services/form-data-transfer.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-car-leasing-form',
@@ -52,7 +51,7 @@ export class CarLeasingFormComponent implements OnInit {
   carModelVariants$!: Observable<Variant[]>;
   carDetails$!: Observable<Details | null>;
   selectedFile: File | null = null;
-  maxFileSize = 2 * 1024 * 1024;
+  maxFileSize = 3 * 1024 * 1024;
 
   private transferService = inject(FormDataTransferService);
   private makeChange$ = new Subject<void>();
@@ -62,8 +61,7 @@ export class CarLeasingFormComponent implements OnInit {
     private leasingFormService: LeasingFormService,
     private submissionConfirmationService: FormSubmissionConfirmationService,
     private router: Router
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.carMakes$ = this.leasingFormService.getCarMakes();
@@ -160,10 +158,12 @@ export class CarLeasingFormComponent implements OnInit {
       console.log('Form Submitted!', this.carLeasingForm.value);
       this.transferService.setCarLeaseData(this.carLeasingForm.value);
       this.transferService.postAllFormData().subscribe((x) => console.log(x));
-      this.submissionConfirmationService.openConfirmationDialog().afterClosed().subscribe(result => {
-        this.router.navigate(['/']);
-      });
-
+      this.submissionConfirmationService
+        .openConfirmationDialog()
+        .afterClosed()
+        .subscribe((result) => {
+          this.router.navigate(['/']);
+        });
     }
   }
 
@@ -171,17 +171,17 @@ export class CarLeasingFormComponent implements OnInit {
     const file = event.target.files[0] ?? null;
     if (file) {
       if (file.size > this.maxFileSize) {
-          alert('File is too large. Maximum size is 2MB.');
-          return;
+        alert('File is too large. Maximum size is 2MB.');
+        return;
       }
-        this.selectedFile = file;
-        this.convertFileToBase64(file, (base64: string) => {
-            this.carLeasingForm.patchValue({ offer: base64 });
-        });
+      this.selectedFile = file;
+      this.convertFileToBase64(file, (base64: string) => {
+        this.carLeasingForm.patchValue({ offer: base64 });
+      });
     } else {
       this.selectedFile = null;
     }
-}
+  }
 
   getButtonColor() {
     return this.carLeasingForm.valid ? 'primary' : 'warn';
@@ -190,11 +190,11 @@ export class CarLeasingFormComponent implements OnInit {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-        const base64String = reader.result as string;
-        callback(base64String.split(',')[1]);
+      const base64String = reader.result as string;
+      callback(base64String.split(',')[1]);
     };
     reader.onerror = (error) => {
-        console.error('Error converting file:', error);
+      console.error('Error converting file:', error);
     };
-}
+  }
 }
