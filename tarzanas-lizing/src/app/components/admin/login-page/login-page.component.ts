@@ -54,7 +54,6 @@ export class LoginPageComponent {
 
       }
     });
-
     this.loginFailed = true;
     this.clear();
   }
