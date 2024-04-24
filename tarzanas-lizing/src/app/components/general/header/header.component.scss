@@ -1,13 +1,14 @@
-:host {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 60px;
+  width: 100%;
 }
 
 .logo-section {
   display: flex;
   align-items: center;
-  margin-top: 10px;
 }
 
 h2 {
@@ -25,11 +26,15 @@ h2 {
   margin: 0 auto;
 }
 
-select {
+mat-select {
   background-color: white;
   border: 1px solid #dedede;
   border-radius: 20px;
   padding: 5px 10px;
   height: 33px;
-  width: 55px;
+  width: 60px;
+}
+
+span.mdc-list-item__primary-text {
+  margin: 0;
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-how-it-works',
@@ -8,5 +8,4 @@ import { Component } from '@angular/core';
   styleUrl: './how-it-works.component.scss'
 })
 export class HowItWorksComponent {
-
 }
