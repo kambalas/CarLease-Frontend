@@ -1,4 +1,4 @@
-import { Component,inject} from '@angular/core';
+import { Component,inject,input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -27,17 +27,27 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './notes-tab.component.scss',
 })
 export class NotesTabComponent {
-
   private notesService = inject(NotesService);
-  testNoteRequest: NoteRequest = {
-    applicationId: -1,
-    noteText: 'mocked notes text',
-  };
+
+  noteText: string = '';
+  applicationId = input<string>();
 
   saveNote(): void {
+    const applicationIdNumber = Number(this.applicationId());
     alert('Note saved!');
-    this.notesService
-      .saveNote(this.testNoteRequest)
-      .subscribe((x) => console.log(x));
+
+    const noteRequest: NoteRequest = {
+      applicationId: applicationIdNumber,
+      noteText: this.noteText,
+    };
+
+    this.notesService.saveNote(noteRequest).subscribe({
+      next: (response) => {
+        console.log('Note saved successfully:', response);
+      },
+      error: (error) => {
+        console.error('Error saving note:', error);
+      }
+    });
   }
 }
