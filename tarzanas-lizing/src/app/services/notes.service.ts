@@ -10,6 +10,10 @@ import { environment } from '../../environment/environment';
 export class NotesService {
   private client = inject(HttpClient);
 
+  getNotesById(id: string): Observable<NoteResponse[]>  {
+    return this.client.get<NoteResponse[]>(`${environment.API_URL}/admin/notes/${id}`)
+  }
+
   saveNote(noteRequest: NoteRequest): Observable<any> {
     return this.client.post<NoteRequest>(
       `${environment.API_URL}/admin/notes/create`,
