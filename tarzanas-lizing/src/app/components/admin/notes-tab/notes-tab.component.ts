@@ -43,6 +43,7 @@ export class NotesTabComponent {
 
     this.notesService.saveNote(noteRequest).subscribe({
       next: (response) => {
+        this.notesService.notifyNotesUpdated();
         console.log('Note saved successfully:', response);
       },
       error: (error) => {

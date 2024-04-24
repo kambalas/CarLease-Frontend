@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { EventEmitter, inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NoteRequest, NoteResponse } from '../types';
 import { Observable } from 'rxjs';
@@ -19,5 +19,10 @@ export class NotesService {
       `${environment.API_URL}/admin/notes/create`,
       noteRequest
     );
+  }
+
+  public notesUpdated = new EventEmitter<void>();
+  notifyNotesUpdated(): void {
+    this.notesUpdated.emit();
   }
 }
