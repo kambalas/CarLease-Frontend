@@ -4,5 +4,9 @@
   </mat-card-header>
   <mat-divider></mat-divider>
   <mat-card-content>
+    @if(responseData$ | async; as responseData){
+      @for(notes of responseData; track $index) {
+        <p>{{notes.noteText}}</p>
+    }}
   </mat-card-content>
 </mat-card>
