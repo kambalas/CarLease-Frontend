@@ -3,6 +3,7 @@ import {BehaviorSubject, Observable, switchMap} from "rxjs";
 import {LoginFormFields, LoginFormRequest} from "../types";
 import {HttpClient} from "@angular/common/http";
 import {FormGroup} from "@angular/forms";
+import {environment} from "../../environment/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,8 @@ export class AuthService {
   }
 
   postLogin(loginFields: FormGroup): Observable<any> {
-    return this.client.post<LoginFormRequest>('${environment.API_URL}/user/api/v1/auth/authenticate',
+
+    return this.client.post<LoginFormRequest>(`${environment.API_URL}/user/api/v1/auth/authenticate`,
       {
         "username": loginFields.get('username')?.value,
         "password": loginFields.get('password')?.value

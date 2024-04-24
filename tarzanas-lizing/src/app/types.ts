@@ -29,7 +29,7 @@ export interface CarLeasingFormFields {
   enginePower: number;
   engineSize: number;
   url: string;
-  offer?: File;
+  offer?: string;
   terms: boolean;
   confirmation: boolean;
 }
@@ -96,21 +96,26 @@ export interface PersonalInfoDetails {
 }
 
 export interface Application {
-  id: string;
+  id: number;
   firstName: string;
-  secondName: string;
+  lastName: string;
   isOpened: boolean;
-  dateSubmitted: Date;
-  dateUpdated: Date;
+  updatedAt: string;
   status: Status;
 }
 
+export interface sortAndFilterRequest {
+  page: string,
+  STATUS: Status[] | null,
+  searchQuery: string | null,
+}
+
 export const enum Status {
-  NEW = 'new',
-  UPDATED = 'updated',
-  PENDING = 'pending',
-  ACCEPTED = 'accepted',
-  REJECTED = 'rejected',
+  NEW = "NEW",
+  UPDATED = "UPDATED",
+  PENDING = "PENDING",
+  ACCEPTED = "ACCEPTED",
+  REJECTED = "REJECTED",
 }
 
 export interface NoteRequest {
@@ -121,6 +126,8 @@ export interface NoteRequest {
 export interface NoteResponse {
   noteText: string;
 }
+
+type Notes = NoteResponse[];
 
 export interface GeneralFormsResponse {
   ratesResponse: {
@@ -206,11 +213,11 @@ export interface GeneralAllFormsResponse {
     createdAt: string;
   };
 }
-export interface LoginFormFields{
+export interface LoginFormFields {
   username: string;
   password: string;
 }
-export interface LoginFormRequest{
+export interface LoginFormRequest {
   username: string;
   password: string;
 }

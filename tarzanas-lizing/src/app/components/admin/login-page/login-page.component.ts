@@ -1,12 +1,12 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatFormField, MatLabel } from "@angular/material/form-field";
-import {FormsModule, FormBuilder, FormGroup, Validators, ReactiveFormsModule} from "@angular/forms";
+import { FormsModule, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
-import {MatIcon} from "@angular/material/icon";
+import { MatIcon } from "@angular/material/icon";
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 
 @Component({
@@ -20,40 +20,55 @@ import {MatIcon} from "@angular/material/icon";
     MatInputModule,
     ReactiveFormsModule,
     MatIcon,
+    MatProgressSpinner,
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
 export class LoginPageComponent {
   loginForm: FormGroup;
+  loginFailed: boolean = false;
   passwordHidden: boolean = true;
+  isLoading: boolean = false;
 
 
-  constructor(private authService: AuthService,private http: HttpClient, private router:Router, private fb: FormBuilder) {
+
+  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
     this.loginForm = this.fb.group({
-      username: ['',Validators.required],
-      password: ['',Validators.required]
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
   submit() {
+
+    this.isLoading = true;
     this.authService.postLogin(this.loginForm).subscribe({
       next: (data) => {
-        console.log("Success!")
         this.authService.setToken(data.token);
         this.router.navigate(['/admin']);
-        console.log(data)
       },
       error: (error) => {
         console.error('There was an error!', error);
+        this.isLoading = false;
+
       }
     });
 
+    this.loginFailed = true;
     this.clear();
-    }
+  }
 
-  clear() {
+  clear(): void {
     this.loginForm.reset();
+  }
+
+  get username() {
+    return this.loginForm.get('username');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
   }
 }
 

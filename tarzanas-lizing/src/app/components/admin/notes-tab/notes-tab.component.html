@@ -1,6 +1,11 @@
 <mat-card-content class="container">
   <p>notes-tab works!</p>
-  <button mat-stroked-button color="warn" class="bottom-left">Send</button>
+  <button
+    mat-stroked-button
+    color="warn"
+    class="bottom-left"
+    (click)="saveNote()"
+  >
+    Save
+  </button>
 </mat-card-content>
-
-
