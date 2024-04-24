@@ -1,21 +1,66 @@
 .container {
   position: relative;
   border-top: 1px solid #d6d6d6;
-  height: 35vh;
+  height: 37vh;
   text-align: left;
-  overflow-y: auto;
-  display: block;
+  overflow-y: hidden;
+  display: flex;
   overflow-x: hidden;
 }
 
-.bottom-left {
+.mail-content-box {
+  width: 96.2%;
+  height: 89.3%;
+  font-family: 'Roboto', sans-serif;
+  padding: 1em;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  outline: none;
+  overflow: auto;
+  transition: all 0.0s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.mail-content-box:hover {
+  border: 1px solid rgba(0, 0, 0, 0.87);
+  overflow: auto;
+}
+
+.mail-content-box:focus {
+  border: 2px solid #6200ee;
+  overflow: auto;
+  padding: calc(1em - 1px);
+}
+
+.mail-content-box::-webkit-scrollbar {
+  display: none;
+}
+
+.mail-content-box {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.mail-content-box::before {
+  content: attr(data-placeholder);
+  color: gray;
+  display: inline;
+  visibility: visible;
+}
+
+.mail-content-box:focus::before {
+  visibility: hidden;
+}
+
+.bottom-right {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 5px;
+  right: 5px;
+  overflow:hidden;
 }
 
 .dropdown-template{
   position: absolute;
-  right: 0;
-  margin: 0 10px ;
+  top: 5px;
+  right: 5px;
+  overflow: hidden;
 }
