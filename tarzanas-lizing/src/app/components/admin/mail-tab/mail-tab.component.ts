@@ -6,7 +6,7 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatOption } from '@angular/material/autocomplete';
 import { MatSelect } from '@angular/material/select';
 import { MailService } from '../../../services/mail.service';
-import {GeneralFormsResponse, MailRequest } from '../../../types';
+import {GeneralFormsResponse, MailRequest, Status} from '../../../types';
 import {MailTemplateService } from "../../../services/mail-template.service";
 import { MatInputModule } from '@angular/material/input';
 
@@ -31,6 +31,8 @@ import { MatInputModule } from '@angular/material/input';
 export class MailTabComponent implements OnInit {
   dataForEmailTab = input<GeneralFormsResponse>();
   applicationId = input<string>();
+  status!: Status;
+
 
   selectedTemplate: string = '';
   private service = inject(MailTemplateService);
@@ -39,12 +41,16 @@ export class MailTabComponent implements OnInit {
     const data: Partial<GeneralFormsResponse> = {...this.dataForEmailTab()};
     switch (this.selectedTemplate) {
       case 'rejected':
+        this.status = Status.REJECTED;
         return this.service.getRejectionTemplate(data);
       case 'accepted':
+        this.status = Status.ACCEPTED;
         return this.service.getAcceptanceTemplate(data);
       case 'more-info':
+        this.status = Status.PENDING;
         return this.service.getMoreInfoTemplate(data);
       case 'cancelled':
+        this.status = Status.REJECTED;
         return this.service.getCancellationTemplate(data);
       default:
         return '';
@@ -64,6 +70,7 @@ export class MailTabComponent implements OnInit {
 
   sendMail(): void {
     alert('Your email sent!');
+    this.mailService.updateStatus(this.applicationId(), this.status).subscribe((x) => console.log(x));
     this.mailService.sendMail(this.testMailRequest).subscribe((x) => console.log(x)
     );
   }
