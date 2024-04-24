@@ -42,11 +42,11 @@ export class PersonalInformationFormComponent implements OnInit {
     return new FormGroup({
       firstName: new FormControl<string | null>(null, [
         Validators.required,
-        Validators.pattern(/[A-Za-zÀ-ÖØ-öø-ſƀ-ƺǍ-ǥǦ-ǳǴ-ǵǶ-ȟȠ-ȯȱ-ȳȴ-ɏ-]/),
+        Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ſƀ-ƺǍ-ǥǦ-ǳǴ-ǵǶ-ȟȠ-ȯȱ-ȳȴ-ɏ-][^\d]*$/),
       ]),
       secondName: new FormControl<string | null>(null, [
         Validators.required,
-        Validators.pattern(/[A-Za-zÀ-ÖØ-öø-ſƀ-ƺǍ-ǥǦ-ǳǴ-ǵǶ-ȟȠ-ȯȱ-ȳȴ-ɏ-]/),
+        Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ſƀ-ƺǍ-ǥǦ-ǳǴ-ǵǶ-ȟȠ-ȯȱ-ȳȴ-ɏ-][^\d]*$/),
       ]),
       email: new FormControl<string | null>(null, [
         Validators.required,
