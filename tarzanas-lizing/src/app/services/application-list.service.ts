@@ -10,10 +10,6 @@ import { environment } from '../../environment/environment';
 export class ApplicationListService {
   private client = inject(HttpClient);
 
-  getAllApplications(): Observable<Application[]> {
-    return this.client.post<Application[]>(`${environment.API_URL}/admin/applications`, { "page": "1" })
-  }
-
   getApplicationsByStatusAndQuery(inputs: sortAndFilterRequest): Observable<Application[]> {
     return this.client.post<Application[]>(`${environment.API_URL}/admin/applications`, inputs)
   }
