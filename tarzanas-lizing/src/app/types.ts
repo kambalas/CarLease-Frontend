@@ -224,11 +224,13 @@ export interface LoginFormRequest {
 
 export interface MailRequest {
   applicationId: number;
+  mailSubject : string;
   mailText: string;
   mailRecipient: string;
 }
 export interface MailResponse {
   applicationId: number;
+  mailSubject : string;
   mailText: string;
   mailRecipient: string;
 }

@@ -1,20 +1,29 @@
 <div class="container">
   <mat-form-field class="dropdown-template">
     <mat-label>Template</mat-label>
-    <mat-select [(value)]="selectedTemplate">
+    <mat-select [(value)]="selectedTemplate" (selectionChange)="onTemplateSelect()">
       <mat-option value="rejected">Rejected</mat-option>
       <mat-option value="accepted">Accepted</mat-option>
       <mat-option value="more-info">Details clarification</mat-option>
       <mat-option value="cancelled">Cancelled</mat-option>
     </mat-select>
   </mat-form-field>
-  <div
-    class="mail-content-box"
-    [innerHTML]="mailContent"
-    contentEditable="true"
-    [attr.data-placeholder]="selectedTemplate ? '' : 'Select a template'"
-    [attr.contentEditable]="selectedTemplate ? 'true' : 'false'"
-  ></div>
+
+  @if(isEditing) {
+    <textarea
+        [(ngModel)]="editableMailContent"
+        class="mail-content-box"
+        [attr.data-placeholder]="selectedTemplate ? '' : 'Select a template'">
+     </textarea>
+  }
+  @if(!isEditing) {
+    <div
+       [innerHTML]="mailContent"
+       class="mail-content-box"
+       [attr.data-placeholder]="selectedTemplate ? '' : 'Select a template'"
+       contentEditable="false">
+  </div>
+  }
 </div>
 
 <div>
