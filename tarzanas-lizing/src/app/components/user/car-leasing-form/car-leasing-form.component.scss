@@ -4,12 +4,16 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      background-color: rgba($color: #000000, $alpha: 0.4);
+      border-radius: 10px;
+      color: white;
+      position: relative;
+      padding: 20px 20px;
+      margin: 0 auto 50px;
 
       .mainContainer {
         display: flex;
-        flex-direction: row;
         justify-content: space-between;
-        align-items: flex-start;
 
         .leftColumn,
         .rightColumn {
@@ -42,6 +46,11 @@
         margin: 10px auto 0;
       }
 
+      button.submitButton:disabled {
+        border-radius: 20px;
+        background-color: rgba($color: #adadad, $alpha: 0.7);
+      }
+
       ::placeholder,
       .mat-form-field-label,
       mat-hint {
@@ -52,6 +61,45 @@
         color: rgb(171, 171, 171);
         margin-top: -5px;
       }
+
+      mat-checkbox label {
+        color: white;
+      }
     }
+  }
+}
+
+@media all and (max-width: 800px) {
+  .container {
+    .carLeasingForm {
+      form {
+        .mainContainer {
+          flex-direction: column;
+
+          .leftColumn,
+          .rightColumn {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .bottomContainer {
+    mat-checkbox {
+      label {
+        display: inline-block;
+        font-size: 13px;
+        text-align: left;
+      }
+    }
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  mat-form-field mat-label {
+    font-size: 14px;
   }
 }

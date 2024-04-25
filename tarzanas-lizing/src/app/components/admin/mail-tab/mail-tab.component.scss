@@ -36,8 +36,10 @@
 }
 
 .mail-content-box {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 .mail-content-box::before {
@@ -55,10 +57,10 @@
   position: absolute;
   bottom: 5px;
   right: 5px;
-  overflow:hidden;
+  overflow: hidden;
 }
 
-.dropdown-template{
+.dropdown-template {
   position: absolute;
   top: 5px;
   right: 5px;

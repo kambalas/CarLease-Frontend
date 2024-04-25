@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 50px 0;
 }
 
 :host::before {
@@ -34,7 +35,7 @@
 
 h1 {
   font-family: 'Montserrat', sans-serif;
-  font-size: 60px;
+  font-size: 4rem;
   font-weight: 600;
   text-shadow: 1px 1px 3px rgb(58, 58, 58);
   line-height: 60px;
@@ -71,4 +72,29 @@ h1 {
 .scroll-btn:hover {
   background-color: #ae8b7c;
   cursor: pointer;
+}
+
+@media all and (max-width: 960px) {
+  h1 {
+    font-size: 3.5rem;
+  }
+}
+
+@media all and (max-width: 600px) {
+  h1 {
+    font-size: 3rem;
+    line-height: 50px;
+  }
+
+  .textContainer {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media all and (max-width: 380px) {
+  h1 {
+    font-size: 2.5rem;
+    line-height: 50px;
+  }
 }

@@ -103,10 +103,10 @@
       </div>
       <div class="bottomContainer">
         <mat-checkbox formControlName="confirmation">
-          I confirm that the above information is accurate
+          <label>I confirm that the above information is accurate</label>
         </mat-checkbox>
         <mat-checkbox formControlName="terms">
-          I have read and agree with the Terms and Conditions:
+          <label>I have read and agree with the Terms and Conditions:</label>
         </mat-checkbox>
         <button
           class="submitButton"
@@ -115,7 +115,7 @@
           type="submit"
           [disabled]="!carLeasingForm.valid"
         >
-          APPLY FOR LOAN
+          Apply for a loan
         </button>
       </div>
     </form>
