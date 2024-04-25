@@ -1,20 +1,67 @@
 :host {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+:host::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(../../../../assets/road.jpg);
+    background-size: cover;
+    background-position: center;
+    filter: brightness(40%);
+}
+
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    margin: 50px 0 30px;
+    font-weight: 600;
+    font-size: 32px;
+    position: relative;
+    color: white;
+    text-align: center;
+    text-shadow: 2px 2px 3px rgb(17, 17, 17);
 }
 
 form {
     width: 300px;
+    text-align: center;
+    background-color: rgba($color: #000000, $alpha: 0.4);
+    border-radius: 10px;
+    position: relative;
+    color: white;
+    padding: 50px 0;
+    margin: 0 auto 50px;
 
     button {
         border-radius: 20px;
         width: 100px;
     }
 
+    button:disabled {
+        border-radius: 20px;
+        width: 100px;
+        background-color: rgba($color: #adadad, $alpha: 0.7);
+    }
+
+    mat-slide-toggle {
+        margin-left: 10px;
+    }
+
+    .error {
+        color: #f44336
+    }
+
     .error,
     .note {
-        margin-bottom: 25px;
+        margin: 0 auto 25px;
+        max-width: 212px;
     }
 
     .form-row {

@@ -1,76 +1,77 @@
-<h2>The fastest way to drive your dream car</h2>
-<form [formGroup]="calculatorForm" (ngSubmit)="onSubmit()">
-    <h3>Car leasing calculator</h3>
-    <mat-form-field>
-        <mat-label>Car value</mat-label>
-        <input matInput type="text" id="carValue" required min placeholder="EUR" formControlName="carValue">
-    </mat-form-field>
-    @if(carValue?.invalid && carValue?.touched){
-        <div class="error">Car value has to be at least 300 EUR</div>
-    }
-
-    <mat-form-field>
-        <mat-label>Period</mat-label>
-        <mat-select matNativeControl name="period" id="period" formControlName="period" required>
-        <mat-option value="months" disabled selected>Months</mat-option>
-        <mat-option value="3">3</mat-option>
-        <mat-option value="4">4</mat-option>
-        <mat-option value="5">5</mat-option>
-        <mat-option value="6">6</mat-option>
-        <mat-option value="12">12</mat-option>
-        <mat-option value="18">18</mat-option>
-        <mat-option value="24">24</mat-option>
-        <mat-option value="36">36</mat-option>
-        <mat-option value="48">48</mat-option>
-        <mat-option value="60">60</mat-option>
-        </mat-select>
-    </mat-form-field>
-    @if(period?.invalid && period?.touched){
-        <div class="error">Please choose a lease period</div>
-    }
-
-    <mat-form-field>
-        <mat-label>Down payment</mat-label>
-        <input matInput type="text" id="downpayment" placeholder="EUR" formControlName="downPayment" min required>
-    </mat-form-field>
-    @if(downPayment?.invalid && downPayment?.touched){
-        <div class="error">Down payment has to be at least 0 EUR</div>
-    }
-    @if(noteActive){
-        <div class="note">If less than 10% of vehicle price, applications are often rejected</div>
-    }
-
-    <mat-form-field>
-        <mat-label>Residual value</mat-label>
-        <mat-select matNativeControl name="residual" id="residual" formControlName="residualValuePercentage" required>
-            <mat-option value="0">0%</mat-option>
-            <mat-option value="5">5%</mat-option>
-            <mat-option value="10">10%</mat-option>
-            <mat-option value="15">15%</mat-option>
-            <mat-option value="20">20%</mat-option>
-            <mat-option value="25">25%</mat-option>
-            <mat-option value="30">30%</mat-option>
-        </mat-select>
-    </mat-form-field>
-
-    <div class="form-row">
-        <mat-label>Environmentally friendly car</mat-label>
-        <mat-slide-toggle formControlName="isEcoFriendly" (change)="calculateMonthlyPayment()"></mat-slide-toggle>
-    </div>
-
-    <div class="form-row">
-        <label>Monthly payment from:</label>
+<div>
+    <h2>Car leasing calculator</h2>
+    <form [formGroup]="calculatorForm" (ngSubmit)="onSubmit()">
         <mat-form-field>
-        @if(monthlyPayment$ | async; as monthlyPayment){
-            @if(monthlyPayment.monthlyPayment < 0){
-                <input matInput value="Incorrect data" type="text" id="monthlyPayment" disabled />
-            } @else {
-                <input matInput value="{{monthlyPayment.monthlyPayment}}" type="text" id="monthlyPayment" disabled />
-            }
-        } @else { 
-            <input matInput value="" type="text" id="monthlyPayment" disabled />
-        }
+            <mat-label>Car value</mat-label>
+            <input matInput type="text" id="carValue" required min placeholder="EUR" formControlName="carValue">
         </mat-form-field>
-    </div>
-    <button type="submit" mat-raised-button color="primary" [disabled]="calculatorForm.invalid">Apply</button>
-</form>
+        @if(carValue?.invalid && carValue?.touched){
+            <div class="error">Car value has to be at least 300 EUR</div>
+        }
+
+        <mat-form-field>
+            <mat-label>Period</mat-label>
+            <mat-select matNativeControl name="period" id="period" formControlName="period" required>
+            <mat-option value="months" disabled selected>Months</mat-option>
+            <mat-option value="3">3</mat-option>
+            <mat-option value="4">4</mat-option>
+            <mat-option value="5">5</mat-option>
+            <mat-option value="6">6</mat-option>
+            <mat-option value="12">12</mat-option>
+            <mat-option value="18">18</mat-option>
+            <mat-option value="24">24</mat-option>
+            <mat-option value="36">36</mat-option>
+            <mat-option value="48">48</mat-option>
+            <mat-option value="60">60</mat-option>
+            </mat-select>
+        </mat-form-field>
+        @if(period?.invalid && period?.touched){
+            <div class="error">Please choose a lease period</div>
+        }
+
+        <mat-form-field>
+            <mat-label>Down payment</mat-label>
+            <input matInput type="text" id="downpayment" placeholder="EUR" formControlName="downPayment" min required>
+        </mat-form-field>
+        @if(downPayment?.invalid && downPayment?.touched){
+            <div class="error">Down payment has to be at least 0 EUR</div>
+        }
+        @if(noteActive){
+            <div class="note">If less than 10% of vehicle price, applications are often rejected</div>
+        }
+
+        <mat-form-field>
+            <mat-label>Residual value</mat-label>
+            <mat-select matNativeControl name="residual" id="residual" formControlName="residualValuePercentage" required>
+                <mat-option value="0">0%</mat-option>
+                <mat-option value="5">5%</mat-option>
+                <mat-option value="10">10%</mat-option>
+                <mat-option value="15">15%</mat-option>
+                <mat-option value="20">20%</mat-option>
+                <mat-option value="25">25%</mat-option>
+                <mat-option value="30">30%</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="form-row">
+            <mat-label>Environmentally friendly car</mat-label>
+            <mat-slide-toggle formControlName="isEcoFriendly" (change)="calculateMonthlyPayment()"></mat-slide-toggle>
+        </div>
+
+        <div class="form-row">
+            <label>Monthly payment from:</label>
+            <mat-form-field subscriptSizing="dynamic">
+            @if(monthlyPayment$ | async; as monthlyPayment){
+                @if(monthlyPayment.monthlyPayment < 0){
+                    <input matInput value="Incorrect data" type="text" id="monthlyPayment" disabled />
+                } @else {
+                    <input matInput value="{{monthlyPayment.monthlyPayment}}" type="text" id="monthlyPayment" disabled />
+                }
+            } @else { 
+                <input matInput value="" type="text" id="monthlyPayment" disabled />
+            }
+            </mat-form-field>
+        </div>
+        <button type="submit" mat-raised-button color="primary" [disabled]="calculatorForm.invalid">Apply</button>
+    </form>
+</div>
