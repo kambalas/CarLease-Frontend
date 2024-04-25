@@ -1,7 +1,7 @@
 import { EventEmitter, inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NoteRequest, NoteResponse } from '../types';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from '../../environment/environment';
 
 @Injectable({
@@ -21,8 +21,9 @@ export class NotesService {
     );
   }
 
-  public notesUpdated = new EventEmitter<void>();
+  notesUpdated$ = new Subject<void>();
+
   notifyNotesUpdated(): void {
-    this.notesUpdated.emit();
+    this.notesUpdated$.next();
   }
 }

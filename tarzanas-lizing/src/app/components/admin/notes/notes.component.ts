@@ -31,7 +31,7 @@ export class NotesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.notesService.notesUpdated.subscribe(() => {
+    this.notesService.notesUpdated$.subscribe(() => {
       this.loadNotes();
     });
   }
