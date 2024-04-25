@@ -5,7 +5,7 @@
         <app-mail-tab [dataForEmailTab]="(response)" [applicationId] = "(selectedId())"/>
       </mat-tab>
       <mat-tab label="Notes">
-        <app-notes-tab />
+        <app-notes-tab [applicationId] = "(selectedId())" />
       </mat-tab>
     </mat-tab-group>
 </mat-card>

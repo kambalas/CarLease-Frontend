@@ -19,11 +19,20 @@ export class NotesComponent implements OnInit {
   responseData$: Observable<NoteResponse[]> = of();
   private notesService = inject(NotesService);
 
+  loadNotes(): void {
+    const applicationIdValue = this.applicationId();
+    if(applicationIdValue) {
+      this.responseData$ = this.notesService.getNotesById(applicationIdValue);
+    }
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     this.responseData$ = this.notesService.getNotesById(changes['applicationId'].currentValue);
   }
 
   ngOnInit(): void {
-    console.log(this.applicationId());
+    this.notesService.notesUpdated$.subscribe(() => {
+      this.loadNotes();
+    });
   }
 }
