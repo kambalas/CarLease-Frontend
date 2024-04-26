@@ -177,17 +177,40 @@ export class CarLeasingFormComponent implements OnInit {
     const file = event.target.files[0] ?? null;
     if (file) {
       if (file.size > this.maxFileSize) {
-        alert('File is too large. Maximum size is 2MB.');
+        alert('File is too large. Maximum size is 3MB.');
         return;
       }
-      this.selectedFile = file;
-      this.convertFileToBase64(file, (base64: string) => {
-        this.carLeasingForm.patchValue({ offer: base64 });
-      });
+      if (file.type !== 'application/pdf') {
+        alert('Only PDF files are allowed!');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+      const arr = new Uint8Array(e.target.result).subarray(0, 5);
+      const header = String.fromCharCode.apply(null, Array.from(arr)); // Convert Uint8Array to Array
+      if (header !== '%PDF-') {
+        alert('Invalid PDF file.');
+        return;
+      }
+        this.selectedFile = file;
+        this.convertFileToBase64(file, (base64: string) => {
+          console.log(base64);
+          this.carLeasingForm.patchValue({ offer: base64 });
+        });
+      };
+
+      reader.onerror = (err) => {
+        console.error('Error reading file:', err);
+        alert('Error reading file.');
+      };
+
+      reader.readAsArrayBuffer(file.slice(0, 5));
     } else {
       this.selectedFile = null;
     }
   }
+
 
   getButtonColor() {
     return this.carLeasingForm.valid ? 'primary' : 'warn';
