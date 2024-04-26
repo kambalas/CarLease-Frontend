@@ -188,7 +188,7 @@ export class CarLeasingFormComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = (e: any) => {
       const arr = new Uint8Array(e.target.result).subarray(0, 5);
-      const header = String.fromCharCode.apply(null, Array.from(arr)); // Convert Uint8Array to Array
+      const header = String.fromCharCode.apply(null, Array.from(arr));
       if (header !== '%PDF-') {
         alert('Invalid PDF file.');
         return;
