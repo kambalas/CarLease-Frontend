@@ -133,7 +133,7 @@ export class ApplicationListComponent implements OnInit {
 
     setTimeout(() => {
       this.getApplications(this.sortAndFilterSubject.value);
-    }, 750);
+    }, 500);
   }
 
   checkIfNearEndOfList(indexOfVisibleApp: number) {
