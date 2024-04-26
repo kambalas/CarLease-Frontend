@@ -34,7 +34,6 @@ export class NotesTabComponent {
 
   saveNote(): void {
     const applicationIdNumber = Number(this.applicationId());
-    alert('Note saved!');
 
     const noteRequest: NoteRequest = {
       applicationId: applicationIdNumber,
@@ -43,11 +42,14 @@ export class NotesTabComponent {
 
     this.notesService.saveNote(noteRequest).subscribe({
       next: (response) => {
+        alert('Note saved!');
         this.notesService.notifyNotesUpdated();
         console.log('Note saved successfully:', response);
+        this.noteText = '';
       },
       error: (error) => {
         console.error('Error saving note:', error);
+        alert('Failed to save note. Please try again.');
       }
     });
   }

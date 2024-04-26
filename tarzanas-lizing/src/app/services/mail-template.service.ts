@@ -15,7 +15,7 @@ export class MailTemplateService {
 
   getRejectionTemplate(data: Partial<GeneralFormsResponse>): string {
     const applicationId = data.ratesResponse?.id || '';
-    const applicantName = `${data.personalInformationResponse?.firstName || ''} ${data.personalInformationResponse?.lastName || ''}`;
+    const applicantName = `${data.personalInformationResponse?.firstName || ''}`;
     const carMake = data.leaseResponse?.make || '';
     const carModel = data.leaseResponse?.model || '';
     const carYear = data.leaseResponse?.year.trim() || '';
@@ -46,7 +46,7 @@ ${this.email}</p>`;
 
   getAcceptanceTemplate(data: Partial<GeneralFormsResponse>): string {
     const applicationId = data.ratesResponse?.id || '';
-    const applicantName = `${data.personalInformationResponse?.firstName || ''} ${data.personalInformationResponse?.lastName || ''}`;
+    const applicantName = `${data.personalInformationResponse?.firstName || ''}`;
     const carMake = data.leaseResponse?.make || '';
     const carModel = data.leaseResponse?.model || '';
     const carYear = data.leaseResponse?.year.trim() || '';
@@ -77,7 +77,7 @@ ${this.email}</p>`;
 
   getMoreInfoTemplate(data: Partial<GeneralFormsResponse>): string {
     const applicationId = data.ratesResponse?.id || '';
-    const applicantName = `${data.personalInformationResponse?.firstName || ''} ${data.personalInformationResponse?.lastName || ''}`;
+    const applicantName = `${data.personalInformationResponse?.firstName || ''}`;
 
     return `<p>Car Leasing Application #${applicationId}</p>
 
@@ -103,7 +103,7 @@ ${this.email}</p>`;
 
   getCancellationTemplate(data: Partial<GeneralFormsResponse>): string {
     const applicationId = data.ratesResponse?.id || '';
-    const applicantName = `${data.personalInformationResponse?.firstName || ''} ${data.personalInformationResponse?.lastName || ''}`;
+    const applicantName = `${data.personalInformationResponse?.firstName || ''}`;
     const carMake = data.leaseResponse?.make || '';
     const carModel = data.leaseResponse?.model || '';
     const carYear = data.leaseResponse?.year.trim() || '';
