@@ -20,7 +20,6 @@
 }
 
 h2 {
-    max-width: 300px;
     font-family: 'Montserrat', sans-serif;
     margin: 50px 0 30px;
     font-weight: 600;
@@ -68,5 +67,11 @@ form {
 
     .form-row {
         margin-bottom: 25px;
+    }
+}
+
+@media all and (max-width: 600px) {
+    h2 {
+        max-width: 300px;
     }
 }

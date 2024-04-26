@@ -1,6 +1,7 @@
 @use "@angular/material" as mat;
 
 mat-card {
+
     .header,
     .search-sort {
         display: flex;
@@ -85,13 +86,12 @@ mat-card {
     }
 
     li.REJECTED {
-      opacity: 0.6;
-      background-color: rgb(224, 224, 224);
-      cursor: default;
-  }
+        opacity: 0.6;
+        background-color: rgb(224, 224, 224);
+        cursor: default;
+    }
 
-  li .date-icon {
-      text-align: right;
-  }
+    li .date-icon {
+        text-align: right;
+    }
 }
-

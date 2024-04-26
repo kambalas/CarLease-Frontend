@@ -1,12 +1,12 @@
 <app-header />
 <div class="main_div">
   <mat-stepper orientation="horizontal" linear>
-    <mat-step [editable]="false" label="Personal information">
+    <mat-step class="step-header" [editable]="false" label="Personal information">
       <div class="left">
         <app-personal-information-form />
       </div>
     </mat-step>
-    <mat-step label="Car information">
+    <mat-step class="step-header" label="Car information">
       <div class="right">
         <app-car-leasing-form>
         </app-car-leasing-form>
