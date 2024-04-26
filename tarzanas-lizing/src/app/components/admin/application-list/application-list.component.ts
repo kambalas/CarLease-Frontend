@@ -1,19 +1,12 @@
 import { AsyncPipe } from '@angular/common';
-import {
-  Component,
-  OnInit,
-  inject,
-  output
-} from '@angular/core';
+import { Component, OnInit, inject, output } from '@angular/core';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormField } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
-import {
-  BehaviorSubject,
-} from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { ApplicationListService } from '../../../services/application-list.service';
 import { Application, Status, sortAndFilterRequest } from '../../../types';
 import { MatSelectModule } from '@angular/material/select';
@@ -37,7 +30,6 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './application-list.component.scss',
 })
 export class ApplicationListComponent implements OnInit {
-
   private service = inject(ApplicationListService);
   listResponse$: BehaviorSubject<Application[]> = new BehaviorSubject<
     Application[]
@@ -63,8 +55,8 @@ export class ApplicationListComponent implements OnInit {
   }
 
   getApplications(request: sortAndFilterRequest) {
-
-    this.service.getApplicationsByStatusAndQuery(request)
+    this.service
+      .getApplicationsByStatusAndQuery(request)
       .subscribe((applications) => {
         const currentApps = this.listResponse$.getValue();
         this.listResponse$.next([...currentApps, ...applications]);
@@ -85,41 +77,48 @@ export class ApplicationListComponent implements OnInit {
     }
   }
 
-submitSortAndSearch(): void {
-  // Reset the listResponse$ and numAppsLoaded when filtering is enabled
-  this.listResponse$.next([]);
-  this.numAppsLoaded = 0;
-  this.canLoadMoreApps = true;
+  submitSortAndSearch(): void {
+    // Reset the listResponse$ and numAppsLoaded when filtering is enabled
+    this.listResponse$.next([]);
+    this.numAppsLoaded = 0;
+    this.canLoadMoreApps = true;
 
-  let newRequest: sortAndFilterRequest = {
-    page: '1',
-    STATUS: this.sortForm.getRawValue().selectedStatus,
-    searchQuery: this.sortForm.getRawValue().searchQuery,
-  };
-
-  // If no filter is selected, reset sortAndFilterSubject
-  if (!this.sortForm.getRawValue().searchQuery && this.sortForm.getRawValue().selectedStatus?.length === 0) {
-    this.sortAndFilterSubject.next({
+    let newRequest: sortAndFilterRequest = {
       page: '1',
-      STATUS: null,
-      searchQuery: null,
-    });
-  } else {
-    // If one or more filters are selected, update sortAndFilterSubject
-    this.sortAndFilterSubject.next(newRequest);
+      STATUS: this.sortForm.getRawValue().selectedStatus,
+      searchQuery: this.sortForm.getRawValue().searchQuery,
+    };
+
+    // If no filter is selected, reset sortAndFilterSubject
+    if (
+      !this.sortForm.getRawValue().searchQuery &&
+      this.sortForm.getRawValue().selectedStatus?.length === 0
+    ) {
+      this.sortAndFilterSubject.next({
+        page: '1',
+        STATUS: null,
+        searchQuery: null,
+      });
+    } else {
+      // If one or more filters are selected, update sortAndFilterSubject
+      this.sortAndFilterSubject.next(newRequest);
+    }
+
+    setTimeout(() => {
+      this.getApplications(this.sortAndFilterSubject.value);
+    }, 500); // Adjust value if filtered responses from backend are too slow
   }
 
-  this.getApplications(this.sortAndFilterSubject.value);
-}
-
   checkIfNearEndOfList(indexOfVisibleApp: number) {
-    const endThreshold = this.numAppsLoaded - 2; //can adjust, smaller number = apps are loaded later down the list;
+    const endThreshold = this.numAppsLoaded - 2; //Can adjust, smaller number = apps are loaded later down the list;
     console.log(`scrolledIndexChange app index: ${indexOfVisibleApp}`);
 
     if (indexOfVisibleApp >= endThreshold && this.canLoadMoreApps) {
       let currentPage = parseInt(this.sortAndFilterSubject.value.page);
       const newPage = currentPage + 1;
-      console.log(`reaching end of current list, incrementing page nr. to p.${newPage} and loading more applications`);
+      console.log(
+        `reaching end of current list, incrementing page nr. to p.${newPage} and loading more applications`
+      );
 
       const newRequest = {
         ...this.sortAndFilterSubject.value,
@@ -127,8 +126,10 @@ submitSortAndSearch(): void {
       };
 
       this.sortAndFilterSubject.next(newRequest);
-      this.getApplications(newRequest);
 
+      setTimeout(() => {
+      this.getApplications(newRequest);
+    }, 500); // Adjust value if more app fetching from backend is too slow
     }
   }
 }
