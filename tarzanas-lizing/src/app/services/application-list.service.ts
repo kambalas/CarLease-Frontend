@@ -12,6 +12,7 @@ import { environment } from '../../environment/environment';
 @Injectable({
   providedIn: 'root',
 })
+
 export class ApplicationListService {
   private client = inject(HttpClient);
 
