@@ -1,0 +1,48 @@
+{
+  "header": {
+    "company_name": "Tarzan leasing"
+  },
+  "how-it-works": {
+    "title_bold": "The fastest way to drive your dream car",
+    "steps": {
+      "step1": "Fill out the form. It includes details about vehicle as well as your personal information.",
+      "step2": "Submit the form and make sure to check your email from time to time - we don‘t take long to reply.",
+      "step3": "Carefully study our leasing offer and - if all information is correct - sign the agreement.",
+      "step4": "Get ready to live the dream - requested money will be transferred to your account shortly."
+    },
+    "apply-for-loan-button": "Apply for a loan"
+  },
+  "footer": {
+    "copyright": "Copyright"
+  },
+  "car-leasing-calculator": {
+    "title": "Car leasing calculator",
+    "car-value":{
+      "title": "Car value",
+      "validation": "Car value has to be at least 300 EUR"
+    },
+    "period": "Period",
+    "period-months": {
+      "title": "Months",
+      "validation": "Please choose a lease period"
+    },
+    "down-payment": {
+      "title": "Down payment",
+      "validation": "Down payment has to be at least 0 eur",
+      "active-validation": "If less than 10% of vehicle value, applications are often rejected"
+    },
+    "residual-value": {
+      "title": "Residual value"
+    },
+    "environmentally-friendly": {
+      "title": "Environmentally friendly car"
+    },
+    "monthly-payment": {
+      "title": "Monthly payment from",
+      "validation-incorrect-data": "Incorrect data"
+    },
+    "apply-button": "Apply"
+    }
+  }
+
+

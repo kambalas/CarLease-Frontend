@@ -1,0 +1,46 @@
+{
+  "header": {
+    "company_name": "Tarzano lizingas"
+  },
+  "how-it-works": {
+    "title_bold": "Greičiausias būdas vairuoti savo svajonių automobilį",
+    "steps": {
+      "step1": "Užpildykite paraišką internetu. Tai užtruks tik 5 minutes.",
+      "step2": "Pateikite paraišką ir nepamirškite patikrinti savo el. pašto dėžutės - Mes atrašome greit.",
+      "step3": "Prieš pasirašant sutartį rimtai atsižvelkite į pasiūlymą ir tik tada, pasirašykite.",
+      "step4": "Būkite pasiruoše gyventi savo svajonėje, nes jūsų automobilis jau pakeliui."
+    },
+    "apply-for-loan-button": "Pildyti lizingo prašymą"
+  },
+  "footer": {
+    "copyright": "Autorinės teisės priklauso"
+  },
+  "car-leasing-calculator": {
+    "title": "Automobiliu lizingo skaičiuoklė",
+    "car-value":{
+      "title": "Automobilio vertė",
+      "validation": "Automobilio vertė turi siekti bent 300 EUR"
+    },
+    "period": "Laikotarpis",
+    "period-months": {
+      "title": "Mėnesiai",
+      "validation": "Prašau pasirinkite lizingo laikotarpį"
+    },
+    "down-payment": {
+      "title": "Pradinis įnašas",
+      "validation": "Pradinis įnašas turi būti didesnis nei 0 eur",
+      "active-validation": "Lizingo prašymai kurių pradinis įnašas mažesnis nei 10% nuo automobilio vertės, dažnai atmetami"
+    },
+    "residual-value": {
+      "title": "Likutinė vertė"
+    },
+    "environmentally-friendly": {
+      "title": "Aplinkai tausojantis automobilis"
+    },
+    "monthly-payment": {
+      "title": "Mėnesinė įmoka nuo",
+      "validation-incorrect-data": "Neteisingi duomenys"
+    },
+    "apply-button": "Pateikti"
+  }
+}
