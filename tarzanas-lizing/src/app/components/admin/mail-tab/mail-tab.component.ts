@@ -32,10 +32,12 @@ export class MailTabComponent implements OnInit {
   dataForEmailTab = input<GeneralFormsResponse>();
   applicationId = input<string>();
   status!: Status;
-
-
+  isEditing = false;
   selectedTemplate: string = '';
+  editableMailContent = '';
+
   private service = inject(MailTemplateService);
+  private mailService = inject(MailService);
 
   get mailContent(): string {
     const data: Partial<GeneralFormsResponse> = {...this.dataForEmailTab()};
@@ -61,17 +63,47 @@ export class MailTabComponent implements OnInit {
     console.log(this.dataForEmailTab()?.personalInformationResponse?.email);
   }
 
-  private mailService = inject(MailService);
-  testMailRequest: MailRequest = {
-    applicationId: -1,
-    mailText: 'mocked',
-    mailRecipient: 'mock@address.com',
-  };
+  stripHtmlTags(htmlContent: string): string {
+     return htmlContent.replace(/<[^>]*>/g, ''); // Regex to remove HTML tags
+  }
+  onTemplateSelect(): void {
+    this.isEditing = true;
+    this.editableMailContent = this.stripHtmlTags(this.mailContent);
+  }
 
   sendMail(): void {
     alert('Your email sent!');
     this.mailService.updateStatus(this.applicationId(), this.status).subscribe((x) => console.log(x));
-    this.mailService.sendMail(this.testMailRequest).subscribe((x) => console.log(x)
-    );
+
+    if (!this.editableMailContent.trim()) {
+      console.error('Error: Email content is empty. Cannot send email.');
+      alert('Error: Email content is empty. Cannot send email.');
+      return;
+    }
+
+    const applicationIdNumber = Number(this.applicationId());
+
+    const mailRequest: MailRequest = {
+      applicationId: applicationIdNumber,
+      mailSubject: `Car Leasing Application #${applicationIdNumber}`,
+      mailText: this.editableMailContent,
+      mailRecipient: this.dataForEmailTab()?.personalInformationResponse?.email || '',
+    };
+
+    this.mailService.sendMail(mailRequest).subscribe({
+      next: (response) => {
+        alert('Your email sent successfully!');
+        console.log('Mail sent:', response);
+      },
+      error: (error) => {
+        console.error('Error sending email:', error);
+        alert('Failed to send email. Please try again.');
+      }
+    });
+
+    this.mailService.updateStatus(this.applicationId(), this.status).subscribe({
+      next: (response) => console.log('Status updated:', response),
+      error: (error) => console.error('Error updating status:', error)
+    });
   }
 }
