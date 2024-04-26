@@ -102,6 +102,7 @@ export interface Application {
   isOpened: boolean;
   updatedAt: string;
   status: Status;
+  highRisk: boolean;
 }
 
 export interface sortAndFilterRequest {

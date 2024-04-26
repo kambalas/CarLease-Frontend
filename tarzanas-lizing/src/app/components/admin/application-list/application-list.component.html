@@ -38,6 +38,9 @@
                         @if(res.status === "PENDING"){
                             <span class="material-symbols-outlined">schedule</span>
                         }
+                        @if(res.highRisk){
+                            <span class="material-symbols-outlined high-risk">question_mark</span>
+                        }
                     </div>
                 </li>
                 <mat-divider></mat-divider>
