@@ -37,7 +37,7 @@ export class PersonalInformationFormComponent implements OnInit {
 
   personalInformationForm = this.makeForm();
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   private makeForm() {
     return new FormGroup({
       firstName: new FormControl<string | null>(null, [
@@ -80,9 +80,6 @@ export class PersonalInformationFormComponent implements OnInit {
       ]),
       citizenship: new FormControl<string>('Lithuania', [
         Validators.required,
-        Validators.pattern(
-          /^(Austria|Belgium|Bulgaria|Croatia|Cyprus|Czech Republic|Denmark|Estonia|Finland|France|Germany|Greece|Hungary|Ireland|Italy|Latvia|Lithuania|Luxembourg|Malta|Netherlands|Poland|Portugal|Romania|Slovakia|Slovenia|Spain|Sweden)$/
-        ),
       ]),
     });
   }
