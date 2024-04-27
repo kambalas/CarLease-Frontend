@@ -102,7 +102,7 @@ export interface Application {
   isOpened: boolean;
   updatedAt: string;
   status: Status;
-  highRisk: boolean;
+  isHighRisk: boolean;
 }
 
 export interface sortAndFilterRequest {
@@ -225,13 +225,13 @@ export interface LoginFormRequest {
 
 export interface MailRequest {
   applicationId: number;
-  mailSubject : string;
+  mailSubject: string;
   mailText: string;
   mailRecipient: string;
 }
 export interface MailResponse {
   applicationId: number;
-  mailSubject : string;
+  mailSubject: string;
   mailText: string;
   mailRecipient: string;
 }
