@@ -6,7 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormField } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, debounceTime, first } from 'rxjs';
 import { ApplicationListService } from '../../../services/application-list.service';
 import { Application, Status, sortAndFilterRequest } from '../../../types';
 import { MatSelectModule } from '@angular/material/select';
@@ -34,9 +34,11 @@ export class ApplicationListComponent implements OnInit {
   listResponse$: BehaviorSubject<Application[]> = new BehaviorSubject<
     Application[]
   >([]);
-  numAppsLoaded = 15;
+  numAppsLoaded = 30;
   canLoadMoreApps = true;
-
+  loadingMoreApplications = false;
+  filteringCriteriaAltered = false;
+  lastRequest!: sortAndFilterRequest;
   OnSelectedId = output<string>();
 
   sortAndFilterSubject = new BehaviorSubject<sortAndFilterRequest>({
@@ -52,9 +54,27 @@ export class ApplicationListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getApplications(this.sortAndFilterSubject.value);
+
+    this.sortForm.controls['searchQuery'].valueChanges
+      .pipe(debounceTime(500))
+      .subscribe((searchTextValue) => {
+        this.submitSortAndSearch();
+      });
   }
 
   getApplications(request: sortAndFilterRequest) {
+    if (
+      this.lastRequest &&
+      this.lastRequest.page === request.page &&
+      this.lastRequest.STATUS === request.STATUS &&
+      this.lastRequest.searchQuery === request.searchQuery
+    ) {
+      return;
+    }
+
+    this.lastRequest = request;
+
+    console.log(request);
     this.service
       .getApplicationsByStatusAndQuery(request)
       .subscribe((applications) => {
@@ -63,11 +83,12 @@ export class ApplicationListComponent implements OnInit {
         this.numAppsLoaded = this.listResponse$.getValue().length;
         console.log(`num apps loaded: ${this.numAppsLoaded}`);
 
-        // If less than 15 applications are returned, stop fetching new applications
-        if (applications.length < 15) {
+        // If less than 30 applications are returned, stop fetching new applications
+        if (applications.length < 30) {
           this.canLoadMoreApps = false;
           console.log('final batch, no more apps to load');
         }
+        this.loadingMoreApplications = false;
       });
   }
 
@@ -78,10 +99,16 @@ export class ApplicationListComponent implements OnInit {
   }
 
   submitSortAndSearch(): void {
-    // Reset the listResponse$ and numAppsLoaded when filtering is enabled
+    // Reset the listResponse$, numAppsLoaded and canLoadMoreApps when filtering is enabled
+
+    this.sortAndFilterSubject
+      .pipe(first())
+      .subscribe(() => console.log(this.sortAndFilterSubject.value));
+
     this.listResponse$.next([]);
     this.numAppsLoaded = 0;
     this.canLoadMoreApps = true;
+    this.filteringCriteriaAltered = true;
 
     let newRequest: sortAndFilterRequest = {
       page: '1',
@@ -106,14 +133,26 @@ export class ApplicationListComponent implements OnInit {
 
     setTimeout(() => {
       this.getApplications(this.sortAndFilterSubject.value);
-    }, 500); // Adjust value if filtered responses from backend are too slow
+    }, 500);
   }
 
   checkIfNearEndOfList(indexOfVisibleApp: number) {
-    const endThreshold = this.numAppsLoaded - 2; //Can adjust, smaller number = apps are loaded later down the list;
+    if (this.filteringCriteriaAltered) {
+      setTimeout(() => {
+        this.filteringCriteriaAltered = false;
+      }, 2000);
+    }
+
+    const endThreshold = this.numAppsLoaded - 10;
     console.log(`scrolledIndexChange app index: ${indexOfVisibleApp}`);
 
-    if (indexOfVisibleApp >= endThreshold && this.canLoadMoreApps) {
+    if (
+      indexOfVisibleApp >= endThreshold &&
+      this.canLoadMoreApps &&
+      !this.loadingMoreApplications &&
+      !this.filteringCriteriaAltered
+    ) {
+      this.loadingMoreApplications = true;
       let currentPage = parseInt(this.sortAndFilterSubject.value.page);
       const newPage = currentPage + 1;
       console.log(
@@ -125,11 +164,11 @@ export class ApplicationListComponent implements OnInit {
         page: newPage.toString(),
       };
 
-      this.sortAndFilterSubject.next(newRequest);
-
       setTimeout(() => {
-      this.getApplications(newRequest);
-    }, 500); // Adjust value if more app fetching from backend is too slow
+        this.getApplications(newRequest);
+      }, 500);
+
+      this.sortAndFilterSubject.next(newRequest);
     }
   }
 }

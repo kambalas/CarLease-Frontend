@@ -47,6 +47,9 @@ mat-card {
             border: 1px solid black;
 
             li {
+                // ! DO NOT reduce height below 70 px as this may mess up the scroll index and auto pagination!
+                // Feel free to increase height a bit if necessary
+                height: 73px;
                 list-style: none;
                 display: flex;
                 justify-content: space-between;
