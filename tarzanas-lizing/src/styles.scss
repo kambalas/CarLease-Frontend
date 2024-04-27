@@ -4,6 +4,13 @@
 
 @include mat.all-component-themes(themes.$client-theme);
 
+$cards-color: #ffffff;
+$text-color: #000000;
+$header-color: #023b6d;
+$green: #2ECA6A;
+$background: #f6f9ff;
+$font: 'Poppins', sans-serif;
+
 // .mat-step-header {
 //     pointer-events: none !important;
 // }
