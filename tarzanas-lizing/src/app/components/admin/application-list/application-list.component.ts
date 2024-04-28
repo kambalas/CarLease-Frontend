@@ -142,7 +142,7 @@ export class ApplicationListComponent implements OnInit {
     if (this.filteringCriteriaAltered) {
       setTimeout(() => {
         this.filteringCriteriaAltered = false;
-      }, 2000);
+      }, 2800);
     }
 
     const endThreshold = this.numAppsLoaded - 10;
