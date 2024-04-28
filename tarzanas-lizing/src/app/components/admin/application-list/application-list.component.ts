@@ -52,12 +52,6 @@ export class ApplicationListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getApplications(this.sortAndFilterSubject.value);
-
-    this.sortForm.controls['searchQuery'].valueChanges
-      .pipe(debounceTime(500))
-      .subscribe((searchTextValue) => {
-        this.submitSortAndSearch();
-      });
   }
 
   getApplications(request: sortAndFilterRequest) {
@@ -141,7 +135,7 @@ export class ApplicationListComponent implements OnInit {
 
     setTimeout(() => {
       this.getApplications(this.sortAndFilterSubject.value);
-    }, 500);
+    }, 1500);
   }
 
   checkIfNearEndOfList(indexOfVisibleApp: number) {
