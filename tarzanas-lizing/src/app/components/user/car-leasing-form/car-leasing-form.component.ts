@@ -26,6 +26,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormDataTransferService } from '../../../services/form-data-transfer.service';
 import { Router } from '@angular/router';
+import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-car-leasing-form',
@@ -40,6 +41,7 @@ import { Router } from '@angular/router';
     MatOptionModule,
     MatButtonModule,
     MatCheckboxModule,
+    TranslateModule,
   ],
   templateUrl: './car-leasing-form.component.html',
   styleUrl: './car-leasing-form.component.scss',

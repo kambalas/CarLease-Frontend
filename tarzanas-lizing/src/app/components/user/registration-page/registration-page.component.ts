@@ -5,6 +5,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 import { FooterComponent } from '../../general/footer/footer.component';
 import { HeaderComponent } from '../../general/header/header.component';
+import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-registration-page',
@@ -15,7 +16,9 @@ import { HeaderComponent } from '../../general/header/header.component';
     MatStepperModule,
     MatButtonModule,
     FooterComponent,
-    HeaderComponent],
+    HeaderComponent,
+    TranslateModule
+  ],
   templateUrl: './registration-page.component.html',
   styleUrl: './registration-page.component.scss'
 })

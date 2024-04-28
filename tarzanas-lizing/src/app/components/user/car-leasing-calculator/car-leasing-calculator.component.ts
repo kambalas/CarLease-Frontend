@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { FormDataTransferService } from '../../../services/form-data-transfer.service';
+import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-car-leasing-calculator',
@@ -24,7 +25,9 @@ import { FormDataTransferService } from '../../../services/form-data-transfer.se
     MatSelectModule,
     MatOptionModule,
     MatButtonModule,
-    AsyncPipe],
+    AsyncPipe,
+    TranslateModule
+  ],
   templateUrl: './car-leasing-calculator.component.html',
   styleUrl: './car-leasing-calculator.component.scss'
 })
