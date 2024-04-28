@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Application, GeneralFormsResponse, sortAndFilterRequest } from '../types';
@@ -34,7 +34,7 @@ export class ApplicationListService {
   }
 
   updateIsOpened(id: number): Observable<any> {
-    return this.client.get(`${environment.API_URL}/admin/something/${id}`)
+    return this.client.patch(`${environment.API_URL}/admin/status/update/is-read?id=${id}`, {})
       .pipe(
         catchError((error) => throwError(() => error)))
   }
