@@ -4,8 +4,8 @@
       <div class="mainContainer">
         <div class="leftColumn">
           <mat-form-field>
-            <mat-label>Make</mat-label>
-            <mat-hint>select car make</mat-hint>
+            <mat-label>{{ 'car-leasing-form.car-make.title' | translate}}</mat-label>
+            <mat-hint>{{ 'car-leasing-form.car-make.hint' | translate}}</mat-hint>
             <mat-select
               formControlName="make"
               >
@@ -16,8 +16,8 @@
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label for="model">Model</mat-label>
-            <mat-hint>select make for options</mat-hint>
+            <mat-label for="model">{{ 'car-leasing-form.car-model.title' | translate}}</mat-label>
+            <mat-hint>{{ 'car-leasing-form.car-model.hint' | translate}}</mat-hint>
             <mat-select
               formControlName="model"
               (selectionChange)="onSelectModel()"
@@ -29,8 +29,8 @@
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label for="modelVariant">Model variant (optional)</mat-label>
-            <mat-hint>select model for options</mat-hint>
+            <mat-label for="modelVariant">{{ 'car-leasing-form.model-variant.title' | translate}}</mat-label>
+            <mat-hint>{{ 'car-leasing-form.model-variant.hint' | translate}}</mat-hint>
             <mat-select
               formControlName="modelVariant"
               (selectionChange)="onSelectModelVariant()"
@@ -45,8 +45,8 @@
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label for="year">Year of manufacture</mat-label>
-            <mat-hint>select model or variant for options</mat-hint>
+            <mat-label for="year">{{ 'car-leasing-form.year.title' | translate}}</mat-label>
+            <mat-hint>{{ 'car-leasing-form.year.hint' | translate}}</mat-hint>
             <mat-select formControlName="year">
               @for (year of (carDetails$ | async)?.years; track $index) {
               <mat-option [value]="year">{{ year }}</mat-option>
@@ -56,19 +56,31 @@
         </div>
         <div class="rightColumn">
           <mat-form-field>
-            <mat-label for="fuelType">Fuel type</mat-label>
-            <mat-hint>select model or variant for options</mat-hint>
+            <mat-label for="fuelType">{{ 'car-leasing-form.fuel-type.title' | translate}}</mat-label>
+            <mat-hint>{{ 'car-leasing-form.fuel-type.hint' | translate}}</mat-hint>
             <mat-select formControlName="fuelType">
               @for (fuelType of (carDetails$ | async)?.fuelTypes; track $index)
               {
-              <mat-option [value]="fuelType">{{ fuelType }}</mat-option>
+              <mat-option [value]="fuelType">
+                @if (fuelType.trim() == 'diesel'){
+                {{ 'car-leasing-form.fuel-type.diesel' | translate}}
+                } @if (fuelType.trim() == 'gas'){
+                {{ 'car-leasing-form.fuel-type.petrol' | translate}}
+                } @if (fuelType.trim() == 'electric'){
+                {{ 'car-leasing-form.fuel-type.electric' | translate}}
+                } @if (fuelType.trim() == 'hybrid'){
+                {{ 'car-leasing-form.fuel-type.hybrid' | translate}}
+                } @if (fuelType.trim() == 'other'){
+                {{ 'car-leasing-form.fuel-type.other' | translate}}
+                }
+                </mat-option>
               }
             </mat-select>
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label for="enginePower">Engine power (hp)</mat-label>
-            <mat-hint>select model or variant for options</mat-hint>
+            <mat-label for="enginePower">{{ 'car-leasing-form.engine-power.title' | translate}}</mat-label>
+            <mat-hint>{{ 'car-leasing-form.engine-power.hint' | translate}}</mat-hint>
             <mat-select formControlName="enginePower">
               @for (enginePower of (carDetails$ | async)?.enginePowers; track
               $index) {
@@ -78,8 +90,8 @@
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label for="engineSize">Engine size (liters)</mat-label>
-            <mat-hint>select model or variant for options</mat-hint>
+            <mat-label for="engineSize">{{ 'car-leasing-form.engine-size.title' | translate}}</mat-label>
+            <mat-hint>{{ 'car-leasing-form.engine-size.hint' | translate}}</mat-hint>
             <mat-select formControlName="engineSize">
               @for (engineSize of (carDetails$ | async)?.engineSizes; track
               $index) {
@@ -89,24 +101,25 @@
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label for="url">URL (optional)</mat-label>
-            <mat-hint>paste car offer URL here</mat-hint>
+            <mat-label for="url">{{ 'car-leasing-form.url.title' | translate }}</mat-label>
+            <mat-hint>{{ 'car-leasing-form.url.hint' | translate }}</mat-hint>
             <input matInput type="url" id="url" formControlName="url" />
           </mat-form-field>
 
           <button type="button" mat-raised-button (click)="fileInput.click()">
-            Upload file (optional)
+            {{ 'car-leasing-form.upload-file.title' | translate}}
         </button>
+          <mat-hint>{{'car-leasing-form.upload-file.hint' | translate}}</mat-hint>
         <input hidden (change)="onFileSelected($event)" #fileInput type="file" accept="application/pdf" />
           <span class="file-name">{{ selectedFile?.name }}</span>
         </div>
       </div>
       <div class="bottomContainer">
         <mat-checkbox formControlName="confirmation">
-          <label>I confirm that the above information is accurate</label>
+          <label>{{ 'car-leasing-form.confirmations.confirmation1' | translate}}</label>
         </mat-checkbox>
         <mat-checkbox formControlName="terms">
-          <label>I have read and agree with the Terms and Conditions</label>
+          <label>{{ 'car-leasing-form.confirmations.confirmation2' | translate}}</label>
         </mat-checkbox>
         <button
           class="submitButton"
@@ -114,9 +127,7 @@
           [color]="getButtonColor()"
           type="submit"
           [disabled]="!carLeasingForm.valid"
-        >
-          Apply for a loan
-        </button>
+        >{{ 'car-leasing-form.submit-button' | translate}}</button>
       </div>
     </form>
   </div>

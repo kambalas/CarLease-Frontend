@@ -14,6 +14,7 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
 import { FormDataTransferService } from '../../../services/form-data-transfer.service';
+import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-personal-information-form',
@@ -27,6 +28,7 @@ import { FormDataTransferService } from '../../../services/form-data-transfer.se
     ReactiveFormsModule,
     MatButtonModule,
     MatStepperModule,
+    TranslateModule,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './personal-information-form.component.html',
