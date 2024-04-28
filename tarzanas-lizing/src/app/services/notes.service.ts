@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MailsAndNotesResponse, NoteRequest } from '../types';
+import { NoteRequest, MailsAndNotesResponse } from '../types';
 import { Observable, Subject } from 'rxjs';
 import { environment } from '../../environment/environment';
 
@@ -12,13 +12,14 @@ export class NotesService {
 
   getMailsAndNotesById(id: string): Observable<MailsAndNotesResponse>  {
     return this.client.get<MailsAndNotesResponse>(`${environment.API_URL}/admin/history/note-mail-list/${id}`)
+
   }
 
   saveNote(noteRequest: NoteRequest): Observable<any> {
-    return this.client.post<NoteRequest>(
-      `${environment.API_URL}/admin/notes/create`,
-      noteRequest
-    );
+    return this.client.post<NoteRequest>(`${environment.API_URL}/admin/notes/create`, noteRequest)
+      .pipe(
+        catchError((error) => throwError(() => error))
+      );
   }
 
   notesUpdated$ = new Subject<void>();
