@@ -1,12 +1,15 @@
-<mat-card>
-  <mat-card-header id="note-title">
-    <mat-card-title>Here you can find more details about this request</mat-card-title>
-  </mat-card-header>
-  <mat-divider></mat-divider>
-  <mat-card-content>
-    @if(responseData$ | async; as responseData){
-      @for(notes of responseData; track $index) {
+<div class="main-content">
+  <div class="notes-section">
+    <div class="card-container">
+      <div class="card-header">Here you can find more details about this request</div>
+      <div class="card-content">
+        <p></p>
+        @if(responseData$ | async; as responseData){
+        @for(notes of responseData; track $index) {
         <p>{{notes.noteText}}</p>
-    }}
-  </mat-card-content>
-</mat-card>
+        }}
+      </div>
+    </div>
+  </div>
+</div>
+

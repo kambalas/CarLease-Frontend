@@ -1,19 +1,42 @@
-.top {
-    height: 49%;
-    margin-bottom: 5px;
+@import '../../../../styles.scss';
+
+.card-container {
+  overflow: hidden;
+  font-family: $font;
+  display: flex;
+  flex-direction: column;
 }
 
-.bottom {
-  margin-top: 5px;
-    height: 49%;
-}
-mat-card {
-  display: block;
+.card-content {
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+  color: $text-color;
 }
 
-mat-tab-group {
-    width: 100%;
-    height: 100%;
+.custom-tab-group {
+  .mat-tab-label {
+    flex-grow: 1;
+    max-width: none;
+    background-color: $cards-color;
+    color: $text-color;
+    margin-right: 8px;
+    border-radius: 0.3rem;
+    box-shadow: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    &:hover {
+      background-color: darken($cards-color, 5%);
+    }
+    &.mat-tab-label-active {
+      color: $header-color;
+      background-color: $cards-color;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+  .mat-ink-bar {
+    background-color: transparent;
+  }
 }
 
 

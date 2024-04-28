@@ -1,19 +1,36 @@
-mat-card {
-  display: block;
-  text-align: left;
-  height: 100%;
+@import '../../../../styles.scss';
+
+.card-container {
+  max-height: 35vh;
+  background-color: $cards-color;
+  border-radius: 0.3rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 1rem;
+  font-family: $font;
+  display: flex;
+  flex-direction: column;
 }
 
-#note-title {
-  justify-content: center;
+.card-header {
+  font-size: 1.25rem;
+  color: $header-color;
+  padding: 1rem;
+  border-bottom: 1px solid #eaeaea;
+  font-family: $font;
   text-align: center;
 }
 
-mat-divider {
-  margin: 15px 0;
+.card-content {
+  flex: 1;
+  padding: 1rem;
+  line-height: 1.6;
+  color: $text-color;
+  overflow-y: auto;
+  text-align: left;
 }
 
-mat-card-content {
-  max-height: 70%;
-  overflow-y: auto;
+.main-content {
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
 }
