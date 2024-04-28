@@ -7,8 +7,8 @@
     "steps": {
       "step1": "Užpildykite paraišką internetu. Tai užtruks tik 5 minutes.",
       "step2": "Pateikite paraišką ir nepamirškite patikrinti savo el. pašto dėžutės - Mes atrašome greit.",
-      "step3": "Prieš pasirašant sutartį rimtai atsižvelkite į pasiūlymą ir tik tada, pasirašykite.",
-      "step4": "Būkite pasiruoše gyventi savo svajonėje, nes jūsų automobilis jau pakeliui."
+      "step3": "Prieš pasirašant sutartį atidžiai peržiūrėkite pasiūlymą ir tik tada pasirašykite.",
+      "step4": "Pasiruoškite svajonės išsipildymui, nes Jūsų automobilis jau pakeliui."
     },
     "apply-for-loan-button": "Pradėti"
   },
@@ -16,7 +16,7 @@
     "copyright": "Autorinės teisės priklauso"
   },
   "car-leasing-calculator": {
-    "title": "Automobiliu lizingo skaičiuoklė",
+    "title": "Automobilių lizingo skaičiuoklė",
     "car-value": {
       "title": "Automobilio vertė",
       "validation": "Automobilio vertė turi siekti bent 300 EUR"
@@ -28,20 +28,20 @@
     },
     "down-payment": {
       "title": "Pradinis įnašas",
-      "validation": "Pradinis įnašas turi būti didesnis nei 0 eur",
-      "active-validation": "Lizingo prašymai kurių pradinis įnašas mažesnis nei 10% nuo automobilio vertės, dažnai atmetami"
+      "validation": "Pradinis įnašas turi būti didesnis nei 0 EUR",
+      "active-validation": "Lizingo prašymai, kurių pradinis įnašas mažesnis nei 10% automiblio vertės, dažnai atmetami."
     },
     "residual-value": {
       "title": "Likutinė vertė"
     },
     "environmentally-friendly": {
-      "title": "Aplinka tausojantis automobilis"
+      "title": "Aplinką tausojantis automobilis"
     },
     "monthly-payment": {
       "title": "Mėnesinė įmoka nuo",
       "validation-incorrect-data": "Neteisingi duomenys"
     },
-    "apply-button": "Pirmyn"
+    "apply-button": "Toliau"
   },
   "personal-information-form": {
     "first-name": {
@@ -77,8 +77,8 @@
       "title": "Šeimyninė padėtis",
       "hint": "Pasirinkite iš sąrašo",
       "options": {
-        "option1": "Nevedęs(a)",
-        "option2": "Vedęs(a)",
+        "option1": "Nevedęs(-usi)",
+        "option2": "Vedęs(-usi)",
         "option3": "Partnerystė"
       }
     },
