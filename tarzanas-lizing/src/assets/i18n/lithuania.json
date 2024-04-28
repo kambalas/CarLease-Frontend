@@ -175,6 +175,17 @@
       "confirmation2": "Sutinku su privatumo politika"
     },
     "submit-button": "Pateikti"
+  },
+  "page-not-found": {
+    "title": "404",
+    "message": "Puslapis nerastas",
+    "back-button": "Grįžti į pradinį puslapį"
+  },
+  "form-submission-confirmation": {
+    "title": "Ačiū!",
+    "message": "Jūsų paraiška sėkmingai pateikta.",
+    "message2": "Mūsų specialistas greitu metu susisieks su Jumis.",
+    "back-button": "Uždaryti"
   }
 }
 
