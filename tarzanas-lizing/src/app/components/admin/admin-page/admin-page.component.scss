@@ -14,25 +14,21 @@
 .right,
 .middle,
 .left {
-  background-color: $background;
   text-align: center;
   margin: 0;
 }
 
 .left {
-  background-color: $background;
   width: 25%;
   height: 95vh;
 }
 
 .right {
-  background-color: $background;
   width: 23%;
   align-self: center;
 }
 
 .middle {
-  background-color: $background;
   width: 57%;
   height: 95vh;
 }
