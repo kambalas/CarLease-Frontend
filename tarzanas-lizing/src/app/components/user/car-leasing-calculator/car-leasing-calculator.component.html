@@ -61,11 +61,13 @@
         <div class="form-row">
             <label>Monthly payment from:</label>
             <mat-form-field subscriptSizing="dynamic">
-            @if(monthlyPayment$ | async; as monthlyPayment){
-                @if(monthlyPayment.monthlyPayment < 0){
+            @if(monthlyPayment$ | async; as res){
+                @if(monthlyPaymentError$ | async; as error) {
+                    <input matInput value="There was an error" type="text" id="monthlyPayment" disabled />
+                } @else if(res.monthlyPayment < 0){
                     <input matInput value="Incorrect data" type="text" id="monthlyPayment" disabled />
                 } @else {
-                    <input matInput value="{{monthlyPayment.monthlyPayment}}" type="text" id="monthlyPayment" disabled />
+                    <input matInput value="{{res.monthlyPayment}}" type="text" id="monthlyPayment" disabled />
                 }
             } @else { 
                 <input matInput value="" type="text" id="monthlyPayment" disabled />

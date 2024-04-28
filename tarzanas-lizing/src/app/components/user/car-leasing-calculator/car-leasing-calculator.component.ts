@@ -9,7 +9,7 @@ import { MonthlyPaymentCalculatorService } from '../../../services/car-leasing-c
 import { CalculatorRequest, CalculatorResponse } from '../../../types';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { Observable } from 'rxjs';
+import { Observable, catchError, ignoreElements, of } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { FormDataTransferService } from '../../../services/form-data-transfer.service';
 
@@ -35,6 +35,7 @@ export class CarLeasingCalculatorComponent implements OnInit {
 
   calculatorForm = this.makeForm();
   monthlyPayment$: Observable<CalculatorResponse> | undefined;
+  monthlyPaymentError$: Observable<any> | undefined;
   noteActive: boolean = true;
 
   ngOnInit(): void {
@@ -86,8 +87,10 @@ export class CarLeasingCalculatorComponent implements OnInit {
 
   calculateMonthlyPayment(): void {
     if (this.calculatorForm.valid) {
-      this.monthlyPayment$ = this.service.getMonthlyPayment
-        (this.calculatorForm.value as Partial<CalculatorRequest>);
+      this.monthlyPayment$ = this.service.getMonthlyPayment(this.calculatorForm.value as Partial<CalculatorRequest>);
+      this.monthlyPaymentError$ = this.monthlyPayment$.pipe(
+        ignoreElements(),
+        catchError((error) => of(error)));
     }
     return;
   }

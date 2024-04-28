@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, combineLatest, map, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, combineLatest, switchMap, throwError } from 'rxjs';
 import { CalculatorFormFields, CarLeasingFormFields, FormsPostRequest, PersonalInformationFormFields } from '../types';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environment/environment';
@@ -65,7 +65,8 @@ export class FormDataTransferService {
       personalInformationRequest: this.personalInformationData$,
       leaseRequest: this.carLeaseData$
     }).pipe(
-      switchMap(req => this.client.post<FormsPostRequest>(`${environment.API_URL}/user/applications/create`, req))
-    )
+      switchMap(req => this.client.post<FormsPostRequest>(`${environment.API_URL}/user/applications/create`, req)),
+      catchError((error) => throwError(() => error))
+    );
   }
 }
