@@ -1,9 +1,9 @@
-import {inject, Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, switchMap} from "rxjs";
-import {LoginFormFields, LoginFormRequest} from "../types";
-import {HttpClient} from "@angular/common/http";
-import {FormGroup} from "@angular/forms";
-import {environment} from "../../environment/environment";
+import { inject, Injectable } from '@angular/core';
+import { catchError, Observable, throwError } from "rxjs";
+import { LoginFormRequest } from "../types";
+import { HttpClient } from "@angular/common/http";
+import { FormGroup } from "@angular/forms";
+import { environment } from "../../environment/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +35,8 @@ export class AuthService {
       {
         "username": loginFields.get('username')?.value,
         "password": loginFields.get('password')?.value
-      });
+      }).pipe(
+        catchError((error) => throwError(() => error))
+      );
   }
 }

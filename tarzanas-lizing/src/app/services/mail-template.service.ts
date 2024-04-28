@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {GeneralFormsResponse} from "../types";
+import { Injectable } from '@angular/core';
+import { GeneralFormsResponse } from "../types";
 
 @Injectable({
   providedIn: 'root'

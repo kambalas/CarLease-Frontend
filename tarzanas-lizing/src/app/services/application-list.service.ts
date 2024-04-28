@@ -1,12 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
-import {
-  Application,
-  GeneralFormsResponse,
-  Status,
-  sortAndFilterRequest,
-} from '../types';
+import { Application, GeneralFormsResponse, sortAndFilterRequest } from '../types';
 import { environment } from '../../environment/environment';
 
 @Injectable({
@@ -16,9 +11,7 @@ import { environment } from '../../environment/environment';
 export class ApplicationListService {
   private client = inject(HttpClient);
 
-  getApplicationsByStatusAndQuery(
-    inputs: sortAndFilterRequest
-  ): Observable<Application[]> {
+  getApplicationsByStatusAndQuery(inputs: sortAndFilterRequest): Observable<Application[]> {
     return this.client
       .post<Application[]>(`${environment.API_URL}/admin/applications`, inputs)
       .pipe(
@@ -32,11 +25,17 @@ export class ApplicationListService {
     return this.client.get<GeneralFormsResponse>(
       `${environment.API_URL}/admin/applications/${id}`
     )
-    .pipe(
-      catchError((error) => {
-        console.error('Error fetching personal and lease data:', error);
-        return throwError(() => error);
-      })
-    );
+      .pipe(
+        catchError((error) => {
+          console.error('Error fetching personal and lease data:', error);
+          return throwError(() => error);
+        })
+      );
+  }
+
+  updateIsOpened(id: number): Observable<any> {
+    return this.client.get(`${environment.API_URL}/admin/something/${id}`)
+      .pipe(
+        catchError((error) => throwError(() => error)))
   }
 }
