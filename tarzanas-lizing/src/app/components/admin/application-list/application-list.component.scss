@@ -1,13 +1,10 @@
 @use "@angular/material" as mat;
+@import '../../../../styles.scss';
 
 mat-card {
 
-    .header,
     .search-sort {
         display: flex;
-    }
-
-    .search-sort {
         align-items: center;
         justify-content: center;
     }
@@ -19,6 +16,7 @@ mat-card {
     }
 
     .smallerFormField {
+        margin-top: 2vh;
         @include mat.form-field-density(-5);
     }
 
@@ -44,9 +42,11 @@ mat-card {
         .app-list-view {
             height: 100%;
             width: 100%;
-            border: 1px solid black;
+            padding: 1rem;
+            background-color: $cards-color;
 
-            li {
+
+          li {
                 // ! DO NOT reduce height below 70 px as this may mess up the scroll index and auto pagination!
                 // Feel free to increase height a bit if necessary
                 height: 73px;
@@ -55,6 +55,7 @@ mat-card {
                 justify-content: space-between;
                 padding: 5px 10px;
                 border-radius: 2px;
+                border-left: 3px solid transparent;
 
                 h3 {
                     margin: 0;
@@ -82,8 +83,9 @@ mat-card {
             }
 
             li:hover {
-                background-color: #b29fd4;
+                background-color: #e3e4fa;
                 cursor: pointer;
+                border-left: 3px solid #0d6efd;
             }
         }
     }
@@ -101,4 +103,7 @@ mat-card {
     li .date-icon {
         text-align: right;
     }
+}
+.cdk-virtual-scroll-viewport {
+  scrollbar-color: #aab7cf transparent;
 }
