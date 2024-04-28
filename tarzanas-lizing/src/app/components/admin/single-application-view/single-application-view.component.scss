@@ -1,20 +1,39 @@
-mat-card {
-    text-align: left;
+@import '../../../../styles.scss';
 
-    p {
-        margin-bottom: 6px;
-    }
+.card-container {
+  background-color: $cards-color;
+  border-radius: 0.3rem;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin: 0rem 1rem 1rem 0rem;
+  font-family: $font;
+  max-width: 500px;
 }
 
-mat-card-header {
-    display: flex;
-    justify-content: space-around;
+.card-header {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: $header-color;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eaeaea;
+  font-family: $font;
+  text-align: center;
 }
 
-mat-card:last-of-type {
-    margin-top: 10px;
+.card-content {
+  flex-direction: column;
+  text-align: left;
 }
 
-mat-divider {
-    margin: 15px 0;
+.card-content p {
+  margin: 0.25rem 0;
+  padding: 0;
+}
+
+.label {
+  color: gray;
+}
+
+.material-symbols-outlined {
+  color: $green;
 }
