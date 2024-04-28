@@ -128,8 +128,6 @@ export interface NoteResponse {
   noteText: string;
 }
 
-type Notes = NoteResponse[];
-
 export interface NoteTextResponse {
   notesText: string;
   createdAt: string;

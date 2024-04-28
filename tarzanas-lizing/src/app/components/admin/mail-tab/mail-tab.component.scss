@@ -19,22 +19,22 @@
 
 .email-dropdown-template {
   width: 100%;
-  padding: 1rem 1rem 0rem 1rem;
+  padding: 1rem 1rem 0 1rem;
 }
 
 .email-content-box {
   width: calc(100% - 2rem);
-  height: 20vh;
-  margin: 0rem 0rem 0.5rem 1rem;
-  padding: 1rem;
+  height: 23vh;
+  margin: 0 0 0.5rem 1rem;
+  padding: 0.5rem;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 0.3rem;
   outline: none;
-  resize: vertical;
+  resize: none;
   overflow-y: auto;
   font-family: $font;
 }
 
 .email-actions {
-  padding: 0rem 0.5rem 0.5rem 0.5rem;
+  padding: 0 0.5rem 0.5rem 0.5rem;
 }
