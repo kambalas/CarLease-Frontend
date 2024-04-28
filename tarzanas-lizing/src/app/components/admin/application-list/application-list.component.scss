@@ -16,7 +16,7 @@ mat-card {
     }
 
     .smallerFormField {
-        margin: 2vh 3vh 0vh 3vh;
+        margin: 2vh 3vh 0 3vh;
         @include mat.form-field-density(-5);
     }
 
