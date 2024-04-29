@@ -8,7 +8,7 @@
               <mat-expansion-panel-header>
                   <mat-panel-title>
                       <span class="material-symbols-outlined">description</span>
-                      Note - {{ note.createdAt | date:'long' }}
+                      Note - {{ note.createdAt | date:'MMM d, y, h:mm a' }}
                   </mat-panel-title>
               </mat-expansion-panel-header>
               <div [innerHTML]="note.notesText | formatText"></div>
@@ -19,7 +19,7 @@
               <mat-expansion-panel-header>
                   <mat-panel-title>
                       <span class="material-symbols-outlined email-icon">email</span>
-                      Email - {{ email.createdAt | date:'medium' }}
+                      Email - {{ email.createdAt | date:'MMM d, y, h:mm a' }}
                   </mat-panel-title>
               </mat-expansion-panel-header>
             <div [innerHTML]="email.mailText | formatText"></div>

@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MailsAndNotesResponse, NoteRequest } from '../types';
-import { Observable, Subject } from 'rxjs';
+import {Observable, Subject, throwError} from 'rxjs';
 import { environment } from '../../environment/environment';
+import {catchError} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root',
@@ -15,10 +16,10 @@ export class NotesService {
   }
 
   saveNote(noteRequest: NoteRequest): Observable<any> {
-    return this.client.post<NoteRequest>(
-      `${environment.API_URL}/admin/notes/create`,
-      noteRequest
-    );
+    return this.client.post<NoteRequest>(`${environment.API_URL}/admin/notes/create`, noteRequest)
+      .pipe(
+        catchError((error) => throwError(() => error))
+      );
   }
 
   notesUpdated$ = new Subject<void>();
