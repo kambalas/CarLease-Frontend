@@ -51,11 +51,11 @@ export class LoginPageComponent {
       error: (error) => {
         console.error('There was an error!', error);
         this.isLoading = false;
+        this.clear();
 
       }
     });
     this.loginFailed = true;
-    this.clear();
   }
 
   clear(): void {
