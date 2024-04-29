@@ -54,6 +54,8 @@ export class CarLeasingFormComponent implements OnInit {
   carDetails$!: Observable<Details | null>;
   selectedFile: File | null = null;
   maxFileSize = 3 * 1024 * 1024;
+  correctFile: boolean = true;
+  correctFileSize: boolean = true;
 
   private transferService = inject(FormDataTransferService);
   private makeChange$ = new Subject<void>();
@@ -175,15 +177,41 @@ export class CarLeasingFormComponent implements OnInit {
 
   onFileSelected(event: any): void {
     const file = event.target.files[0] ?? null;
+    this.correctFile = true;
+    this.correctFileSize = true;
     if (file) {
       if (file.size > this.maxFileSize) {
-        alert('File is too large. Maximum size is 2MB.');
+        this.correctFileSize = false;
+        this.selectedFile = null;
         return;
       }
-      this.selectedFile = file;
-      this.convertFileToBase64(file, (base64: string) => {
-        this.carLeasingForm.patchValue({ offer: base64 });
-      });
+      if (file.type !== 'application/pdf') {
+        this.correctFile = false;
+        this.selectedFile = null;
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+      const arr = new Uint8Array(e.target.result).subarray(0, 5);
+      const header = String.fromCharCode.apply(null, Array.from(arr));
+      if (header !== '%PDF-') {
+        this.correctFile = false;
+        return;
+      }
+        this.selectedFile = file;
+        this.convertFileToBase64(file, (base64: string) => {
+          console.log(base64);
+          this.carLeasingForm.patchValue({ offer: base64 });
+        });
+      };
+
+      reader.onerror = (err) => {
+        console.error('Error reading file:', err);
+        this.selectedFile = null;
+      };
+
+      reader.readAsArrayBuffer(file.slice(0, 5));
     } else {
       this.selectedFile = null;
     }

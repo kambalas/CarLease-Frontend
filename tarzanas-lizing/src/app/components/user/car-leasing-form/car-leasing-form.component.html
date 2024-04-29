@@ -112,6 +112,13 @@
           <mat-hint>{{'car-leasing-form.upload-file.hint' | translate}}</mat-hint>
         <input hidden (change)="onFileSelected($event)" #fileInput type="file" accept="application/pdf" />
           <span class="file-name">{{ selectedFile?.name }}</span>
+          @if(!correctFile){
+            <div class="error">{{'car-leasing-form.upload-file.validation1' | translate}}</div>
+          }
+          @if(!correctFileSize){
+              <div class="error">{{'car-leasing-form.upload-file.validation2' | translate}}</div>
+          }
+
         </div>
       </div>
       <div class="bottomContainer">

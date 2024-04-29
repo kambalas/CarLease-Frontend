@@ -17,7 +17,7 @@ export class NotesService {
   saveNote(noteRequest: NoteRequest): Observable<any> {
     return this.client.post<NoteRequest>(`${environment.API_URL}/admin/notes/create`, noteRequest)
       .pipe(
-        catchError((error) => throwError(() => error))
+        catchError((error: any) => throwError(() => error))
       );
   }
 
