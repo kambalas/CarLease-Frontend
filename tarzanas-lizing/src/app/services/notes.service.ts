@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NoteRequest, MailsAndNotesResponse } from '../types';
-import { Observable, Subject } from 'rxjs';
+import { MailsAndNotesResponse, NoteRequest } from '../types';
+import {Observable, Subject, throwError} from 'rxjs';
 import { environment } from '../../environment/environment';
+import {catchError} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,6 @@ export class NotesService {
 
   getMailsAndNotesById(id: string): Observable<MailsAndNotesResponse>  {
     return this.client.get<MailsAndNotesResponse>(`${environment.API_URL}/admin/history/note-mail-list/${id}`)
-
   }
 
   saveNote(noteRequest: NoteRequest): Observable<any> {
