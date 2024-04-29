@@ -18,7 +18,6 @@
   .mat-tab-label {
     flex-grow: 1;
     max-width: none;
-    background-color: $cards-color;
     color: $text-color;
     margin-right: 8px;
     border-radius: 0.3rem;
@@ -31,7 +30,7 @@
     &.mat-tab-label-active {
       color: $header-color;
       background-color: $cards-color;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
   }
   .mat-ink-bar {

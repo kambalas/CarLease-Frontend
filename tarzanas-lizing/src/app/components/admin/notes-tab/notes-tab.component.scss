@@ -18,11 +18,12 @@
 
 .textarea-notes {
   width: 100%;
-  height: 30vh;
+  height: 32.6vh;
   border: 1px solid #ccc;
   border-radius: 0.3rem;
+  outline: none;
   padding: 0.5rem;
-  resize: vertical;
+  resize: none;
   overflow-y: auto;
   font-family: $font;
   font-size: 11pt;

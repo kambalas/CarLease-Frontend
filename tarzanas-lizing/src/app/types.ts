@@ -128,7 +128,21 @@ export interface NoteResponse {
   noteText: string;
 }
 
-type Notes = NoteResponse[];
+export interface NoteTextResponse {
+  notesText: string;
+  createdAt: string;
+}
+
+export interface MailTextResponse {
+  mailText: string;
+  createdAt: string;
+}
+
+export interface MailsAndNotesResponse {
+  applicationId: number;
+  notesTexts: NoteTextResponse[];
+  mailTexts: MailTextResponse[];
+}
 
 export interface GeneralFormsResponse {
   ratesResponse: {

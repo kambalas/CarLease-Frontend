@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NoteRequest, NoteResponse } from '../types';
-import { catchError, Observable, Subject, throwError } from 'rxjs';
+import { NoteRequest, MailsAndNotesResponse } from '../types';
+import { Observable, Subject } from 'rxjs';
 import { environment } from '../../environment/environment';
 
 @Injectable({
@@ -10,8 +10,9 @@ import { environment } from '../../environment/environment';
 export class NotesService {
   private client = inject(HttpClient);
 
-  getNotesById(id: string): Observable<NoteResponse[]> {
-    return this.client.get<NoteResponse[]>(`${environment.API_URL}/admin/notes/${id}`)
+  getMailsAndNotesById(id: string): Observable<MailsAndNotesResponse>  {
+    return this.client.get<MailsAndNotesResponse>(`${environment.API_URL}/admin/history/note-mail-list/${id}`)
+
   }
 
   saveNote(noteRequest: NoteRequest): Observable<any> {
