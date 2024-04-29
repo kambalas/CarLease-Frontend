@@ -29,6 +29,11 @@ export class AuthService {
     const token = this.getToken();
     return !!token;
   }
+  logout(): void {
+    this.token = null;
+    sessionStorage.removeItem('jwt');
+
+  }
 
   postLogin(loginFields: FormGroup): Observable<any> {
     return this.client.post<LoginFormRequest>(`${environment.API_URL}/user/api/v1/auth/authenticate`,
