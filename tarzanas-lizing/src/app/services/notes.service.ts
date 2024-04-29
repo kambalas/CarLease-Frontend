@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NoteRequest, MailsAndNotesResponse } from '../types';
-import { Observable, Subject } from 'rxjs';
+import { catchError, Observable, Subject, throwError } from 'rxjs';
 import { environment } from '../../environment/environment';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { environment } from '../../environment/environment';
 export class NotesService {
   private client = inject(HttpClient);
 
-  getMailsAndNotesById(id: string): Observable<MailsAndNotesResponse>  {
+  getMailsAndNotesById(id: string): Observable<MailsAndNotesResponse> {
     return this.client.get<MailsAndNotesResponse>(`${environment.API_URL}/admin/history/note-mail-list/${id}`)
 
   }
