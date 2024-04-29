@@ -38,7 +38,7 @@
             <h4>ID: {{ res.id }}</h4>
           </div>
           <div class="date-icon">
-            <h5>{{ res.updatedAt.slice(0, 10) }}</h5>
+            <h5>{{ res.createdAt.slice(0, 10) }}</h5>
             @if(res.status === "ACCEPTED"){
             <span class="material-symbols-outlined">done</span>
             } @if(res.status === "PENDING"){

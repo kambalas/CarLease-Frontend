@@ -100,7 +100,7 @@ export interface Application {
   firstName: string;
   lastName: string;
   isOpened: boolean;
-  updatedAt: string;
+  createdAt: string;
   status: Status;
   isHighRisk: boolean;
 }
