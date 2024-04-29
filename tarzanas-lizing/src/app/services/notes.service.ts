@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { NoteRequest, MailsAndNotesResponse } from '../types';
 import { catchError, Observable, Subject, throwError } from 'rxjs';
 import { environment } from '../../environment/environment';
-import {catchError} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root',
