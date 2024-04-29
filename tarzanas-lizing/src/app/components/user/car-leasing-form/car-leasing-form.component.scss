@@ -11,6 +11,13 @@
       padding: 20px 20px;
       margin: 0 auto 50px;
 
+      .error {
+        color: #f44336;
+        margin: 0 auto 25px;
+        max-width: 212px;
+    }
+
+
       .mainContainer {
         display: flex;
         justify-content: space-between;

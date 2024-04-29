@@ -55,6 +55,7 @@ export class CarLeasingFormComponent implements OnInit {
   selectedFile: File | null = null;
   maxFileSize = 3 * 1024 * 1024;
   correctFile: boolean = true;
+  correctFileSize: boolean = true;
 
   private transferService = inject(FormDataTransferService);
   private makeChange$ = new Subject<void>();
@@ -177,13 +178,16 @@ export class CarLeasingFormComponent implements OnInit {
   onFileSelected(event: any): void {
     const file = event.target.files[0] ?? null;
     this.correctFile = true;
+    this.correctFileSize = true;
     if (file) {
       if (file.size > this.maxFileSize) {
-        alert('File is too large. Maximum size is 3MB.');
+        this.correctFileSize = false;
+        this.selectedFile = null;
         return;
       }
       if (file.type !== 'application/pdf') {
         this.correctFile = false;
+        this.selectedFile = null;
         return;
       }
 
@@ -204,7 +208,7 @@ export class CarLeasingFormComponent implements OnInit {
 
       reader.onerror = (err) => {
         console.error('Error reading file:', err);
-        alert('Error reading file.');
+        this.selectedFile = null;
       };
 
       reader.readAsArrayBuffer(file.slice(0, 5));
@@ -212,7 +216,6 @@ export class CarLeasingFormComponent implements OnInit {
       this.selectedFile = null;
     }
   }
-
 
   getButtonColor() {
     return this.carLeasingForm.valid ? 'primary' : 'warn';

@@ -167,7 +167,10 @@
       "hint": "paste car offer URL here"
     },
     "upload-file": {
-      "title": "Upload file (optional)"
+      "title": "Upload file",
+      "hint": "Optional",
+      "validation1": "Only PDF files are allowed!",
+      "validation2": "Max file size is 3MB"
     },
     "confirmations": {
       "confirmation1": "I confirm that the above information is accurate",

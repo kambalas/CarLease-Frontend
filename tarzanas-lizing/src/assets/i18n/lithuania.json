@@ -168,7 +168,9 @@
     },
     "upload-file": {
       "title": "Prisegti",
-      "hint": "neprivaloma"
+      "hint": "neprivaloma",
+      "validation1": "Galima prisegti tik PDF failus",
+      "validation2": "Failo dydis negali viršyti 3MB"
     },
     "confirmations": {
       "confirmation1": "Patvirtinu, kad informacija yra teisinga",
