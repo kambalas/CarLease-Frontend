@@ -54,6 +54,7 @@ export class CarLeasingFormComponent implements OnInit {
   carDetails$!: Observable<Details | null>;
   selectedFile: File | null = null;
   maxFileSize = 3 * 1024 * 1024;
+  correctFile: boolean = true;
 
   private transferService = inject(FormDataTransferService);
   private makeChange$ = new Subject<void>();
@@ -175,13 +176,14 @@ export class CarLeasingFormComponent implements OnInit {
 
   onFileSelected(event: any): void {
     const file = event.target.files[0] ?? null;
+    this.correctFile = true;
     if (file) {
       if (file.size > this.maxFileSize) {
         alert('File is too large. Maximum size is 3MB.');
         return;
       }
       if (file.type !== 'application/pdf') {
-        alert('Only PDF files are allowed!');
+        this.correctFile = false;
         return;
       }
 
@@ -190,7 +192,7 @@ export class CarLeasingFormComponent implements OnInit {
       const arr = new Uint8Array(e.target.result).subarray(0, 5);
       const header = String.fromCharCode.apply(null, Array.from(arr));
       if (header !== '%PDF-') {
-        alert('Invalid PDF file.');
+        this.correctFile = false;
         return;
       }
         this.selectedFile = file;
