@@ -21,9 +21,8 @@
       "title": "Automobilio vertė",
       "validation": "Automobilio vertė turi siekti bent 300 EUR"
     },
-    "period": "Laikotarpis",
+    "period": "Laikotarpis (mėn.)",
     "period-months": {
-      "title": "Mėnesiai",
       "validation": "Prašau pasirinkite lizingo laikotarpį"
     },
     "down-payment": {
@@ -190,6 +189,3 @@
     "back-button": "Uždaryti"
   }
 }
-
-
-

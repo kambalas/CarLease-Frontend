@@ -12,7 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { Observable, catchError, ignoreElements, of } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { FormDataTransferService } from '../../../services/form-data-transfer.service';
-import {TranslateModule} from "@ngx-translate/core";
+import { TranslateModule } from "@ngx-translate/core";
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-car-leasing-calculator',
@@ -26,7 +27,8 @@ import {TranslateModule} from "@ngx-translate/core";
     MatOptionModule,
     MatButtonModule,
     AsyncPipe,
-    TranslateModule
+    TranslateModule,
+    MatTooltip
   ],
   templateUrl: './car-leasing-calculator.component.html',
   styleUrl: './car-leasing-calculator.component.scss'
@@ -39,11 +41,9 @@ export class CarLeasingCalculatorComponent implements OnInit {
   calculatorForm = this.makeForm();
   monthlyPayment$: Observable<CalculatorResponse> | undefined;
   monthlyPaymentError$: Observable<any> | undefined;
-  noteActive: boolean = true;
 
   ngOnInit(): void {
     this.calculatorForm.valueChanges.subscribe(x => {
-      this.checkDownPayment();
       this.calculateMonthlyPayment();
     })
   }
@@ -56,7 +56,7 @@ export class CarLeasingCalculatorComponent implements OnInit {
           Validators.min(300),
           Validators.pattern('^[0-9]*$')
         ]),
-        period: new FormControl<string>('months', [
+        period: new FormControl<string | null>(null, [
           Validators.required,
           Validators.pattern('^[0-9]*$')
         ]),
@@ -96,14 +96,6 @@ export class CarLeasingCalculatorComponent implements OnInit {
         catchError((error) => of(error)));
     }
     return;
-  }
-
-  checkDownPayment() {
-    if (this.downPayment?.value! / this.carValue?.value! * 100 >= 10) {
-      this.noteActive = false;
-      return;
-    }
-    this.noteActive = true;
   }
 
   get carValue() {
