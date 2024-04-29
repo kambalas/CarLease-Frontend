@@ -31,9 +31,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class ApplicationListComponent implements OnInit {
   private service = inject(ApplicationListService);
-  listResponse$: BehaviorSubject<Application[]> = new BehaviorSubject<
-    Application[]
-  >([]);
+  listResponse$: BehaviorSubject<Application[]> = new BehaviorSubject<Application[]>([]);
   numAppsLoaded = 30;
   canLoadMoreApps = true;
   loadingMoreApplications = false;
@@ -54,12 +52,6 @@ export class ApplicationListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getApplications(this.sortAndFilterSubject.value);
-
-    this.sortForm.controls['searchQuery'].valueChanges
-      .pipe(debounceTime(500))
-      .subscribe((searchTextValue) => {
-        this.submitSortAndSearch();
-      });
   }
 
   getApplications(request: sortAndFilterRequest) {
@@ -92,9 +84,19 @@ export class ApplicationListComponent implements OnInit {
       });
   }
 
-  openSelected(id: number) {
+  openSelected(id: number, res: Application) {
     if (id) {
       this.OnSelectedId.emit(id.toString());
+    }
+
+    if (id && res.isOpened === false) {
+      res.isOpened = true;
+      this.service.updateIsOpened(id).subscribe(
+        {
+          next: data => console.log(data),
+          error: error => console.error('Error:', error)
+        }
+      );
     }
   }
 
@@ -133,14 +135,14 @@ export class ApplicationListComponent implements OnInit {
 
     setTimeout(() => {
       this.getApplications(this.sortAndFilterSubject.value);
-    }, 500);
+    }, 1500);
   }
 
   checkIfNearEndOfList(indexOfVisibleApp: number) {
     if (this.filteringCriteriaAltered) {
       setTimeout(() => {
         this.filteringCriteriaAltered = false;
-      }, 2000);
+      }, 2800);
     }
 
     const endThreshold = this.numAppsLoaded - 10;

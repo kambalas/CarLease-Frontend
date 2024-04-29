@@ -63,7 +63,7 @@ export class CarLeasingFormComponent implements OnInit {
     private leasingFormService: LeasingFormService,
     private submissionConfirmationService: FormSubmissionConfirmationService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.carMakes$ = this.leasingFormService.getCarMakes();
@@ -159,7 +159,11 @@ export class CarLeasingFormComponent implements OnInit {
     if (this.carLeasingForm.valid) {
       console.log('Form Submitted!', this.carLeasingForm.value);
       this.transferService.setCarLeaseData(this.carLeasingForm.value);
-      this.transferService.postAllFormData().subscribe((x) => console.log(x));
+      this.transferService.postAllFormData()
+        .subscribe({
+          next: (data) => console.log(data),
+          error: (error) => console.error('Error:', error)
+        });
       this.submissionConfirmationService
         .openConfirmationDialog()
         .afterClosed()

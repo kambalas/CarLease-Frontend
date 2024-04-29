@@ -31,7 +31,7 @@
       <ng-container *cdkVirtualFor="let res of listResponse$ | async">
         <li
           class="opened-{{ res.isOpened }} {{ res.status }}"
-          (click)="openSelected(res.id)"
+          (click)="openSelected(res.id, res)"
         >
           <div>
             <h3>{{ res.firstName + " " + res.lastName }}</h3>
