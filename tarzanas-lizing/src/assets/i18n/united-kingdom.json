@@ -21,9 +21,8 @@
       "title": "Car value",
       "validation": "Car value has to be at least 300 EUR"
     },
-    "period": "Period",
+    "period": "Period (months)",
     "period-months": {
-      "title": "Months",
       "validation": "Please choose a lease period"
     },
     "down-payment": {
@@ -190,6 +189,3 @@
     "back-button": "Close"
   }
 }
-
-
-

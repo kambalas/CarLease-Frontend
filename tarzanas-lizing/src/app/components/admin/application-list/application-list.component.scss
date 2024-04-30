@@ -46,7 +46,7 @@ mat-card {
             background-color: $cards-color;
 
 
-          li {
+            li {
                 // ! DO NOT reduce height below 70 px as this may mess up the scroll index and auto pagination!
                 // Feel free to increase height a bit if necessary
                 height: 73px;
@@ -98,13 +98,14 @@ mat-card {
 
     .high-risk {
         color: #f44336;
-        font-size: 20px;
+        font-size: 24px;
     }
 
     li .date-icon {
         text-align: right;
     }
 }
+
 .cdk-virtual-scroll-viewport {
-  scrollbar-color: #aab7cf transparent;
+    scrollbar-color: #aab7cf transparent;
 }

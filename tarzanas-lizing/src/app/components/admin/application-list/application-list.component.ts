@@ -6,7 +6,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormField } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
-import { BehaviorSubject, debounceTime, first } from 'rxjs';
+import { MatTooltip } from '@angular/material/tooltip';
+import { BehaviorSubject, first } from 'rxjs';
 import { ApplicationListService } from '../../../services/application-list.service';
 import { Application, Status, sortAndFilterRequest } from '../../../types';
 import { MatSelectModule } from '@angular/material/select';
@@ -25,6 +26,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
     AsyncPipe,
     MatSelectModule,
     ScrollingModule,
+    MatTooltip
   ],
   templateUrl: './application-list.component.html',
   styleUrl: './application-list.component.scss',
