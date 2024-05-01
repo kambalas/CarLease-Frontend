@@ -112,7 +112,7 @@ Kaina: ${carPrice} Eur</p>
 <p>Suprantame tinkamo automobilio ir lizingavimo sąlygų pasirinkimo svarbą, todėl norime pateikti geriausias, Jūsų
 porekius atitinkančias lizingo sąlygas.</p>
 
-<p>Prie šio el. laiško prisegėme mokėjimo planą ir automobilio lizingo sutartį. Sutartį galima pasirašyti tik
+<p>Netrukus gausite ir automobilio lizingo sutartį. Sutartį galima pasirašyti tik
 elektroninėmis priemonėmis (m. parašu, Smart-ID). Atidžiai susipažinkite su sutarties sąlygomis, pasirašykite ją ir
 atsiųskite atsakyme į šį el. laišką.</p>
 
@@ -167,9 +167,9 @@ ${this.email}</p>
 
 <p>Prašome pateikti informaciją apie toliau išvardintus klausimus:</p>
 
-<p>*įrašyti klausimus*</p>
+<p>*Įrašyti klausimus*</p>
 
-<p>Savalaikis atsakymas labai padėtų mums paspartinti Jūsų paraiškos svarstymą! Jei turite klausimų ar norėtumėte
+<p>Greitas atsakymas labai padėtų mums paspartinti Jūsų paraiškos svarstymą! Jei turite klausimų ar norėtumėte
 aptarti informaciją, kurios prašome, susisiekite su mumis telefonu ${this.phoneNumber} ar el. paštu ${this.email}.</p>
 
 <p>Dėkojame už bendradarbiavimą!</p>
