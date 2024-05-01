@@ -15,15 +15,14 @@ export class StatisticsService {
       rejected: 5,
       pending: 8
     }
-    //this.client.get();
   }
 
   getApplicationCountCurrentMonth(): number[] {
     return [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
   }
 
-  getYearlyAcceptedApplicationLoanValue(): number {
-    return 20000;
+  getYearlyAcceptedApplicationLoanValue(): { currentYear: number, lastYear: number } {
+    return { currentYear: 19000, lastYear: 20000 };
   }
 
   getNewCustomerCount(): { currentMonth: number, lastMonth: number } {

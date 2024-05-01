@@ -1,7 +1,8 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
-import {MainContainerComponent} from './components/user/home-page/main-container.component';
-import {TranslationService} from "./services/translation.service";
+import { Component, inject, OnInit } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { MainContainerComponent } from './components/user/home-page/main-container.component';
+import { TranslationService } from "./services/translation.service";
+import { provideEcharts } from 'ngx-echarts';
 
 
 @Component({
@@ -10,6 +11,9 @@ import {TranslationService} from "./services/translation.service";
   imports: [RouterOutlet, MainContainerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  providers: [
+    provideEcharts()
+  ]
 
 })
 export class AppComponent implements OnInit {

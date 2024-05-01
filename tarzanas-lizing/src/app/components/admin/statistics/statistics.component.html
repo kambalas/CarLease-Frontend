@@ -1,27 +1,61 @@
-<h2>STATISTICS</h2>
-<div class="cards">
-<div class="card-container">
-    <div class="card-header">Total Loan Value <span>| Year</span></div>
-    <div class="card-content">
-       <div class="symbol"></div>
+<div class="cards-and-graph">
+    <div class="cards">
+        <div class="card-container">
+            <div class="card-header">Total Loan Value <span>| Year</span></div>
+            <div class="card-content">
+                <div class="loan-value symbol">
+                    <span class="material-symbols-outlined loan-value-icon">euro</span>
+                </div>
+                <div class="card-text">
+                    <p class="value">{{totalLoanValue.currentYear}} &euro;</p>
+                    @if(totalLoanValue.currentYear > totalLoanValue.lastYear){
+                        <p><span class="increase">{{calculateDifference(totalLoanValue.currentYear, totalLoanValue.lastYear)}}%</span> increase</p>
+                    } @else {
+                        <p><span class="decrease">{{calculateDifference(totalLoanValue.currentYear, totalLoanValue.lastYear) * (-1)}}%</span> decrease</p>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card-header">Customers <span>| Month</span></div>
+            <div class="card-content">
+                <div class="customer symbol">
+                    <span class="material-symbols-outlined customer-icon">group</span>
+                </div>
+                <div class="card-text">
+                    <p class="value">{{numberOfNewCustomers.currentMonth}}</p>
+                    @if(numberOfNewCustomers.currentMonth > numberOfNewCustomers.lastMonth){
+                        <p><span class="increase">{{calculateDifference(numberOfNewCustomers.currentMonth, numberOfNewCustomers.lastMonth)}}%</span> increase</p>
+                    } @else {
+                        <p><span class="decrease">{{calculateDifference(numberOfNewCustomers.currentMonth, numberOfNewCustomers.lastMonth) * (-1)}}%</span> decrease</p>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card-header">High Risk <span> | Month</span></div>
+            <div class="card-content">
+                <div class="high-risk symbol">
+                    <span class="material-symbols-outlined high-risk-icon">error</span>
+                </div>
+                <div class="card-text">
+                    <p class="value">{{numberOfHighRiskApplications.currentMonth}}</p>
+                    @if(numberOfHighRiskApplications.currentMonth > numberOfHighRiskApplications.lastMonth){
+                        <p><span class="increase">{{calculateDifference(numberOfHighRiskApplications.currentMonth, numberOfHighRiskApplications.lastMonth)}}%</span> increase</p>
+                    } @else {
+                        <p><span class="decrease">{{calculateDifference(numberOfHighRiskApplications.currentMonth, numberOfHighRiskApplications.lastMonth) * (-1)}}%</span> decrease</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="graph-container">
+        <div class="card-header chart-header">Monthly applications <span class="chart">| Year</span></div>
+        <div echarts [options]="lineChartOption" class="line-chart"></div>
     </div>
 </div>
-<div class="card-container">
-    <div class="card-header">Customers <span>| Month</span></div>
-    <div class="card-content">
-       <div class="symbol"></div>
-    </div>
-</div>
-<div class="card-container">
-    <div class="card-header">High Risk <span> | Month</span></div>
-    <div class="card-content">
-       <div class="symbol"></div>
-    </div>
-</div>
-</div>
-<div class="graph-container">
-    Monthly application graph
-</div>
+
 <div class="piechart-container">
-    Application status piechart
+    <div class="card-header chart-header">Application status <span class="chart">| Year</span></div>
+    <div echarts [options]="pieChartOption" class="pie-chart"></div>
 </div>
