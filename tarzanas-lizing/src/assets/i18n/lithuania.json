@@ -125,8 +125,8 @@
     "next-button": "Toliau"
   },
   "registration-page": {
-    "step1": "Asmeninė informacija",
-    "step2": "Automobilio informacija"
+    "step1": "Klientas",
+    "step2": "Automobilis"
   },
   "car-leasing-form": {
     "car-make": {
