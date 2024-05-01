@@ -12,7 +12,8 @@
 }
 
 .card-content {
-  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
   line-height: 1.6;
   color: black;
 }
@@ -23,9 +24,9 @@
 }
 
 .email-content-box {
-  width: calc(100% - 2rem);
+  width: 96%;
   height: 23vh;
-  margin: 0 0 0.5rem 1rem;
+  margin: 0.5rem 1rem;
   padding: 0.5rem;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 0.3rem;
@@ -36,5 +37,24 @@
 }
 
 .email-actions {
-  padding: 0 0.5rem 0.5rem 0.5rem;
+  align-self: center;
+  padding: 0.5rem;
+}
+
+.email-content-box {
+  overflow-y: scroll;
+}
+
+.email-content-box::-webkit-scrollbar {
+  width: 12px;
+}
+
+.email-content-box::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.email-content-box::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  border-radius: 6px;
+  border: 3px solid transparent;
 }
