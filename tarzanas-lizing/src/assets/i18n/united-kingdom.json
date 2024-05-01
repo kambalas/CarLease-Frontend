@@ -3,12 +3,12 @@
     "company_name": "Tarzan leasing"
   },
   "how-it-works": {
-    "title_bold": "The fastest way to drive your dream car",
+    "title_bold": "The fastest way to drive your dream car!",
     "steps": {
-      "step1": "Fill out the form. It includes details about vehicle as well as your personal information.",
-      "step2": "Submit the form and make sure to check your email from time to time - we don‘t take long to reply.",
-      "step3": "Carefully study our leasing offer and - if all information is correct - sign the agreement.",
-      "step4": "Get ready to live the dream - requested money will be transferred to your account shortly."
+      "step1": "1. Fill out the form. It includes details about vehicle as well as your personal information.",
+      "step2": "2. Submit the form and make sure to check your email from time to time - we don‘t take long to reply.",
+      "step3": "3. Carefully study our leasing offer and - if all information is correct - sign the agreement.",
+      "step4": "4. Get ready to live the dream - requested money will be transferred to your account shortly."
     },
     "apply-for-loan-button": "Calculate payment"
   },
@@ -124,8 +124,8 @@
     "next-button": "Next"
   },
   "registration-page": {
-    "step1": "Personal information",
-    "step2": "Car information"
+    "step1": "Personal data",
+    "step2": "Car data"
   },
   "car-leasing-form": {
     "car-make": {

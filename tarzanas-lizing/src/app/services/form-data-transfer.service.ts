@@ -44,7 +44,8 @@ export class FormDataTransferService {
     maritalStatus: "",
     numberOfChildren: 0,
     citizenship: "",
-    monthlyIncome: 0
+    monthlyIncome: 0,
+    languagePref: ""
   })
 
   setCalculatorData(formData: CalculatorFormFields) {

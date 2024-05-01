@@ -41,7 +41,33 @@ Price: ${carPrice} Eur</p>
 <p>Best regards,<br>
 ${this.companyName} <br>
 ${this.phoneNumber} <br>
-${this.email}</p>`;
+${this.email}</p>
+
+<hr>
+
+<p>Gerb. ${applicantName},</p>
+
+<p>Apgailestaujame turėdami pranešti, kad išsamiai apsvarstę Jūsų pateiktą automobilio lizingo paraišką #${applicationId} nusprendėme ją atmesti.</p>
+
+<p><strong>Automobilio duomenys:</strong> <em>${carMake} ${carModel} (${carYear})</em><br>
+Kaina: ${carPrice} Eur</p>
+
+<p>Suprantame, kad ši žinia gali nuvilti ir atsiprašome už galimus nepatogumus. Deja, pagal dabartinius kriterijus ir
+galimybes negalime patenkinti Jūsų paraiškos.</p>
+
+<p>Jei dėl šio sprendimo turite klausimų ar norėtumėte išsamesnio paaiškinimo, prašome su mumis susisiekti telefonu ${this.phoneNumber} ar el. paštu ${this.email}. Mielai Jums padėsime! </p>
+
+<p>Dėkojame, kad domitės „${this.companyName}“ paslaugomis ir tikimės, kad jei ateityje vėl iškiltų automobilio lizingavimo
+poreikis, kreipsitės į mus.</p>
+
+<p>Ačiū už Jūsų supratingumą!</p>
+
+<p>Pagarbiai<br>
+
+„${this.companyName}“ <br>
+${this.phoneNumber} <br>
+${this.email}</p>
+`;
   }
 
   getAcceptanceTemplate(data: Partial<GeneralFormsResponse>): string {
@@ -72,7 +98,36 @@ Price: ${carPrice} Eur</p>
 <p>Best regards,<br>
 ${this.companyName}<br>
 ${this.phoneNumber}<br>
-${this.email}</p>`;
+${this.email}</p>
+
+<hr>
+
+<p>Gerb. ${applicantName},</p>
+
+<p>Džiaugiamės galėdami pranešti, kad Jūsų pateikta automobilio lizingo paraiška #${applicationId} patvirtinta!</p>
+
+<p><strong>Automobilio duomenys:</strong> <em>${carMake} ${carModel} (${carYear})</em><br>
+Kaina: ${carPrice} Eur</p>
+
+<p>Suprantame tinkamo automobilio ir lizingavimo sąlygų pasirinkimo svarbą, todėl norime pateikti geriausias, Jūsų
+porekius atitinkančias lizingo sąlygas.</p>
+
+<p>Netrukus gausite ir automobilio lizingo sutartį. Sutartį galima pasirašyti tik
+elektroninėmis priemonėmis (m. parašu, Smart-ID). Atidžiai susipažinkite su sutarties sąlygomis, pasirašykite ją ir
+atsiųskite atsakyme į šį el. laišką.</p>
+
+<p>Jei kiltų klausimų ar reikėtų pagalbos, mielai jums padėsime! Susisiekite su mumis telefonu ${this.phoneNumber} ar el.paštu ${this.email}. </p>
+
+<p>Dėkojame, kad renkatės „${this.companyName}“ ir tikimės, kad padėsime Jums jau greitai atsidurti už savo svajonių
+automobilio vairo!</p>
+
+<p>Pagarbiai<br>
+
+„${this.companyName}“ <br>
+${this.phoneNumber} <br>
+${this.email}</p>
+`;
+
   }
 
   getMoreInfoTemplate(data: Partial<GeneralFormsResponse>): string {
@@ -98,7 +153,33 @@ ${this.email}</p>`;
 <p>Best regards,<br>
 ${this.companyName}<br>
 ${this.phoneNumber}<br>
-${this.email}</p>`;
+${this.email}</p>
+
+<hr>
+
+<p>Gerb. ${applicantName},</p>
+
+<p>Dėkojame, kad kreipiatės į „${this.companyName}“ dėl automobilio lizingo!</p>
+
+<p>Apgailestaujame turėdami pranešti, kad Jūsų automobilio lizingo paraiška #${applicationId} atšaukta.</p>
+
+<p>Šiuo metu peržiūrime Jūsų paraišką #40 ir, kad tęstume paraiškos svarstymą, mums reikia papildomos informacijos.</p>
+
+<p>Prašome pateikti informaciją apie toliau išvardintus klausimus:</p>
+
+<p>*Įrašyti klausimus*</p>
+
+<p>Greitas atsakymas labai padėtų mums paspartinti Jūsų paraiškos svarstymą! Jei turite klausimų ar norėtumėte
+aptarti informaciją, kurios prašome, susisiekite su mumis telefonu ${this.phoneNumber} ar el. paštu ${this.email}.</p>
+
+<p>Dėkojame už bendradarbiavimą!</p>
+
+<p>Pagarbiai<br>
+
+„${this.companyName}“ <br>
+${this.phoneNumber} <br>
+${this.email}</p>
+`;
   }
 
   getCancellationTemplate(data: Partial<GeneralFormsResponse>): string {
@@ -131,6 +212,32 @@ ${this.email}</p>`;
 <p>Best regards,<br>
 ${this.companyName}<br>
 ${this.phoneNumber}<br>
-${this.email}</p>`;
+${this.email}</p>
+
+<hr>
+
+<p>Gerb. ${applicantName},</p>
+
+<p>Dėkojame, kad kreipiatės į „${this.companyName}“</p>
+
+<p>Apgailestaujame turėdami pranešti, kad Jūsų automobilio lizingo paraiška #${applicationId} atšaukta.</p>
+
+<p><strong>Automobilio informacija:</strong> <em>${carMake} ${carModel} (${carYear})</em><br>
+
+<p>Dėja dėl nenumatytų aplinkybių turėjome atšaukti Jūsų paraišką. Suprantame, kad ši žinia gali nuvilti ir atsiprašome
+dėl galimų nepatogumų</p>
+
+<p>Jei turite klausimų dėl atšaukimo ar norėtumėte gauti daugiau informacijos, prašome susisiekti su mumis telefonu
+${this.phoneNumber} ar el. paštu ${this.email}. Mūsų komanda mielai atsakys į Jums rūpimus klausimus.</p>
+
+<p>Dėkojame už Jūsų supratingumą! Jei ateityje nuspręstumėte vėl kreiptis dėl automobilio lizingo, mielai padėsime
+Jums surasti geriausią sprendimą.</p>
+
+<p>Pagarbiai</p>
+
+„${this.companyName}“<br>
+${this.phoneNumber}<br>
+${this.email}</p>
+`;
   }
 }

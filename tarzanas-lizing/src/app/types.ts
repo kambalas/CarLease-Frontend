@@ -18,6 +18,7 @@ export interface PersonalInformationFormFields {
   numberOfChildren: number;
   citizenship: string;
   monthlyIncome: number;
+  languagePref: string;
 }
 
 export interface CarLeasingFormFields {
