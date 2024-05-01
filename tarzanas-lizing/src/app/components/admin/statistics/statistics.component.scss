@@ -1,0 +1,33 @@
+@import '../../../../styles.scss';
+
+.cards {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.card-container {
+    background-color: $cards-color;
+    border-radius: 0.3rem;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    margin: 1rem;
+    font-family: $font;
+    min-width: 20%;
+    text-align: left;
+}
+
+.card-header {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: $header-color;
+    padding-bottom: 0.5rem;
+    font-family: $font;
+}
+
+.card-header span {
+    color: lightgray;
+    font-weight: 200;
+    font-size: 0.9rem;
+}

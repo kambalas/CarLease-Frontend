@@ -4,24 +4,24 @@ import { MailAndNotesComponent } from '../mail-and-notes/mail-and-notes.componen
 import { SingleApplicationViewComponent } from '../single-application-view/single-application-view.component';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
+import { StatisticsComponent } from '../statistics/statistics.component';
 
 @Component({
   selector: 'app-admin-page',
   standalone: true,
-  imports: [ApplicationListComponent, MailAndNotesComponent, SingleApplicationViewComponent],
+  imports: [ApplicationListComponent, MailAndNotesComponent, SingleApplicationViewComponent, StatisticsComponent],
   templateUrl: './admin-page.component.html',
   styleUrl: './admin-page.component.scss'
 })
 export class AdminPageComponent {
   selectedId!: string;
-  constructor(private authService: AuthService, private router: Router){}
+  constructor(private authService: AuthService, private router: Router) { }
 
   setSelectedId(id: string) {
     this.selectedId = id;
   }
-  logout()
-  {
-  this.authService.logout();
-  this.router.navigate(['/login'])
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login'])
   }
 }

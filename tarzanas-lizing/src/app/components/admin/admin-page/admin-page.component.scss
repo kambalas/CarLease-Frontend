@@ -3,6 +3,7 @@
 .centered-title {
   text-align: center;
 }
+
 .logout-button:hover {
   background-color: darkblue;
 }
@@ -40,6 +41,12 @@
   height: 94vh;
 }
 
+.middle-right-statistics {
+  width: 80%;
+  height: 95vh;
+  text-align: center;
+}
+
 .header {
   display: flex;
   width: 100%;
@@ -65,6 +72,7 @@
   font-size: 1.2rem;
   font-weight: bold;
 }
+
 .logout-button {
   padding: 8px 16px;
   background-color: $header-color;
