@@ -267,8 +267,28 @@ export const enum Months {
 }
 
 export interface ApplicationStatusCountResponse {
-  new: number;
-  accepted: number,
-  rejected: number,
-  pending: number
+  newCount: number;
+  acceptedCount: number,
+  rejectedCount: number,
+  pendingCount: number
+}
+
+export interface ApplicationDailyCountResponse {
+  day: string,
+  applicationCount: number
+}
+
+export interface AcceptedApplicationLoanValueResponse {
+  thisYearSum: number,
+  lastYearSum: number
+}
+
+export interface ApplicationMonthlyCountResponse {
+  thisMonthCount: number,
+  previousMonthCount: number
+}
+
+export interface HighRiskMonthlyCountResponse {
+  currentMonthCount: number,
+  lastMonthCount: number
 }

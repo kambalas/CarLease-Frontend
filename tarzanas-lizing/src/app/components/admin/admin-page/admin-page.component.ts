@@ -14,12 +14,14 @@ import { StatisticsComponent } from '../statistics/statistics.component';
   styleUrl: './admin-page.component.scss'
 })
 export class AdminPageComponent {
-  selectedId!: string;
   constructor(private authService: AuthService, private router: Router) { }
+
+  selectedId!: string;
 
   setSelectedId(id: string) {
     this.selectedId = id;
   }
+
   logout() {
     this.authService.logout();
     this.router.navigate(['/login'])
