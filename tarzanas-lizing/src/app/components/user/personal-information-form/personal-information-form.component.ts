@@ -114,6 +114,7 @@ export class PersonalInformationFormComponent implements OnInit {
       numberOfChildren: this.personalInformationForm.value.childrenCount!,
       citizenship: this.personalInformationForm.value.citizenship!,
       monthlyIncome: this.personalInformationForm.value.montlyIncome!,
+      languagePref: localStorage.getItem('language') || 'united-kingdom'
     });
   }
 }
