@@ -250,3 +250,45 @@ export interface MailResponse {
   mailText: string;
   mailRecipient: string;
 }
+
+export const enum Months {
+  JANUARY = 1,
+  FEBRUARY = 2,
+  MARCH = 3,
+  APRIL = 4,
+  MAY = 5,
+  JUNE = 6,
+  JULY = 7,
+  AUGUST = 8,
+  SEPTEMBER = 9,
+  OCTOBER = 10,
+  NOVEMBER = 11,
+  DECEMBER = 12
+}
+
+export interface ApplicationStatusCountResponse {
+  newCount: number;
+  acceptedCount: number,
+  rejectedCount: number,
+  pendingCount: number
+}
+
+export interface ApplicationDailyCountResponse {
+  day: string,
+  applicationCount: number
+}
+
+export interface AcceptedApplicationLoanValueResponse {
+  thisYearSum: number,
+  lastYearSum: number
+}
+
+export interface ApplicationMonthlyCountResponse {
+  thisMonthCount: number,
+  previousMonthCount: number
+}
+
+export interface HighRiskMonthlyCountResponse {
+  currentMonthCount: number,
+  lastMonthCount: number
+}
