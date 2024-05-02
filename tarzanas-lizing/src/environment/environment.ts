@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiHost: 'https://backend-xa05.onrender.com'
+  API_URL: 'https://ci-cd-spring.onrender.com'
 };

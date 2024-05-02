@@ -1,0 +1,22 @@
+<div class="header">
+  <img src="../../assets/logo.png" alt="Tarzan Leasing Logo" class="header-logo" />
+  <h1 class="header-title">Tarzan Leasing</h1>
+  <button class="logout-button" (click)="logout()">Logout</button>
+</div>
+<div class="main">
+  <div class="left">
+    <app-application-list (OnSelectedId)="setSelectedId($event)" />
+  </div>
+  @if(selectedId){
+    <div class="middle">
+      <app-mail-and-notes [selectedId]="(selectedId)" />
+    </div>
+    <div class="right">
+      <app-single-application-view [selectedId]="(selectedId)" />
+    </div>
+  } @else {
+    <div class="middle-right-statistics">
+      <app-statistics />
+    </div>
+  }
+</div>
