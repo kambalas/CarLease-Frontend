@@ -55,9 +55,9 @@
                         <p class="value">{{numberOfHighRiskApplications.currentMonthCount}}</p>
                         @if(numberOfHighRiskApplications.lastMonthCount > 0) {
                             @if(numberOfHighRiskApplications.currentMonthCount > numberOfHighRiskApplications.lastMonthCount){
-                                <p><span class="increase">{{calculateDifference(numberOfHighRiskApplications.currentMonthCount, numberOfHighRiskApplications.lastMonthCount)}}%</span> increase</p>
+                                <p><span class="decrease">{{calculateDifference(numberOfHighRiskApplications.currentMonthCount, numberOfHighRiskApplications.lastMonthCount)}}%</span> increase</p>
                             } @else {
-                                <p><span class="decrease">{{calculateDifference(numberOfHighRiskApplications.currentMonthCount, numberOfHighRiskApplications.lastMonthCount) * (-1)}}%</span> decrease</p>
+                                <p><span class="increase">{{calculateDifference(numberOfHighRiskApplications.currentMonthCount, numberOfHighRiskApplications.lastMonthCount) * (-1)}}%</span> decrease</p>
                             }
                         } @else {
                             <p>No data for last month</p>
