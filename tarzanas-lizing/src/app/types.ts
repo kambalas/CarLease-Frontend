@@ -167,6 +167,7 @@ export interface GeneralFormsResponse {
     numberOfChildren: number;
     citizenship: string;
     monthlyIncome: string;
+    languagePref: string;
   };
   leaseResponse: {
     id: string;
@@ -206,6 +207,7 @@ export interface GeneralAllFormsResponse {
     numberOfChildren: number;
     citizenship: string;
     monthlyIncome: string;
+    languagePref: string;
   };
   leaseResponse: {
     id: number;

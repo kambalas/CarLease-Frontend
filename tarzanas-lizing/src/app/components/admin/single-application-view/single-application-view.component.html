@@ -2,9 +2,8 @@
   <div class="card-header">Client data</div>
   <div class="card-content">
     @if(responseData$ | async; as res){
-        <p><span class="label">Full Name:</span> {{
-        res.personalInformationResponse.firstName + " " + res.personalInformationResponse.lastName}}</p>
-        <p><span class="label">Citizenship:</span> {{res.personalInformationResponse.citizenship}}</p>
+        <p><span class="label">Full Name:</span> {{res.personalInformationResponse.firstName + " " + res.personalInformationResponse.lastName}}</p>
+        <p><span class="label">Citizenship:</span> {{res.personalInformationResponse.citizenship}} <img src="../../../../assets/{{res.personalInformationResponse.languagePref}}.png" alt="language-preference" class="lang-pref" matTooltip="Preferred language"></p>
         <p><span class="label">Personal ID:</span> {{res.personalInformationResponse.pid}}</p>
         <p><span class="label">Age:</span> {{calulateAge(res.personalInformationResponse.dateOfBirth)}} years</p>
         <p><span class="label">Phone No.:</span> {{res.personalInformationResponse.phoneNumber}}</p>
