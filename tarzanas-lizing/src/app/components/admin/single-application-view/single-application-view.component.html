@@ -22,7 +22,7 @@
         <p><span class="label">Car:</span> {{res.leaseResponse.make}} {{res.leaseResponse.model}} ({{res.leaseResponse.year.trim()}}) @if(res.ratesResponse.isEcoFriendly) {<span class="material-symbols-outlined" matTooltip="Eco-friendly car">eco</span>}</p>
             <p><span class="label">Car model variant:</span> {{res.leaseResponse.modelVariant}}</p>
             <p><span class="label">Fuel type, engine:</span> {{res.leaseResponse.fuelType}} | {{res.leaseResponse.engineSize}} L | {{res.leaseResponse.enginePower}} hp</p>
-            <p><span class="label">Car offer url:</span> {{res.leaseResponse.url}}</p>
+            <p><span class="label">Car offer url: </span><a href="{{res.leaseResponse.url}}" target="_blank">visit website</a></p>
             <p><span class="label">Car value:</span> {{res.ratesResponse.carValue}} €</p>
             <p><span class="label">Period:</span> {{res.ratesResponse.period}} months</p>
             <p><span class="label">Residual value:</span> {{residualToEur(res.ratesResponse.residualValuePercentage, res.ratesResponse.carValue)}}€</p>
