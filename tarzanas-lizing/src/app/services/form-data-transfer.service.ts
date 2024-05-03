@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, combineLatest, switchMap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, combineLatest, switchMap, tap, throwError } from 'rxjs';
 import { CalculatorFormFields, CarLeasingFormFields, FormsPostRequest, PersonalInformationFormFields } from '../types';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environment/environment';

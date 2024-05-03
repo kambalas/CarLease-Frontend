@@ -10,6 +10,7 @@ import {
   BehaviorSubject,
   Observable,
   Subject,
+  Subscription,
   of,
   switchMap,
   takeUntil,
@@ -26,7 +27,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormDataTransferService } from '../../../services/form-data-transfer.service';
 import { Router } from '@angular/router';
-import {TranslateModule} from "@ngx-translate/core";
+import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-car-leasing-form',
@@ -56,6 +57,7 @@ export class CarLeasingFormComponent implements OnInit {
   maxFileSize = 3 * 1024 * 1024;
   correctFile: boolean = true;
   correctFileSize: boolean = true;
+  subscription: Subscription | undefined;
 
   private transferService = inject(FormDataTransferService);
   private makeChange$ = new Subject<void>();
@@ -161,7 +163,7 @@ export class CarLeasingFormComponent implements OnInit {
     if (this.carLeasingForm.valid) {
       console.log('Form Submitted!', this.carLeasingForm.value);
       this.transferService.setCarLeaseData(this.carLeasingForm.value);
-      this.transferService.postAllFormData()
+      this.subscription = this.transferService.postAllFormData()
         .subscribe({
           next: (data) => console.log(data),
           error: (error) => console.error('Error:', error)
@@ -193,12 +195,12 @@ export class CarLeasingFormComponent implements OnInit {
 
       const reader = new FileReader();
       reader.onload = (e: any) => {
-      const arr = new Uint8Array(e.target.result).subarray(0, 5);
-      const header = String.fromCharCode.apply(null, Array.from(arr));
-      if (header !== '%PDF-') {
-        this.correctFile = false;
-        return;
-      }
+        const arr = new Uint8Array(e.target.result).subarray(0, 5);
+        const header = String.fromCharCode.apply(null, Array.from(arr));
+        if (header !== '%PDF-') {
+          this.correctFile = false;
+          return;
+        }
         this.selectedFile = file;
         this.convertFileToBase64(file, (base64: string) => {
           console.log(base64);
@@ -230,5 +232,9 @@ export class CarLeasingFormComponent implements OnInit {
     reader.onerror = (error) => {
       console.error('Error converting file:', error);
     };
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
 }
