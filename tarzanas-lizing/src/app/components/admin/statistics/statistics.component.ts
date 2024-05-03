@@ -61,10 +61,10 @@ export class StatisticsComponent {
                 }
               },
               data: [
+                { value: this.applicationStatusData!.newCount, name: 'New' },
                 { value: this.applicationStatusData!.acceptedCount, name: 'Accepted' },
-                { value: this.applicationStatusData!.rejectedCount, name: 'Rejected' },
                 { value: this.applicationStatusData!.pendingCount, name: 'Pending' },
-                { value: this.applicationStatusData!.newCount, name: 'New' }
+                { value: this.applicationStatusData!.rejectedCount, name: 'Rejected' },
               ],
               radius: ['40%', '70%']
             }
