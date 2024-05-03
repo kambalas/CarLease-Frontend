@@ -30,7 +30,7 @@
       @if(listResponse$ | async; as listResponse) {
       <ng-container *cdkVirtualFor="let res of listResponse$ | async">
         <li
-          class="opened-{{ res.isOpened }} {{ res.status }}"
+          class="opened-{{ res.isOpened }} {{ res.status }} {{selectedId === res.id ? 'selected' : ''}}"
           (click)="openSelected(res.id, res)"
         >
           <div>

@@ -3,7 +3,7 @@
 
 mat-card {
 
-  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
 
     .search-sort {
         display: flex;
@@ -77,6 +77,12 @@ mat-card {
 
                 .date-icon {
                     text-align: right;
+                }
+
+                &.selected {
+                    background-color: #e3e4fa;
+                    cursor: pointer;
+                    border-left: 3px solid #0d6efd
                 }
             }
 

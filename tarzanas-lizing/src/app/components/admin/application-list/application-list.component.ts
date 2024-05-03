@@ -40,6 +40,7 @@ export class ApplicationListComponent implements OnInit {
   filteringCriteriaAltered = false;
   lastRequest!: sortAndFilterRequest;
   OnSelectedId = output<string>();
+  selectedId: number | undefined;
 
   sortAndFilterSubject = new BehaviorSubject<sortAndFilterRequest>({
     page: '1',
@@ -89,6 +90,7 @@ export class ApplicationListComponent implements OnInit {
   openSelected(id: number, res: Application) {
     if (id) {
       this.OnSelectedId.emit(id.toString());
+      this.selectedId = id;
     }
 
     if (id && res.isOpened === false) {
