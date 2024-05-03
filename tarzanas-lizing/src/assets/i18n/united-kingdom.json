@@ -70,7 +70,7 @@
     },
     "date-of-birth": {
       "title": "Date of birth",
-      "hint": "you must be at leasty 18 years old"
+      "hint": "you must be at least 18 years old"
     },
     "marital-status": {
       "title": "Marital status",
