@@ -6,9 +6,10 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatOption } from '@angular/material/autocomplete';
 import { MatSelect } from '@angular/material/select';
 import { MailService } from '../../../services/mail.service';
-import {GeneralFormsResponse, MailRequest, Status} from '../../../types';
-import {MailTemplateService } from "../../../services/mail-template.service";
+import { GeneralFormsResponse, MailRequest, Status } from '../../../types';
+import { MailTemplateService } from "../../../services/mail-template.service";
 import { MatInputModule } from '@angular/material/input';
+import { EmailConfirmationService } from '../../../services/email-confirmation.service';
 
 @Component({
   selector: 'app-mail-tab',
@@ -37,10 +38,11 @@ export class MailTabComponent implements OnInit {
   editableMailContent = '';
 
   private service = inject(MailTemplateService);
+  private emailModalService = inject(EmailConfirmationService);
   private mailService = inject(MailService);
 
   get mailContent(): string {
-    const data: Partial<GeneralFormsResponse> = {...this.dataForEmailTab()};
+    const data: Partial<GeneralFormsResponse> = { ...this.dataForEmailTab() };
     switch (this.selectedTemplate) {
       case 'rejected':
         this.status = Status.REJECTED;
@@ -64,7 +66,7 @@ export class MailTabComponent implements OnInit {
   }
 
   stripHtmlTags(htmlContent: string): string {
-     return htmlContent.replace(/<[^>]*>/g, ''); // Regex to remove HTML tags
+    return htmlContent.replace(/<[^>]*>/g, ''); // Regex to remove HTML tags
   }
   onTemplateSelect(): void {
     this.isEditing = true;
@@ -72,11 +74,9 @@ export class MailTabComponent implements OnInit {
   }
 
   sendMail(): void {
-    alert('Your email sent!');
     this.mailService.updateStatus(this.applicationId(), this.status).subscribe((x) => console.log(x));
 
     if (!this.editableMailContent.trim()) {
-      console.error('Error: Email content is empty. Cannot send email.');
       alert('Error: Email content is empty. Cannot send email.');
       return;
     }
@@ -92,8 +92,8 @@ export class MailTabComponent implements OnInit {
 
     this.mailService.sendMail(mailRequest).subscribe({
       next: (response) => {
-        alert('Your email sent successfully!');
-        console.log('Mail sent:', response);
+        this.emailModalService
+          .openConfirmationDialog()
       },
       error: (error) => {
         console.error('Error sending email:', error);

@@ -3,14 +3,9 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { AsyncPipe, DatePipe } from "@angular/common";
 import { FormatTextPipe } from "./format-text.pipe";
 import { MailsAndNotesResponse } from "../../../types";
-import {NotesService} from "../../../services/notes.service";
-import {Observable, of} from "rxjs";
-import {
-  MatAccordion,
-  MatExpansionPanel,
-  MatExpansionPanelHeader,
-  MatExpansionPanelTitle
-} from "@angular/material/expansion";
+import { NotesService } from "../../../services/notes.service";
+import { Observable, of } from "rxjs";
+import { MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle } from "@angular/material/expansion";
 
 @Component({
   selector: 'app-notes',
@@ -27,7 +22,7 @@ export class NotesComponent implements OnInit {
 
   loadNotesandMails(): void {
     const applicationIdValue = this.applicationId();
-    if(applicationIdValue) {
+    if (applicationIdValue) {
       this.responseData$ = this.notesService.getMailsAndNotesById(applicationIdValue);
     }
   }
