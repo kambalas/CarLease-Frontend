@@ -26,7 +26,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormDataTransferService } from '../../../services/form-data-transfer.service';
 import { Router } from '@angular/router';
-import {TranslateModule} from "@ngx-translate/core";
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-car-leasing-form',
@@ -65,7 +65,7 @@ export class CarLeasingFormComponent implements OnInit {
     private leasingFormService: LeasingFormService,
     private submissionConfirmationService: FormSubmissionConfirmationService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.carMakes$ = this.leasingFormService.getCarMakes();
@@ -134,6 +134,7 @@ export class CarLeasingFormComponent implements OnInit {
         .subscribe((response) => {
           this.carModelVariants$ = of(response.variants);
           this.carDetails$ = of(response.details);
+          this.checkDetailsForOnlyValues(response.details);
         });
     }
   }
@@ -153,6 +154,7 @@ export class CarLeasingFormComponent implements OnInit {
         )
         .subscribe((response) => {
           this.carDetails$ = of(response);
+          this.checkDetailsForOnlyValues(response);
         });
     }
   }
@@ -161,11 +163,10 @@ export class CarLeasingFormComponent implements OnInit {
     if (this.carLeasingForm.valid) {
       console.log('Form Submitted!', this.carLeasingForm.value);
       this.transferService.setCarLeaseData(this.carLeasingForm.value);
-      this.transferService.postAllFormData()
-        .subscribe({
-          next: (data) => console.log(data),
-          error: (error) => console.error('Error:', error)
-        });
+      this.transferService.postAllFormData().subscribe({
+        next: (data) => console.log(data),
+        error: (error) => console.error('Error:', error),
+      });
       this.submissionConfirmationService
         .openConfirmationDialog()
         .afterClosed()
@@ -193,12 +194,12 @@ export class CarLeasingFormComponent implements OnInit {
 
       const reader = new FileReader();
       reader.onload = (e: any) => {
-      const arr = new Uint8Array(e.target.result).subarray(0, 5);
-      const header = String.fromCharCode.apply(null, Array.from(arr));
-      if (header !== '%PDF-') {
-        this.correctFile = false;
-        return;
-      }
+        const arr = new Uint8Array(e.target.result).subarray(0, 5);
+        const header = String.fromCharCode.apply(null, Array.from(arr));
+        if (header !== '%PDF-') {
+          this.correctFile = false;
+          return;
+        }
         this.selectedFile = file;
         this.convertFileToBase64(file, (base64: string) => {
           console.log(base64);
@@ -220,6 +221,7 @@ export class CarLeasingFormComponent implements OnInit {
   getButtonColor() {
     return this.carLeasingForm.valid ? 'primary' : 'warn';
   }
+
   convertFileToBase64(file: File, callback: (result: string) => void): void {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -230,5 +232,24 @@ export class CarLeasingFormComponent implements OnInit {
     reader.onerror = (error) => {
       console.error('Error converting file:', error);
     };
+  }
+
+  checkDetailsForOnlyValues(details: Details) {
+    if (details) {
+      if (details.years.length === 1) {
+        this.carLeasingForm.get('year')!.setValue(details.years[0]);
+      }
+      if (details.fuelTypes.length === 1) {
+        this.carLeasingForm.get('fuelType')!.setValue(details.fuelTypes[0]);
+      }
+      if (details.enginePowers.length === 1) {
+        this.carLeasingForm
+          .get('enginePower')!
+          .setValue(details.enginePowers[0]);
+      }
+      if (details.engineSizes.length === 1) {
+        this.carLeasingForm.get('engineSize')!.setValue(details.engineSizes[0]);
+      }
+    }
   }
 }
