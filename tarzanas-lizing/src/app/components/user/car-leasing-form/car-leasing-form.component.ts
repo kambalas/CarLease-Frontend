@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject, Observable, Subject, of, switchMap, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, of, switchMap, takeUntil } from 'rxjs';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Details, Model, Variant } from '../../../types';
 import { LeasingFormService } from '../../../services/leasing-form-service.service';
