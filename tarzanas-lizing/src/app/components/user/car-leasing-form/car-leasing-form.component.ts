@@ -43,6 +43,7 @@ export class CarLeasingFormComponent implements OnInit {
   maxFileSize = 3 * 1024 * 1024;
   correctFile: boolean = true;
   correctFileSize: boolean = true;
+  subscription: Subscription | undefined;
 
   private transferService = inject(FormDataTransferService);
   private makeChange$ = new Subject<void>();
@@ -149,10 +150,13 @@ export class CarLeasingFormComponent implements OnInit {
   onSubmit(): void {
     if (this.carLeasingForm.valid) {
       this.transferService.setCarLeaseData(this.carLeasingForm.value);
-      this.transferService.postAllFormData().subscribe({
-        next: (data) => console.log(data),
-        error: (error) => console.error('Error:', error),
-      });
+
+      this.subscription = this.transferService.postAllFormData()
+        .subscribe({
+          next: (data) => console.log(data),
+          error: (error) => console.error('Error:', error)
+        });
+      
       this.submissionConfirmationService
         .openConfirmationDialog()
         .afterClosed()
@@ -219,6 +223,9 @@ export class CarLeasingFormComponent implements OnInit {
     };
   }
 
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+}
   checkDetailsForOnlyValues(details: Details) {
     if (details) {
       if (details.years.length === 1) {
