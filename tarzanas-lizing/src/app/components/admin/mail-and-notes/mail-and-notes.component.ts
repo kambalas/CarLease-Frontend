@@ -25,7 +25,6 @@ export class MailAndNotesComponent implements OnChanges {
   responseObject$: Observable<GeneralFormsResponse> | undefined;
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.selectedId())
     this.responseObject$ = this.service.getPersonalAndLeaseData(this.selectedId()!);
   }
 }

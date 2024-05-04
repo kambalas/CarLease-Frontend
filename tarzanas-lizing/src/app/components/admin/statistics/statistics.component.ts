@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { EChartsOption } from 'echarts';
 import { NgxEchartsDirective } from 'ngx-echarts';
 import { StatisticsService } from '../../../services/statistics.service';
@@ -105,7 +105,6 @@ export class StatisticsComponent {
 
   getDaysInMonth(year: number, month: number): string[] {
     const numDays = new Date(year, month, 0).getDate();
-    console.log(numDays)
     return Array.from({ length: numDays }, (_, index) => month + "/" + (index + 1));
   }
 }

@@ -69,20 +69,18 @@ export class ApplicationListComponent implements OnInit {
 
     this.lastRequest = request;
 
-    console.log(request);
     this.service
       .getApplicationsByStatusAndQuery(request)
       .subscribe((applications) => {
         const currentApps = this.listResponse$.getValue();
         this.listResponse$.next([...currentApps, ...applications]);
         this.numAppsLoaded = this.listResponse$.getValue().length;
-        console.log(`num apps loaded: ${this.numAppsLoaded}`);
 
         // If less than 30 applications are returned, stop fetching new applications
         if (applications.length < 30) {
           this.canLoadMoreApps = false;
-          console.log('final batch, no more apps to load');
         }
+
         this.loadingMoreApplications = false;
       });
   }
@@ -150,7 +148,6 @@ export class ApplicationListComponent implements OnInit {
     }
 
     const endThreshold = this.numAppsLoaded - 10;
-    console.log(`scrolledIndexChange app index: ${indexOfVisibleApp}`);
 
     if (
       indexOfVisibleApp >= endThreshold &&
@@ -161,9 +158,6 @@ export class ApplicationListComponent implements OnInit {
       this.loadingMoreApplications = true;
       let currentPage = parseInt(this.sortAndFilterSubject.value.page);
       const newPage = currentPage + 1;
-      console.log(
-        `reaching end of current list, incrementing page nr. to p.${newPage} and loading more applications`
-      );
 
       const newRequest = {
         ...this.sortAndFilterSubject.value,
