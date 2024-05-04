@@ -1,20 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
-import {
-  ReactiveFormsModule,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-
-import {
-  BehaviorSubject,
-  Observable,
-  Subject,
-  Subscription,
-  of,
-  switchMap,
-  takeUntil,
-} from 'rxjs';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BehaviorSubject, Observable, Subject, of, switchMap, takeUntil } from 'rxjs';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Details, Model, Variant } from '../../../types';
 import { LeasingFormService } from '../../../services/leasing-form-service.service';
@@ -67,7 +53,7 @@ export class CarLeasingFormComponent implements OnInit {
     private leasingFormService: LeasingFormService,
     private submissionConfirmationService: FormSubmissionConfirmationService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.carMakes$ = this.leasingFormService.getCarMakes();
@@ -163,7 +149,6 @@ export class CarLeasingFormComponent implements OnInit {
 
   onSubmit(): void {
     if (this.carLeasingForm.valid) {
-      console.log('Form Submitted!', this.carLeasingForm.value);
       this.transferService.setCarLeaseData(this.carLeasingForm.value);
 
       this.subscription = this.transferService.postAllFormData()
@@ -207,7 +192,6 @@ export class CarLeasingFormComponent implements OnInit {
         }
         this.selectedFile = file;
         this.convertFileToBase64(file, (base64: string) => {
-          console.log(base64);
           this.carLeasingForm.patchValue({ offer: base64 });
         });
       };

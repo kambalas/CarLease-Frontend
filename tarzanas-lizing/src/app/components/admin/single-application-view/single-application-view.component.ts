@@ -26,8 +26,7 @@ export class SingleApplicationViewComponent implements OnChanges {
   calulateAge(birthdateString: string): number {
     let birthdate = new Date(birthdateString);
     let timeDiff = Math.abs(Date.now() - birthdate.getTime());
-    let age = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
-    return age;
+    return Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
   }
 
   residualToEur(residualValue: string, carValue: string) {

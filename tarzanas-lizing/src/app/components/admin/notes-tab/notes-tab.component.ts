@@ -1,4 +1,4 @@
-import { Component,inject,input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -43,7 +43,6 @@ export class NotesTabComponent {
     this.notesService.saveNote(noteRequest).subscribe({
       next: (response) => {
         this.notesService.notifyNotesUpdated();
-        console.log('Note saved successfully:', response);
         this.noteText = '';
       },
       error: (error) => {

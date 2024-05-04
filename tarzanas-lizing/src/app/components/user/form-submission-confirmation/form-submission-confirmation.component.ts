@@ -1,14 +1,7 @@
 import { Component } from '@angular/core';
-import {
-  MatDialog,
-  MatDialogRef,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogTitle,
-  MatDialogContent,
-} from '@angular/material/dialog';
+import { MatDialogRef, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import {TranslateModule} from "@ngx-translate/core";
+import { TranslateModule } from "@ngx-translate/core";
 
 
 @Component({
@@ -19,5 +12,5 @@ import {TranslateModule} from "@ngx-translate/core";
   styleUrl: './form-submission-confirmation.component.scss'
 })
 export class FormSubmissionConfirmationComponent {
-  constructor(public dialogRef: MatDialogRef<FormSubmissionConfirmationComponent>) {}
+  constructor(public dialogRef: MatDialogRef<FormSubmissionConfirmationComponent>) { }
 }

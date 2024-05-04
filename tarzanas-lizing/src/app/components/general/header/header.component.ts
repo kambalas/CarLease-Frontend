@@ -1,8 +1,8 @@
-import {Component, inject, OnInit} from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
-import {TranslationService} from "../../../services/translation.service";
-import {TranslateModule} from "@ngx-translate/core";
+import { TranslationService } from "../../../services/translation.service";
+import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-header',
@@ -11,16 +11,16 @@ import {TranslateModule} from "@ngx-translate/core";
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
 
   translateService = inject(TranslationService);
-  selected : string;
+  selected: string;
 
   constructor() {
     if (!localStorage.getItem('language')) {
       this.selected = 'united-kingdom';
     }
-    else{
+    else {
       this.selected = localStorage.getItem('language')!;
     }
   }
@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit{
     if (!localStorage.getItem('language')) {
       this.translateService.setDefaultLang('united-kingdom');
     }
-    else{
+    else {
       this.translateService.setDefaultLang(localStorage.getItem('language')!);
     }
   }

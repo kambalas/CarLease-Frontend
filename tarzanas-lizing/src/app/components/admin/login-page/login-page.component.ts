@@ -31,8 +31,6 @@ export class LoginPageComponent {
   passwordHidden: boolean = true;
   isLoading: boolean = false;
 
-
-
   constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
@@ -41,7 +39,6 @@ export class LoginPageComponent {
   }
 
   submit() {
-
     this.isLoading = true;
     this.authService.postLogin(this.loginForm).subscribe({
       next: (data) => {
