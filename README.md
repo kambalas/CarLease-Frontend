@@ -18,7 +18,6 @@ A responsive Angular application designed to streamline and manage car loan appl
 - **TypeScript:** For writing robust and maintainable code.
 - **Angular Material:** For a modern and consistent design.
 - **RxJS:** For managing asynchronous data streams.
-- **HTML5 & CSS3:** For structuring and styling the application.
 - **RESTful API:** Integration with the back-end services.
 
 
